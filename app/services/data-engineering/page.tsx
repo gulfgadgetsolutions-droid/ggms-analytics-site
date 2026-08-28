@@ -1,45 +1,56 @@
-import Navbar from "../../components/Navbar";
-import Footer from "../../components/Footer";
+import type { Metadata } from "next";
+import ServiceDetailPage, { type ServicePageContent } from "../../components/ServiceDetailPage";
 
-export default function DataEngineering() {
-  return (
-    <main className="min-h-screen bg-white text-slate-900">
-      <Navbar />
+export const metadata: Metadata = { title: "Data Engineering & Cloud Platforms | GGMS Analytics", description: "Build reliable pipelines, integrations, warehouses, and cloud data platforms that make business data trusted and usable." };
 
-      <section className="relative bg-slate-900 overflow-hidden">
-        <div className="relative max-w-4xl mx-auto px-6 py-24 text-center">
-          <span className="inline-block text-xs font-semibold tracking-widest text-cyan-400 uppercase mb-4">
-            Services
-          </span>
-          <h1 className="font-[family-name:var(--font-heading)] text-3xl md:text-5xl font-semibold tracking-tight leading-[1.2] max-w-3xl mx-auto text-white">
-            Data Engineering
-          </h1>
-        </div>
-      </section>
+const content: ServicePageContent = {
+  eyebrow: "Data Engineering & Cloud Platforms",
+  heroTitle: "Build a foundation",
+  heroAccent: "your data can trust.",
+  heroDescription: "We connect, transform, and organize enterprise data into reliable platforms built for analytics, AI, and everyday decisions.",
+  heroImage: "/images/services/data-engineering-hero.png",
+  heroAlt: "Enterprise source systems connected through data pipelines to a cloud data platform",
+  problemLabel: "The foundation matters",
+  problemTitle: "Reliable decisions begin with reliable data.",
+  problemParagraphs: ["Most data problems do not begin in a dashboard. They begin upstream—in disconnected systems, fragile manual extracts, inconsistent definitions, and pipelines nobody fully owns.", "We design the architecture and engineering layer that turns those sources into governed, timely, reusable data products. Everything downstream becomes easier to trust, scale, and maintain."],
+  capabilities: [
+    { title: "Data pipelines & orchestration", text: "Design resilient ETL and ELT workflows with scheduling, dependencies, monitoring, and recoverable failure handling." },
+    { title: "Enterprise integration", text: "Connect SAP, SQL Server, applications, files, APIs, and cloud services through secure, maintainable integration patterns." },
+    { title: "Warehouses & lakehouses", text: "Create analytical platforms and dimensional models structured for reporting, exploration, machine learning, and growth." },
+    { title: "Cloud modernization", text: "Move legacy data workloads toward scalable cloud architecture without losing operational continuity or governance." },
+  ],
+  technologies: [
+    { group: "Cloud data", items: ["Microsoft Fabric", "Azure Data Factory", "Azure Synapse", "Databricks"] },
+    { group: "Sources & storage", items: ["SAP", "SQL Server", "Azure Data Lake", "PostgreSQL"] },
+    { group: "Engineering", items: ["Python", "SQL", "PySpark", "REST APIs"] },
+    { group: "Delivery & operations", items: ["GitHub", "Azure DevOps", "Docker", "Azure Monitor"] },
+  ],
+  processTitle: "From source systems to dependable data products",
+  processDescription: "Every stage makes ownership, quality, security, and operations explicit.",
+  steps: [
+    { title: "Discover", text: "Map sources, consumers, business definitions, constraints, volumes, and service expectations." },
+    { title: "Architect", text: "Define ingestion, storage, transformation, modeling, security, and operating patterns." },
+    { title: "Connect", text: "Integrate source systems securely using appropriate batch, event, API, or file-based methods." },
+    { title: "Transform", text: "Standardize, validate, reconcile, and model data into reusable business-ready layers." },
+    { title: "Test", text: "Validate completeness, accuracy, performance, resilience, security, and recovery behavior." },
+    { title: "Deploy & operate", text: "Automate releases, monitoring, lineage, documentation, alerts, and ongoing improvement." },
+  ],
+  useCaseTitle: "Engineering for real enterprise complexity",
+  useCaseDescription: "We focus on the foundations that unblock reporting, analytics, operations, and future AI initiatives.",
+  useCases: ["SAP and SQL Server integration", "Excel and file-based reporting modernization", "Cloud warehouse or lakehouse implementation", "Automated ingestion from APIs and applications", "Legacy ETL migration and performance improvement", "Reusable governed data products for multiple teams"],
+  controlsLabel: "Quality, security & operations",
+  controlsTitle: "Trust designed into every pipeline",
+  controlsDescription: "A data platform is valuable only when teams can rely on what it produces and understand how it operates.",
+  controls: [
+    { title: "Data quality", text: "Validation, reconciliation, freshness, and completeness checks surface issues early." },
+    { title: "Secure access", text: "Identity, encryption, network controls, and least-privilege permissions protect data." },
+    { title: "Lineage & definitions", text: "Documented transformations and business definitions make outputs explainable." },
+    { title: "Operational resilience", text: "Monitoring, alerts, retries, and recovery procedures keep critical flows dependable." },
+  ],
+  deliverablesTitle: "A platform your team can build on",
+  deliverablesDescription: "The engagement includes the working solution and the operational knowledge needed to own it.",
+  deliverables: ["Production-ready data pipelines and integrations", "Warehouse, lakehouse, and analytical data models", "Automated data-quality checks and monitoring", "Security and access-control configuration", "Architecture, lineage, and operating documentation", "Deployment, knowledge transfer, and support plan"],
+  ctaLabel: "Ready for dependable data?", ctaTitle: "Let’s design the foundation behind your next decision.", ctaButton: "Discuss your data platform",
+};
 
-      <section className="max-w-3xl mx-auto px-6 py-20">
-        <p className="text-slate-600 leading-relaxed mb-8">
-          We build the pipelines that move and clean your data so everything downstream &mdash; reports,
-          dashboards, models &mdash; can actually be trusted.
-        </p>
-        <ul className="text-slate-600 space-y-3 list-disc list-inside">
-          <li>ETL/ELT pipeline design and development</li>
-          <li>SAP and SQL Server data integration</li>
-          <li>Azure Data Factory pipelines</li>
-          <li>Data warehousing and modeling</li>
-        </ul>
-      </section>
-
-      <section className="bg-slate-900 text-white py-16 text-center">
-        <h2 className="font-[family-name:var(--font-heading)] text-2xl font-semibold mb-4">
-          Need this for your data?
-        </h2>
-        <a href="/#contact" className="bg-cyan-500 text-slate-950 px-6 py-3 rounded-md font-semibold hover:bg-cyan-400 hover:scale-105 transition inline-block">
-          Talk to Us
-        </a>
-      </section>
-
-      <Footer />
-    </main>
-  );
-}
+export default function DataEngineering() { return <ServiceDetailPage content={content} />; }

@@ -1,108 +1,118 @@
+import type { Metadata } from "next";
+import Link from "next/link";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
+export const metadata: Metadata = {
+  title: "Data & AI Services | GGMS Analytics",
+  description: "Explore six connected services spanning data and AI strategy, engineering, analytics, data science, intelligent automation, and managed support.",
+};
+
+const services = [
+  {
+    href: "/services/data-ai-strategy",
+    title: "Data & AI Strategy",
+    summary: "Turn business priorities, data readiness, and technology choices into a practical roadmap.",
+    capabilities: ["Maturity assessment", "Use-case prioritization", "Target architecture", "Governance roadmap"],
+    outcome: "Plan",
+  },
+  {
+    href: "/services/data-engineering",
+    title: "Data Engineering & Cloud Platforms",
+    summary: "Build dependable pipelines, integrations, warehouses, and cloud data platforms.",
+    capabilities: ["ETL and ELT pipelines", "SAP and SQL integration", "Lakehouse architecture", "Cloud modernization"],
+    outcome: "Build",
+  },
+  {
+    href: "/services/data-analytics",
+    title: "Business Intelligence & Analytics",
+    summary: "Create trusted KPI systems, semantic models, and dashboards people actually use.",
+    capabilities: ["Power BI dashboards", "Semantic models", "Automated reporting", "Self-service analytics"],
+    outcome: "Understand",
+  },
+  {
+    href: "/services/data-science",
+    title: "Data Science & Machine Learning",
+    summary: "Use forecasting and predictive modeling to anticipate outcomes and act earlier.",
+    capabilities: ["Forecasting", "Predictive models", "Segmentation", "Anomaly detection"],
+    outcome: "Predict",
+  },
+  {
+    href: "/services/ai-automation",
+    title: "Generative AI, Agentic AI & Automation",
+    summary: "Connect intelligent assistants and governed AI agents to real business workflows.",
+    capabilities: ["Generative AI apps", "AI agents", "Knowledge assistants", "Workflow automation"],
+    outcome: "Automate",
+  },
+  {
+    href: "/services/managed-data-ai",
+    title: "Managed Data & AI Services",
+    summary: "Keep critical data, analytics, and AI systems reliable, supported, and improving.",
+    capabilities: ["Platform monitoring", "Incident support", "Quality management", "Continuous optimization"],
+    outcome: "Operate",
+  },
+];
+
 export default function Services() {
   return (
-    <main className="min-h-screen bg-white text-slate-900">
+    <main className="min-h-screen bg-white text-slate-950">
       <Navbar />
 
-      <section className="bg-slate-50 border-b border-slate-100">
-        <div className="max-w-4xl mx-auto px-6 py-24 text-center">
-          <span className="inline-block text-xs font-semibold tracking-widest text-cyan-500 uppercase mb-4">
-            Services
+      <section className="relative overflow-hidden border-b border-slate-200 bg-slate-50">
+        <div className="absolute -left-24 top-0 h-80 w-80 rounded-full bg-cyan-300/15 blur-3xl" />
+        <div className="absolute -right-24 bottom-0 h-96 w-96 rounded-full bg-blue-300/15 blur-3xl" />
+        <div className="relative mx-auto max-w-6xl px-6 py-24 text-center sm:py-28">
+          <span className="inline-flex items-center gap-2 rounded-full border border-cyan-200 bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.22em] text-cyan-700 shadow-sm">
+            <span className="h-1.5 w-1.5 rounded-full bg-cyan-500" /> Our Services
           </span>
-          <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">Our Services</h1>
-          <p className="text-lg text-slate-600">
-            Four practice areas, one team. From raw enterprise data to decisions your business can act on.
+          <h1 className="mx-auto mt-6 max-w-4xl text-4xl font-semibold tracking-[-0.03em] sm:text-6xl">
+            One connected journey from
+            <span className="block text-cyan-600">strategy to sustained value.</span>
+          </h1>
+          <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-slate-600">
+            Six focused practices help organizations plan, build, understand, predict, automate, and operate with data and AI.
           </p>
         </div>
       </section>
 
-      <section className="max-w-5xl mx-auto px-6 py-20 space-y-16">
-
-        <div className="grid md:grid-cols-3 gap-8 items-start border-b border-slate-100 pb-16">
-          <div>
-            <span className="text-cyan-500 font-bold text-sm">01</span>
-            <h2 className="text-2xl font-semibold mt-2">Data Engineering</h2>
-          </div>
-          <div className="md:col-span-2">
-            <p className="text-slate-600 leading-relaxed mb-4">
-              We build the pipelines that move and clean your data so everything downstream &mdash; reports,
-              dashboards, models &mdash; can actually be trusted.
-            </p>
-            <ul className="text-slate-600 space-y-2 list-disc list-inside">
-              <li>ETL/ELT pipeline design and development</li>
-              <li>SAP and SQL Server data integration</li>
-              <li>Azure Data Factory pipelines</li>
-              <li>Data warehousing and modeling</li>
-            </ul>
+      <section className="mx-auto max-w-6xl px-6 py-20 sm:py-24">
+        <div className="mb-14 overflow-x-auto pb-2">
+          <div className="mx-auto flex min-w-[720px] items-center justify-center">
+            {services.map((service, index) => (
+              <div key={service.outcome} className="flex items-center">
+                <span className="rounded-full border border-cyan-200 bg-cyan-50 px-4 py-2 text-xs font-semibold uppercase tracking-wider text-cyan-800">{service.outcome}</span>
+                {index < services.length - 1 && <span className="mx-2 h-px w-6 bg-slate-300" />}
+              </div>
+            ))}
           </div>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8 items-start border-b border-slate-100 pb-16">
-          <div>
-            <span className="text-cyan-500 font-bold text-sm">02</span>
-            <h2 className="text-2xl font-semibold mt-2">Data Analytics &amp; BI</h2>
-          </div>
-          <div className="md:col-span-2">
-            <p className="text-slate-600 leading-relaxed mb-4">
-              We turn that clean data into dashboards people actually open every day, not reports
-              that get built once and forgotten.
-            </p>
-            <ul className="text-slate-600 space-y-2 list-disc list-inside">
-              <li>Power BI dashboard design and build</li>
-              <li>Semantic models and DAX measures</li>
-              <li>Automated, scheduled reporting</li>
-              <li>Row-level security and access control setup</li>
-            </ul>
-          </div>
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {services.map((service) => (
+            <Link key={service.href} href={service.href} className="premium-card group flex min-h-[390px] flex-col rounded-2xl p-7 sm:p-8">
+              <div className="flex items-center justify-between">
+                <span className="h-2.5 w-2.5 rounded-full bg-cyan-500 shadow-[0_0_12px_rgba(6,182,212,0.45)]" />
+                <span className="grid h-10 w-10 place-items-center rounded-full border border-slate-200 text-slate-500 transition group-hover:border-cyan-300 group-hover:bg-cyan-50 group-hover:text-cyan-700" aria-hidden="true">→</span>
+              </div>
+              <h2 className="mt-8 text-2xl font-semibold leading-tight tracking-tight">{service.title}</h2>
+              <p className="mt-4 leading-7 text-slate-600">{service.summary}</p>
+              <ul className="mt-7 space-y-3 border-t border-slate-100 pt-6 text-sm text-slate-600">
+                {service.capabilities.map((capability) => (
+                  <li key={capability} className="flex items-center gap-3"><span className="h-1.5 w-1.5 rounded-full bg-cyan-500" />{capability}</li>
+                ))}
+              </ul>
+              <span className="mt-auto pt-8 text-sm font-semibold text-cyan-700">Explore {service.outcome.toLowerCase()} services <span aria-hidden="true">→</span></span>
+            </Link>
+          ))}
         </div>
-
-        <div className="grid md:grid-cols-3 gap-8 items-start border-b border-slate-100 pb-16">
-          <div>
-            <span className="text-cyan-500 font-bold text-sm">03</span>
-            <h2 className="text-2xl font-semibold mt-2">Data Science</h2>
-          </div>
-          <div className="md:col-span-2">
-            <p className="text-slate-600 leading-relaxed mb-4">
-              Once the foundation is solid, we build models that help you look forward, not just backward.
-            </p>
-            <ul className="text-slate-600 space-y-2 list-disc list-inside">
-              <li>Forecasting and demand planning</li>
-              <li>Anomaly detection</li>
-              <li>Predictive models on operational data</li>
-            </ul>
-          </div>
-        </div>
-
-        <div className="grid md:grid-cols-3 gap-8 items-start">
-          <div>
-            <span className="text-cyan-500 font-bold text-sm">04</span>
-            <h2 className="text-2xl font-semibold mt-2">AI &amp; Automation</h2>
-          </div>
-          <div className="md:col-span-2">
-            <p className="text-slate-600 leading-relaxed mb-4">
-              We take the repetitive, manual parts of reporting and operations and let AI handle them.
-            </p>
-            <ul className="text-slate-600 space-y-2 list-disc list-inside">
-              <li>AI-driven process automation</li>
-              <li>Automated reporting and alerting</li>
-              <li>Enterprise knowledge base and internal AI tools</li>
-            </ul>
-          </div>
-        </div>
-
       </section>
 
-      <section className="bg-slate-900 text-white py-16 text-center">
-        <h2 className="text-2xl font-bold mb-4">Not sure which one you need?</h2>
-        <p className="text-slate-300 mb-8">Tell us what you&apos;re working with, and we&apos;ll point you to the right starting point.</p>
-        <a
-          href="/#contact"
-          className="bg-cyan-500 text-white px-6 py-3 rounded-md font-semibold hover:bg-cyan-600 transition inline-block"
-        >
-          Talk to Us
-        </a>
+      <section className="px-6 pb-24 sm:pb-32">
+        <div className="mx-auto max-w-6xl overflow-hidden rounded-3xl bg-slate-900 px-6 py-14 text-center text-white shadow-2xl shadow-slate-900/15 sm:px-12 sm:py-16">
+          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-cyan-400">Not sure which service fits?</p>
+          <h2 className="mx-auto mt-4 max-w-2xl text-3xl font-semibold tracking-tight sm:text-4xl">Start with the business challenge. We&apos;ll help identify the right next step.</h2>
+          <Link href="/lets-talk" className="mt-8 inline-flex rounded-lg bg-cyan-400 px-7 py-3.5 font-semibold text-slate-950 transition hover:-translate-y-0.5 hover:bg-cyan-300">Talk to Us <span className="ml-2" aria-hidden="true">→</span></Link>
+        </div>
       </section>
 
       <Footer />
