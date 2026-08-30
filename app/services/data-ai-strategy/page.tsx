@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import ServiceDetailPage, { type ServicePageContent } from "../../components/ServiceDetailPage";
 
-export const metadata: Metadata = { title: "Data & AI Strategy | GGMS Analytics", description: "Assess readiness, prioritize high-value opportunities, and create a practical roadmap for data, analytics, and AI investment." };
+export const metadata: Metadata = { title: "Data & AI Strategy", description: "Assess readiness, prioritize high-value opportunities, and create a practical roadmap for data, analytics, and AI investment.", alternates: { canonical: "/services/data-ai-strategy" } };
 
 const content: ServicePageContent = {
   eyebrow: "Data & AI Strategy", heroTitle: "Turn ambition into", heroAccent: "an achievable roadmap.", heroDescription: "We connect business priorities, data readiness, technology, and governance into a clear plan for measurable data and AI progress.", heroImage: "/images/services/data-ai-strategy-hero.png", heroAlt: "A strategic compass connecting current data systems to a phased data and AI roadmap",

@@ -3,10 +3,13 @@ import Image from "next/image";
 import Link from "next/link";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
+import ServiceHeroScene from "../../components/ServiceHeroScene";
+import ServiceSchema from "../../components/ServiceSchema";
 
 export const metadata: Metadata = {
-  title: "Generative AI, Agentic AI & Intelligent Automation | GGMS Analytics",
+  title: "Generative AI, Agentic AI & Intelligent Automation",
   description: "Build governed generative AI applications, enterprise assistants, agentic workflows, and intelligent automation connected to real business systems.",
+  alternates: { canonical: "/services/ai-automation" },
 };
 
 const capabilities = [
@@ -59,38 +62,40 @@ const useCases = [
   "Keep people in control with approvals for high-impact actions",
 ];
 
+const faqs = [
+  ["Where should an organization begin with generative or agentic AI?", "Begin with one valuable workflow that has clear inputs, approved knowledge, measurable effort, and a defined human owner. This creates a controlled way to prove usefulness before expanding."],
+  ["Can AI connect with our existing business systems?", "Yes. AI applications and agents can use approved APIs and integrations across documents, databases, email, ERP, CRM, and workflow platforms while respecting access boundaries."],
+  ["How do you reduce inaccurate or unsafe responses?", "The solution can combine grounded retrieval, source citations, permission controls, structured outputs, evaluation, guardrails, logging, and human approval for uncertain or high-impact actions."],
+  ["Can people remain involved in automated workflows?", "Yes. Review, approval, escalation, and exception handling can be placed wherever business judgment, accountability, or regulatory control requires them."],
+];
+
 export default function AiAutomation() {
   return (
     <main className="min-h-screen overflow-hidden bg-white text-slate-950">
+      <ServiceSchema name="Generative AI, Agentic AI & Intelligent Automation" description="Governed generative AI applications, enterprise assistants, agentic workflows, and intelligent automation connected to real business systems." path="/services/ai-automation" />
       <Navbar />
 
-      <section className="relative isolate min-h-[720px] overflow-hidden bg-slate-50 text-slate-950">
-        <Image
-          src="/images/services/ai-automation-hero.png"
-          alt="An intelligent automation engine connecting business data to trusted outputs"
-          fill
-          preload
-          sizes="100vw"
-          className="object-cover object-[70%_center] opacity-95"
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-white via-white/95 to-white/5" />
-        <div className="absolute inset-0 bg-gradient-to-t from-white/50 via-transparent to-white/30" />
-        <div className="absolute inset-y-0 left-0 w-3/5 bg-[radial-gradient(circle_at_30%_45%,rgba(34,211,238,0.11),transparent_55%)]" />
-        <div className="relative mx-auto flex min-h-[760px] max-w-7xl items-center px-6 py-24 lg:px-8">
-          <div className="max-w-2xl">
-            <div className="mb-7 inline-flex items-center gap-3 rounded-full border border-cyan-600/20 bg-white/80 px-4 py-2 text-xs font-semibold uppercase tracking-[0.22em] text-cyan-700 shadow-sm backdrop-blur">
+      <section className="service-hero-soft relative isolate min-h-[720px] overflow-hidden bg-slate-300 text-slate-950">
+        <Image src="/images/services/ai-automation-hero.png" alt="An intelligent automation engine connecting business data to trusted outputs" fill preload sizes="100vw" className="object-cover object-[70%_center] opacity-90" />
+        <ServiceHeroScene variant="automation" />
+        <div className="absolute inset-0 bg-gradient-to-r from-slate-200/95 via-slate-300/85 to-slate-900/20" />
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-400/60 via-transparent to-slate-200/30" />
+        <div className="absolute inset-y-0 left-0 w-3/5 bg-[radial-gradient(circle_at_30%_45%,rgba(255,255,255,0.32),transparent_60%)]" />
+        <div className="relative z-10 mx-auto flex min-h-[760px] max-w-7xl items-center px-6 py-24 lg:px-8">
+          <div className="service-hero-panel max-w-2xl">
+            <div className="mb-7 inline-flex items-center gap-3 rounded-full border border-slate-400/45 bg-white/55 px-4 py-2 text-xs font-semibold uppercase tracking-[0.22em] text-cyan-700 shadow-lg shadow-slate-900/10 backdrop-blur">
               <span className="h-1.5 w-1.5 rounded-full bg-cyan-500 shadow-[0_0_10px_#06b6d4]" /> Generative AI · Agentic AI · Automation
             </div>
             <h1 className="font-[family-name:var(--font-heading)] text-5xl font-semibold leading-[1.04] tracking-[-0.04em] sm:text-6xl lg:text-7xl">
               Make the work flow.
-              <span className="block bg-gradient-to-r from-cyan-300 to-sky-500 bg-clip-text text-transparent">Intelligently.</span>
+              <span className="block bg-gradient-to-r from-cyan-600 to-sky-700 bg-clip-text text-transparent">Intelligently.</span>
             </h1>
-            <p className="mt-7 max-w-xl text-lg leading-8 text-slate-600 sm:text-xl">
+            <p className="mt-7 max-w-xl text-lg leading-8 text-slate-700 sm:text-xl">
               We build governed generative AI applications, enterprise assistants, and agentic workflows that connect knowledge, decisions, and business systems.
             </p>
             <div className="mt-10 flex flex-col gap-4 sm:flex-row">
-              <Link href="/#contact" className="premium-glow inline-flex items-center justify-center gap-2 rounded-lg bg-cyan-500 px-6 py-3.5 font-semibold text-white transition hover:-translate-y-0.5 hover:bg-cyan-600">Explore your use case <span aria-hidden="true">→</span></Link>
-              <a href="#approach" className="inline-flex items-center justify-center rounded-lg border border-slate-300 bg-white/80 px-6 py-3.5 font-semibold text-slate-800 shadow-sm backdrop-blur transition hover:border-cyan-400 hover:bg-white">See how it works</a>
+              <Link href="/#contact" className="premium-glow inline-flex items-center justify-center gap-2 rounded-lg bg-cyan-500 px-6 py-3.5 font-semibold text-slate-950 transition hover:-translate-y-0.5 hover:bg-cyan-400">Explore your use case <span aria-hidden="true">→</span></Link>
+              <a href="#approach" className="service-secondary-button inline-flex items-center justify-center rounded-lg px-6 py-3.5 font-semibold text-slate-800 transition hover:-translate-y-0.5 hover:border-cyan-500">See how it works</a>
             </div>
           </div>
         </div>
@@ -111,19 +116,19 @@ export default function AiAutomation() {
         </div>
       </section>
 
-      <section className="section-glow bg-slate-50 py-24 sm:py-32">
+      <section className="service-dark-band section-glow py-24 text-white sm:py-32">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-cyan-600">What we build</p>
+          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-cyan-400">What we build</p>
           <h2 className="mt-4 max-w-2xl text-3xl font-semibold tracking-tight sm:text-5xl">Useful AI, connected to real work</h2>
           <div className="mt-14 grid gap-5 md:grid-cols-2">
             {capabilities.map(([title, text]) => (
-              <article key={title} className="premium-card group rounded-2xl p-8 sm:p-10">
+              <article key={title} className="service-dark-card group rounded-2xl p-8 sm:p-10">
                 <div className="flex items-start justify-between gap-6">
                   <span className="h-2.5 w-2.5 rounded-full bg-cyan-500" />
-                  <span className="h-px w-12 bg-slate-200 transition-all group-hover:w-20 group-hover:bg-cyan-400" />
+                  <span className="h-px w-12 bg-slate-600 transition-all group-hover:w-20 group-hover:bg-cyan-400" />
                 </div>
                 <h3 className="mt-10 text-2xl font-semibold tracking-tight">{title}</h3>
-                <p className="mt-4 leading-7 text-slate-600">{text}</p>
+                <p className="mt-4 leading-7 text-slate-300">{text}</p>
               </article>
             ))}
           </div>
@@ -226,6 +231,10 @@ export default function AiAutomation() {
           </ul>
         </div>
       </section>
+
+      <figure className="mx-auto max-w-7xl px-6 pb-24 sm:pb-32 lg:px-8"><div className="relative min-h-[360px] overflow-hidden rounded-3xl sm:min-h-[520px]"><Image src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1800&q=85" alt="Team collaborating on an intelligent automation workflow" fill sizes="(min-width: 1280px) 1280px, 100vw" className="object-cover" /></div><figcaption className="mt-4 text-sm text-slate-500">People, process, and technology working together in intelligent automation.</figcaption></figure>
+
+      <section className="border-y border-slate-200 bg-slate-50 py-24 sm:py-32"><div className="mx-auto grid max-w-7xl gap-14 px-6 lg:grid-cols-[0.72fr_1.28fr] lg:gap-20 lg:px-8"><div><p className="text-sm font-semibold uppercase tracking-[0.2em] text-cyan-600">Frequently asked questions</p><h2 className="mt-4 text-3xl font-semibold tracking-tight sm:text-5xl">Responsible AI starts with clear answers.</h2><p className="mt-6 leading-7 text-slate-600">We define what the system should do, what it must never do, and where people remain in control.</p></div><div className="space-y-3">{faqs.map(([question,answer])=><details key={question} className="group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm open:border-cyan-300 open:shadow-md"><summary className="flex cursor-pointer list-none items-center justify-between gap-5 font-semibold text-slate-900"><span>{question}</span><span className="text-xl font-light text-cyan-700 transition-transform group-open:rotate-45">+</span></summary><p className="mt-4 pr-8 leading-7 text-slate-600">{answer}</p></details>)}</div></div></section>
 
       <section className="px-6 pb-24 sm:pb-32 lg:px-8">
         <div className="relative mx-auto max-w-7xl overflow-hidden rounded-3xl bg-gradient-to-br from-cyan-400 via-sky-400 to-blue-500 px-6 py-16 text-slate-950 shadow-2xl shadow-cyan-900/20 sm:px-12 lg:flex lg:items-center lg:justify-between lg:px-16">

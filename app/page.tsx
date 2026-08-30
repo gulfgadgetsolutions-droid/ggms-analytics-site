@@ -1,9 +1,16 @@
+import type { Metadata } from "next";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import ContactForm from "./components/ContactForm";
-import HeroSlider from "./components/HeroSlider";
+import BrandFilmHero from "./components/BrandFilmHero";
 import Image from "next/image";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "Enterprise Data Engineering, Analytics & AI",
+  description: "GGMS Analytics builds trusted data platforms, Power BI analytics, data science solutions, generative AI automation, and managed data services across the Gulf.",
+  alternates: { canonical: "/" },
+};
 
 const services = [
   { href: "/services/data-ai-strategy", title: "Data and AI Strategy", description: "Readiness assessment, opportunity prioritization, architecture, and roadmap." },
@@ -34,7 +41,7 @@ export default function Home() {
       <Navbar />
 
       {/* ================= HERO ================= */}
-      <HeroSlider />
+      <BrandFilmHero />
 
       {/* ================= WHAT WE DO ================= */}
       <section className="max-w-6xl mx-auto px-6 py-20 grid md:grid-cols-2 gap-12 items-center">

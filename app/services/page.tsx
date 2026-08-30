@@ -4,8 +4,9 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
 export const metadata: Metadata = {
-  title: "Data & AI Services | GGMS Analytics",
+  title: "Data & AI Services",
   description: "Explore six connected services spanning data and AI strategy, engineering, analytics, data science, intelligent automation, and managed support.",
+  alternates: { canonical: "/services" },
 };
 
 const services = [

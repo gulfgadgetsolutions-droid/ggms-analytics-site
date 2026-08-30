@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import BrandIdentity from "./BrandIdentity";
 
 const serviceLinks = [
   { href: "/services/data-ai-strategy", title: "Data & AI Strategy", description: "Readiness, architecture, governance, and roadmap" },
@@ -27,9 +28,7 @@ export default function Navbar() {
   return (
     <header className="sticky top-0 z-50 border-b border-slate-700 bg-slate-900/95 text-white backdrop-blur-xl">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-        <Link href="/" onClick={closeMobile} className="text-xl font-bold tracking-tight">
-          GGMS <span className="text-cyan-400">Analytics</span>
-        </Link>
+        <BrandIdentity compact onNavigate={closeMobile} />
 
         <nav className="hidden items-center gap-7 text-sm font-medium md:flex" aria-label="Primary navigation">
           <div className="group relative focus-within:z-50">
@@ -63,7 +62,7 @@ export default function Navbar() {
         </nav>
 
         <div className="flex items-center gap-3">
-          <Link href="/lets-talk" className="hidden rounded-md bg-cyan-400 px-4 py-2.5 text-sm font-semibold text-slate-950 transition hover:bg-cyan-300 sm:inline-flex">Let&apos;s Talk</Link>
+          <Link href="/lets-talk" className="hidden rounded-md bg-cyan-400 px-4 py-2.5 text-sm font-semibold text-slate-950 transition hover:bg-cyan-300 sm:inline-flex">Start a Project</Link>
           <button
             type="button"
             onClick={() => setMobileOpen((open) => !open)}
@@ -103,7 +102,7 @@ export default function Navbar() {
               ))}
             </div>
 
-            <Link href="/lets-talk" onClick={closeMobile} className="mt-3 flex w-full items-center justify-center rounded-md bg-cyan-400 px-5 py-3 font-semibold text-slate-950 transition hover:bg-cyan-300">Let&apos;s Talk</Link>
+            <Link href="/lets-talk" onClick={closeMobile} className="mt-3 flex w-full items-center justify-center rounded-md bg-cyan-400 px-5 py-3 font-semibold text-slate-950 transition hover:bg-cyan-300">Start a Project</Link>
           </div>
         </nav>
       )}

@@ -3,8 +3,10 @@
 import { useState } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import { companyContact } from "../lib/company";
 
 export default function LetsTalk() {
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -24,11 +26,17 @@ export default function LetsTalk() {
     }));
   }
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-
-    // Backend/email connection will be added separately.
-    console.log("Let's Talk submission:", form);
+    setStatus("sending");
+    try {
+      const response = await fetch("/api/contact", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ ...form, message: form.details, purpose: "Project Consultation" }) });
+      if (!response.ok) throw new Error("Submission failed");
+      setStatus("sent");
+    } catch (error) {
+      console.error("Let's Talk form error:", error);
+      setStatus("error");
+    }
   }
 
   const inputClass =
@@ -38,35 +46,39 @@ export default function LetsTalk() {
     "cursor-pointer rounded-full border px-4 py-2.5 text-sm transition";
 
   return (
-    <main className="min-h-screen bg-white text-slate-950">
+    <main className="min-h-screen bg-slate-100 text-slate-950">
       <Navbar />
 
       {/* Header */}
-      <section className="relative overflow-hidden border-b border-slate-200">
+      <section className="relative overflow-hidden border-b border-slate-400 bg-slate-200">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_75%_20%,rgba(6,182,212,0.10),transparent_35%)]" />
 
-        <div className="relative mx-auto max-w-5xl px-6 pb-16 pt-24 md:px-10 md:pb-20 md:pt-28">
+        <div className="relative mx-auto max-w-7xl px-6 py-16 md:px-10 md:py-20">
           <p className="mb-5 text-sm font-semibold uppercase tracking-[0.2em] text-cyan-600">
-            Let&apos;s Talk
+            Start a Project
           </p>
 
-          <h1 className="max-w-4xl text-5xl font-semibold leading-[1.05] tracking-tight md:text-7xl">
-            Tell us what
-            <br />
-            you&apos;re trying to solve.
+          <h1 className="max-w-4xl text-4xl font-semibold leading-[1.05] tracking-tight md:text-6xl">
+            Give us the context.<br />We&apos;ll prepare the conversation.
           </h1>
 
           <p className="mt-7 max-w-2xl text-lg leading-8 text-slate-600 md:text-xl">
-            Tell us about the challenge, project, or opportunity you want
-            to discuss. The more context you share, the better we can
-            prepare for the conversation.
+            This is not a general contact form. It is a structured project brief for data, analytics, engineering, and AI requirements.
           </p>
         </div>
       </section>
 
       {/* Form */}
-      <section className="mx-auto max-w-5xl px-6 py-16 md:px-10 md:py-24">
-        <form onSubmit={handleSubmit} className="space-y-14">
+      <section className="mx-auto grid max-w-7xl gap-12 px-6 py-16 md:px-10 md:py-24 lg:grid-cols-[.65fr_1.35fr] lg:gap-20">
+        <aside className="lg:sticky lg:top-28 lg:self-start">
+          <p className="text-sm font-semibold uppercase tracking-[.2em] text-cyan-700">Project conversation</p>
+          <h2 className="mt-4 text-3xl font-semibold tracking-tight">Help us prepare before we speak.</h2>
+          <p className="mt-5 leading-7 text-slate-600">This page is for project discovery. Share the business challenge, current environment, stage, and timing so the right people can review it.</p>
+          <div className="mt-9 space-y-4 rounded-2xl border border-slate-300 bg-slate-200 p-6"><p className="text-sm font-semibold">Prefer a direct channel?</p><a href={companyContact.phone.href} className="block text-sm text-slate-700 hover:text-cyan-700">Call {companyContact.phone.label}</a><a href={companyContact.whatsapp[0].href} target="_blank" rel="noreferrer" className="block text-sm text-slate-700 hover:text-cyan-700">WhatsApp {companyContact.whatsapp[0].label}</a><a href={companyContact.email[0].href} className="block break-all text-sm text-slate-700 hover:text-cyan-700">{companyContact.email[0].label}</a></div>
+          <div className="mt-7 border-l-2 border-cyan-500 pl-5"><p className="text-sm font-semibold">What happens next</p><ol className="mt-4 space-y-3 text-sm leading-6 text-slate-600"><li>We review your context.</li><li>We identify the right capability.</li><li>We prepare focused questions.</li><li>We agree on a practical next step.</li></ol></div>
+        </aside>
+        <div className="rounded-3xl border border-slate-300 bg-slate-50 p-7 shadow-xl shadow-slate-900/8 sm:p-10">
+        {status === "sent" ? <div className="py-20 text-center"><p className="text-sm font-semibold uppercase tracking-[.2em] text-cyan-700">Request received</p><h2 className="mt-4 text-3xl font-semibold">Thank you. We&apos;ll review your project context.</h2><p className="mx-auto mt-5 max-w-xl leading-7 text-slate-600">You can also contact us directly at {companyContact.phone.label}.</p></div> : <form onSubmit={handleSubmit} className="space-y-14">
 
           {/* What do you want to discuss? */}
           <div>
@@ -282,12 +294,16 @@ export default function LetsTalk() {
 
             <button
               type="submit"
-              className="rounded-full bg-slate-950 px-8 py-4 text-sm font-semibold text-white transition hover:bg-cyan-600"
+              disabled={status === "sending"}
+              className="rounded-full bg-slate-950 px-8 py-4 text-sm font-semibold text-white transition hover:bg-cyan-600 disabled:cursor-not-allowed disabled:opacity-50"
             >
-              Start the conversation →
+              {status === "sending" ? "Sending..." : "Start the conversation →"}
             </button>
           </div>
+          {status === "error" && <p className="text-sm text-red-600">We could not submit the form. Please try again or use one of the direct contact channels.</p>}
         </form>
+        }
+        </div>
       </section>
 
       <Footer />

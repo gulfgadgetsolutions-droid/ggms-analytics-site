@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import ServiceDetailPage, { type ServicePageContent } from "../../components/ServiceDetailPage";
 
-export const metadata: Metadata = { title: "Data Engineering & Cloud Platforms | GGMS Analytics", description: "Build reliable pipelines, integrations, warehouses, and cloud data platforms that make business data trusted and usable." };
+export const metadata: Metadata = { title: "Data Engineering & Cloud Platforms", description: "Build reliable pipelines, integrations, warehouses, and cloud data platforms that make business data trusted and usable.", alternates: { canonical: "/services/data-engineering" } };
 
 const content: ServicePageContent = {
   eyebrow: "Data Engineering & Cloud Platforms",

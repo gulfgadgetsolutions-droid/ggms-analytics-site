@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { companyContact } from "../lib/company";
+import BrandIdentity from "./BrandIdentity";
 
 const serviceLinks = [
   ["Data & AI Strategy", "/services/data-ai-strategy"],
@@ -46,14 +48,14 @@ export default function Footer() {
           </div>
 
           <Link href="/lets-talk" className="group relative z-10 inline-flex items-center justify-center rounded-lg border border-cyan-200/20 bg-cyan-400 px-6 py-3.5 font-semibold text-slate-950 shadow-[0_0_32px_rgba(34,211,238,0.22)] transition hover:-translate-y-1 hover:bg-cyan-300 hover:shadow-[0_0_44px_rgba(34,211,238,0.32)]">
-            Let&apos;s Talk <span className="ml-2 transition-transform group-hover:translate-x-1" aria-hidden="true">→</span>
+            Start a Project <span className="ml-2 transition-transform group-hover:translate-x-1" aria-hidden="true">→</span>
           </Link>
         </div>
 
         <div className="grid gap-12 border-b border-slate-800 pb-14 md:grid-cols-2 lg:grid-cols-[1.15fr_1.4fr_0.7fr_0.9fr]">
           <div>
-            <Link href="/" className="text-xl font-bold tracking-tight text-white">GGMS <span className="text-cyan-400">Analytics</span></Link>
-            <p className="mt-5 max-w-xs text-sm leading-7 text-slate-400">GGMS Analytics delivers practical data, analytics, engineering, and AI solutions designed around measurable business outcomes.</p>
+            <BrandIdentity footer />
+            <p className="mt-5 max-w-xs text-sm leading-7 text-slate-400">Practical Data Engineering, Analytics, and AI solutions designed around measurable business outcomes.</p>
             <div className="mt-6 flex flex-wrap gap-2">
               {["Data", "Analytics", "AI", "Cloud"].map((item) => (
                 <span key={item} className="rounded-full border border-slate-700 bg-slate-800/60 px-3 py-1 text-xs text-slate-400">{item}</span>
@@ -89,8 +91,9 @@ export default function Footer() {
 
           <div>
             <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-white">Get in Touch</h3>
-            <a href="mailto:info@ggmsglobal.com" className="mt-5 block break-all text-sm text-slate-400 transition hover:text-cyan-300">info@ggmsglobal.com</a>
-            <p className="mt-5 text-xs leading-6 text-slate-500">Enterprise data, analytics, engineering, and AI solutions across the Gulf.</p>
+            <a href={companyContact.phone.href} className="mt-5 block text-sm text-slate-400 transition hover:text-cyan-300">{companyContact.phone.label}</a>
+            <a href={companyContact.email[0].href} className="mt-3 block break-all text-sm text-slate-400 transition hover:text-cyan-300">{companyContact.email[0].label}</a>
+            <a href={companyContact.mapUrl} target="_blank" rel="noreferrer" className="mt-4 block text-xs leading-6 text-slate-500 transition hover:text-cyan-300">{companyContact.address}</a>
             <Link href="/contact" className="group mt-5 inline-flex items-center text-sm font-semibold text-cyan-400 transition hover:text-cyan-300">Contact details <span className="ml-2 transition-transform group-hover:translate-x-1" aria-hidden="true">→</span></Link>
           </div>
         </div>

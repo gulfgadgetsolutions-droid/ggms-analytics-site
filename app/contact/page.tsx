@@ -1,118 +1,55 @@
-import Navbar from "../components/Navbar";
+import Image from "next/image";
 import ContactForm from "../components/ContactForm";
 import Footer from "../components/Footer";
+import Navbar from "../components/Navbar";
+import { companyContact } from "../lib/company";
+import { getSiteUrl } from "../lib/site";
 
 export default function Contact() {
-  return (
-    <main className="min-h-screen bg-white text-slate-950">
-      <Navbar />
+  const siteUrl = getSiteUrl();
+  const schema = {
+    "@context": "https://schema.org", "@type": "ContactPage", "@id": `${siteUrl}/contact/#page`,
+    name: "Contact GGMS Analytics", url: `${siteUrl}/contact`, mainEntity: {
+      "@type": "Organization", "@id": `${siteUrl}/#organization`, telephone: companyContact.phone.label,
+      email: companyContact.email[0].label, address: { "@type": "PostalAddress", streetAddress: "Office No. 103, Truckker Building", addressLocality: "Muscat", addressCountry: "OM" },
+    },
+  };
 
-      {/* Hero */}
-      <section className="relative overflow-hidden border-b border-slate-200">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(6,182,212,0.10),transparent_35%)]" />
+  return <main className="min-h-screen bg-white text-slate-950">
+    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema).replace(/</g, "\\u003c") }} />
+    <Navbar />
 
-        <div className="relative mx-auto max-w-7xl px-6 pb-20 pt-24 md:px-10 md:pb-28 md:pt-32">
-          <div className="max-w-4xl">
-            <p className="mb-6 text-sm font-semibold uppercase tracking-[0.2em] text-cyan-600">
-              Contact GGMS Global
-            </p>
-
-            <h1 className="text-5xl font-semibold leading-[1.05] tracking-tight md:text-7xl">
-              Let&apos;s build
-              <br />
-              <span className="text-slate-400">what&apos;s next.</span>
-            </h1>
-
-            <p className="mt-8 max-w-2xl text-lg leading-8 text-slate-600 md:text-xl">
-              Turn data, technology and ideas into solutions that move your
-              business forward.
-            </p>
-          </div>
+    <section className="border-b border-slate-200 bg-slate-50">
+      <div className="mx-auto grid max-w-7xl items-stretch lg:grid-cols-2">
+        <div className="flex flex-col justify-center px-6 py-20 sm:py-28 lg:px-10 lg:py-32">
+          <p className="text-sm font-semibold uppercase tracking-[0.22em] text-cyan-700">Contact GGMS Analytics</p>
+          <h1 className="mt-6 max-w-xl text-5xl font-semibold leading-[1.04] tracking-[-0.04em] sm:text-6xl">Let&apos;s start with a conversation.</h1>
+          <p className="mt-7 max-w-xl text-lg leading-8 text-slate-600">Tell us what you are trying to improve, build, or understand. Our team will help direct your enquiry to the right Data and AI specialist.</p>
+          <div className="mt-9 flex flex-wrap gap-x-8 gap-y-3 text-sm font-semibold"><a href={companyContact.phone.href} className="transition hover:text-cyan-700">{companyContact.phone.label}</a><a href={companyContact.email[0].href} className="transition hover:text-cyan-700">{companyContact.email[0].label}</a></div>
         </div>
-      </section>
-
-      {/* Contact area */}
-      <section className="mx-auto max-w-7xl px-6 py-20 md:px-10 md:py-28">
-        <div className="grid gap-16 lg:grid-cols-[0.8fr_1.4fr] lg:gap-24">
-          
-          {/* Left */}
-          <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-cyan-600">
-              Talk to us
-            </p>
-
-            <h2 className="mt-4 text-3xl font-semibold tracking-tight md:text-4xl">
-              Have a challenge?
-            </h2>
-
-            <p className="mt-6 max-w-md text-base leading-7 text-slate-600">
-              Whether you need help with data analytics, cloud, AI,
-              engineering or a custom technology solution, tell us what
-              you&apos;re working on.
-            </p>
-
-            <div className="mt-10 space-y-7">
-              <div>
-                <p className="text-sm font-semibold text-slate-950">
-                  Business inquiries
-                </p>
-                <p className="mt-1 text-sm text-slate-500">
-                  Discuss your business or technology requirements.
-                </p>
-              </div>
-
-              <div>
-                <p className="text-sm font-semibold text-slate-950">
-                  Partnerships
-                </p>
-                <p className="mt-1 text-sm text-slate-500">
-                  Explore alliances and collaboration opportunities.
-                </p>
-              </div>
-
-              <div>
-                <p className="text-sm font-semibold text-slate-950">
-                  Careers
-                </p>
-                <p className="mt-1 text-sm text-slate-500">
-                  Interested in building with GGMS?
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* Right */}
-          <div>
-            <div className="mb-8">
-              <h2 className="text-2xl font-semibold tracking-tight">
-                Send us an inquiry
-              </h2>
-
-              <p className="mt-2 text-sm text-slate-500">
-                Tell us a little about what you need and we&apos;ll get back
-                to you.
-              </p>
-            </div>
-
-            <ContactForm />
-          </div>
+        <div className="relative min-h-[430px] lg:min-h-full">
+          <Image src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=1600&q=88" alt="Business professionals meeting to discuss a project" fill priority sizes="(min-width: 1024px) 50vw, 100vw" className="object-cover" />
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-950/35 to-transparent" />
         </div>
-      </section>
+      </div>
+    </section>
 
-      {/* Bottom statement */}
-      <section className="border-y border-slate-200 bg-slate-50">
-        <div className="mx-auto max-w-7xl px-6 py-14 md:px-10 md:py-20">
-          <p className="max-w-4xl text-2xl font-medium leading-relaxed tracking-tight text-slate-800 md:text-4xl">
-            Data. Cloud. Analytics. AI. Engineering.
-            <span className="text-slate-400">
-              {" "}
-              One technology partner for what&apos;s next.
-            </span>
-          </p>
-        </div>
-      </section>
+    <section className="mx-auto max-w-7xl px-6 py-20 sm:py-24 lg:px-8">
+      <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+        <article className="rounded-2xl border border-slate-200 bg-white p-7 shadow-sm transition hover:-translate-y-1 hover:border-cyan-400 hover:shadow-lg"><span className="text-xs font-semibold uppercase tracking-[.18em] text-cyan-700">Call</span><a href={companyContact.phone.href} className="mt-5 block text-xl font-semibold hover:text-cyan-700">{companyContact.phone.label}</a><p className="mt-3 text-sm leading-6 text-slate-600">For direct business and office enquiries.</p></article>
+        <article className="rounded-2xl border border-slate-200 bg-white p-7 shadow-sm transition hover:-translate-y-1 hover:border-cyan-400 hover:shadow-lg"><span className="text-xs font-semibold uppercase tracking-[.18em] text-cyan-700">WhatsApp</span>{companyContact.whatsapp.map(item=><a key={item.href} href={item.href} target="_blank" rel="noreferrer" className="mt-4 block font-semibold hover:text-cyan-700">{item.label}</a>)}<p className="mt-3 text-sm leading-6 text-slate-600">Start a quick conversation with our team.</p></article>
+        <article className="rounded-2xl border border-slate-200 bg-white p-7 shadow-sm transition hover:-translate-y-1 hover:border-cyan-400 hover:shadow-lg"><span className="text-xs font-semibold uppercase tracking-[.18em] text-cyan-700">Email</span>{companyContact.email.map(item=><a key={item.href} href={item.href} className="mt-4 block break-all font-semibold hover:text-cyan-700">{item.label}</a>)}<p className="mt-3 text-sm leading-6 text-slate-600">Share documents or a detailed requirement.</p></article>
+        <article className="rounded-2xl border border-slate-200 bg-white p-7 shadow-sm transition hover:-translate-y-1 hover:border-cyan-400 hover:shadow-lg"><span className="text-xs font-semibold uppercase tracking-[.18em] text-cyan-700">Visit</span><p className="mt-5 font-semibold leading-7">{companyContact.address}</p><a href={companyContact.mapUrl} target="_blank" rel="noreferrer" className="mt-4 inline-flex text-sm font-semibold text-cyan-700 hover:text-cyan-800">Open in Google Maps →</a></article>
+      </div>
+    </section>
 
-      <Footer />
-    </main>
-  );
+    <section id="project-enquiry" className="scroll-mt-24 border-y border-slate-200 bg-slate-50 py-20 sm:py-28">
+      <div className="mx-auto grid max-w-7xl gap-10 px-6 lg:grid-cols-[.9fr_1.1fr] lg:px-8">
+        <div className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-lg"><iframe title="GGMS Analytics office at Truckker Building in Muscat, Oman" src={companyContact.mapEmbedUrl} className="h-[560px] w-full" loading="lazy" referrerPolicy="no-referrer-when-downgrade" /></div>
+        <div className="rounded-3xl border border-slate-200 bg-white p-7 shadow-lg sm:p-10"><p className="text-sm font-semibold uppercase tracking-[.2em] text-cyan-700">Start a project or make an enquiry</p><h2 className="mt-4 text-3xl font-semibold tracking-tight">Send a message to our team.</h2><p className="mt-4 mb-10 leading-7 text-slate-600">Use one form for a project discussion, consultation, partnership, proposal, career question, or general enquiry. Add enough context for us to connect you with the right person.</p><ContactForm /></div>
+      </div>
+    </section>
+
+    <Footer />
+  </main>;
 }

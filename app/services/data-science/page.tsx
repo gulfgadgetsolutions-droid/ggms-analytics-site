@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import ServiceDetailPage, { type ServicePageContent } from "../../components/ServiceDetailPage";
 
-export const metadata: Metadata = { title: "Data Science & Machine Learning | GGMS Analytics", description: "Apply forecasting, predictive modeling, segmentation, and anomaly detection to measurable business decisions." };
+export const metadata: Metadata = { title: "Data Science & Machine Learning", description: "Apply forecasting, predictive modeling, segmentation, and anomaly detection to measurable business decisions.", alternates: { canonical: "/services/data-science" } };
 
 const content: ServicePageContent = {
   eyebrow: "Data Science & Machine Learning", heroTitle: "Move from hindsight", heroAccent: "to foresight.", heroDescription: "We develop practical predictive solutions that help teams anticipate demand, identify risk, understand behavior, and act earlier.", heroImage: "/images/services/data-science-hero.png", heroAlt: "Historical data transformed into forecasts, clusters, and anomaly signals",

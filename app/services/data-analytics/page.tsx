@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import ServiceDetailPage, { type ServicePageContent } from "../../components/ServiceDetailPage";
 
-export const metadata: Metadata = { title: "Business Intelligence & Analytics | GGMS Analytics", description: "Turn trusted data into governed Power BI dashboards, KPI systems, and analytics that improve everyday decision-making." };
+export const metadata: Metadata = { title: "Business Intelligence & Analytics", description: "Turn trusted data into governed Power BI dashboards, KPI systems, and analytics that improve everyday decision-making.", alternates: { canonical: "/services/data-analytics" } };
 
 const content: ServicePageContent = {
   eyebrow: "Business Intelligence & Analytics", heroTitle: "See what matters.", heroAccent: "Act with confidence.", heroDescription: "We turn complex operational data into clear metrics, governed dashboards, and decision systems people actually use.", heroImage: "/images/services/data-analytics-hero.png", heroAlt: "Executive analytics dashboards presenting clear business performance signals",
