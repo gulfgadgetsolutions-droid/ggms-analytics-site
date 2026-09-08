@@ -2,7 +2,6 @@ import Image from "next/image";
 import Link from "next/link";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
-import ServiceHeroScene from "./ServiceHeroScene";
 import ServiceSchema from "./ServiceSchema";
 
 export type ServicePageContent = {
@@ -75,17 +74,16 @@ export default function ServiceDetailPage({ content }: { content: ServicePageCon
   const servicePhoto = servicePhotos[sceneVariant];
   const servicePath = sceneVariant === "strategy" ? "/services/data-ai-strategy" : sceneVariant === "engineering" ? "/services/data-engineering" : sceneVariant === "analytics" ? "/services/data-analytics" : "/services/data-science";
   return (
-    <main className="min-h-screen overflow-hidden bg-white text-slate-950">
+    <main className="depth-page depth-services min-h-screen overflow-hidden bg-white text-slate-950">
       <ServiceSchema name={content.eyebrow} description={content.heroDescription} path={servicePath} />
       <Navbar />
-      <section className="service-hero-soft relative isolate min-h-[720px] overflow-hidden bg-slate-300 text-slate-950">
-        <Image src={content.heroImage} alt={content.heroAlt} fill preload sizes="100vw" className="object-cover object-[70%_center] opacity-90" />
-        <ServiceHeroScene variant={sceneVariant} />
+      <section className="service-hero-soft depth-hero relative isolate min-h-[720px] overflow-hidden bg-slate-300 text-slate-950">
+        <Image src={content.heroImage} alt={content.heroAlt} fill preload sizes="100vw" className="object-cover object-center opacity-95" />
         <div className="absolute inset-0 bg-gradient-to-r from-slate-200/95 via-slate-300/85 to-slate-900/20" />
         <div className="absolute inset-0 bg-gradient-to-t from-slate-400/60 via-transparent to-slate-200/30" />
         <div className="absolute inset-y-0 left-0 w-3/5 bg-[radial-gradient(circle_at_30%_45%,rgba(255,255,255,0.32),transparent_60%)]" />
         <div className="relative z-10 mx-auto flex min-h-[760px] max-w-7xl items-center px-6 py-24 lg:px-8">
-          <div className="service-hero-panel max-w-2xl">
+          <div className="service-hero-panel depth-panel max-w-2xl">
             <div className="mb-7 inline-flex items-center gap-3 rounded-full border border-slate-400/45 bg-white/55 px-4 py-2 text-xs font-semibold uppercase tracking-[0.22em] text-cyan-700 shadow-lg shadow-slate-900/10 backdrop-blur"><span className="h-1.5 w-1.5 rounded-full bg-cyan-500 shadow-[0_0_10px_#06b6d4]" />{content.eyebrow}</div>
             <h1 className="text-5xl font-semibold leading-[1.04] tracking-[-0.04em] sm:text-6xl lg:text-7xl">{content.heroTitle}<span className="block bg-gradient-to-r from-cyan-600 to-sky-700 bg-clip-text text-transparent">{content.heroAccent}</span></h1>
             <p className="mt-7 max-w-xl text-lg leading-8 text-slate-700 sm:text-xl">{content.heroDescription}</p>

@@ -4,7 +4,7 @@ import ServiceDetailPage, { type ServicePageContent } from "../../components/Ser
 export const metadata: Metadata = { title: "Business Intelligence & Analytics", description: "Turn trusted data into governed Power BI dashboards, KPI systems, and analytics that improve everyday decision-making.", alternates: { canonical: "/services/data-analytics" } };
 
 const content: ServicePageContent = {
-  eyebrow: "Business Intelligence & Analytics", heroTitle: "See what matters.", heroAccent: "Act with confidence.", heroDescription: "We turn complex operational data into clear metrics, governed dashboards, and decision systems people actually use.", heroImage: "/images/services/data-analytics-hero.png", heroAlt: "Executive analytics dashboards presenting clear business performance signals",
+  eyebrow: "Business Intelligence & Analytics", heroTitle: "See what matters.", heroAccent: "Act with confidence.", heroDescription: "We turn complex operational data into clear metrics, governed dashboards, and decision systems people actually use.", heroImage: "/images/services/data-analytics-hero-composite.webp", heroAlt: "A real analytics workspace with an integrated dimensional performance visualization",
   problemLabel: "Clarity over reporting noise", problemTitle: "A dashboard should answer questions—not create more.",
   problemParagraphs: ["Many organizations have plenty of reports but no shared view of performance. Metrics conflict, refreshes depend on manual effort, and important questions still require another spreadsheet.", "We connect business context with analytical design—creating trusted models, meaningful KPIs, and focused experiences for executives, managers, and operational teams."],
   capabilities: [

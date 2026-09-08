@@ -46,14 +46,14 @@ export default function LetsTalk() {
     "cursor-pointer rounded-full border px-4 py-2.5 text-sm transition";
 
   return (
-    <main className="min-h-screen bg-slate-100 text-slate-950">
+    <main className="depth-page depth-project min-h-screen bg-slate-100 text-slate-950">
       <Navbar />
 
       {/* Header */}
-      <section className="relative overflow-hidden border-b border-slate-400 bg-slate-200">
+      <section className="depth-hero relative overflow-hidden border-b border-slate-400 bg-slate-200">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_75%_20%,rgba(6,182,212,0.10),transparent_35%)]" />
 
-        <div className="relative mx-auto max-w-7xl px-6 py-16 md:px-10 md:py-20">
+        <div className="depth-hero-copy relative mx-auto max-w-7xl px-6 py-16 md:px-10 md:py-20">
           <p className="mb-5 text-sm font-semibold uppercase tracking-[0.2em] text-cyan-600">
             Start a Project
           </p>
@@ -74,10 +74,10 @@ export default function LetsTalk() {
           <p className="text-sm font-semibold uppercase tracking-[.2em] text-cyan-700">Project conversation</p>
           <h2 className="mt-4 text-3xl font-semibold tracking-tight">Help us prepare before we speak.</h2>
           <p className="mt-5 leading-7 text-slate-600">This page is for project discovery. Share the business challenge, current environment, stage, and timing so the right people can review it.</p>
-          <div className="mt-9 space-y-4 rounded-2xl border border-slate-300 bg-slate-200 p-6"><p className="text-sm font-semibold">Prefer a direct channel?</p><a href={companyContact.phone.href} className="block text-sm text-slate-700 hover:text-cyan-700">Call {companyContact.phone.label}</a><a href={companyContact.whatsapp[0].href} target="_blank" rel="noreferrer" className="block text-sm text-slate-700 hover:text-cyan-700">WhatsApp {companyContact.whatsapp[0].label}</a><a href={companyContact.email[0].href} className="block break-all text-sm text-slate-700 hover:text-cyan-700">{companyContact.email[0].label}</a></div>
+          <div className="depth-panel mt-9 space-y-4 rounded-2xl border border-slate-300 bg-slate-200 p-6"><p className="text-sm font-semibold">Prefer a direct channel?</p><a href={companyContact.phone.href} className="block text-sm text-slate-700 hover:text-cyan-700">Call {companyContact.phone.label}</a><a href={companyContact.whatsapp[0].href} target="_blank" rel="noreferrer" className="block text-sm text-slate-700 hover:text-cyan-700">WhatsApp {companyContact.whatsapp[0].label}</a><a href={companyContact.email[0].href} className="block break-all text-sm text-slate-700 hover:text-cyan-700">{companyContact.email[0].label}</a></div>
           <div className="mt-7 border-l-2 border-cyan-500 pl-5"><p className="text-sm font-semibold">What happens next</p><ol className="mt-4 space-y-3 text-sm leading-6 text-slate-600"><li>We review your context.</li><li>We identify the right capability.</li><li>We prepare focused questions.</li><li>We agree on a practical next step.</li></ol></div>
         </aside>
-        <div className="rounded-3xl border border-slate-300 bg-slate-50 p-7 shadow-xl shadow-slate-900/8 sm:p-10">
+        <div className="depth-panel rounded-3xl border border-slate-300 bg-slate-50 p-7 shadow-xl shadow-slate-900/8 sm:p-10">
         {status === "sent" ? <div className="py-20 text-center"><p className="text-sm font-semibold uppercase tracking-[.2em] text-cyan-700">Request received</p><h2 className="mt-4 text-3xl font-semibold">Thank you. We&apos;ll review your project context.</h2><p className="mx-auto mt-5 max-w-xl leading-7 text-slate-600">You can also contact us directly at {companyContact.phone.label}.</p></div> : <form onSubmit={handleSubmit} className="space-y-14">
 
           {/* What do you want to discuss? */}

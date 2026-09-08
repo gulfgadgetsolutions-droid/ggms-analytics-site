@@ -4,7 +4,7 @@ import ServiceDetailPage, { type ServicePageContent } from "../../components/Ser
 export const metadata: Metadata = { title: "Data Science & Machine Learning", description: "Apply forecasting, predictive modeling, segmentation, and anomaly detection to measurable business decisions.", alternates: { canonical: "/services/data-science" } };
 
 const content: ServicePageContent = {
-  eyebrow: "Data Science & Machine Learning", heroTitle: "Move from hindsight", heroAccent: "to foresight.", heroDescription: "We develop practical predictive solutions that help teams anticipate demand, identify risk, understand behavior, and act earlier.", heroImage: "/images/services/data-science-hero.png", heroAlt: "Historical data transformed into forecasts, clusters, and anomaly signals",
+  eyebrow: "Data Science & Machine Learning", heroTitle: "Move from hindsight", heroAccent: "to foresight.", heroDescription: "We develop practical predictive solutions that help teams anticipate demand, identify risk, understand behavior, and act earlier.", heroImage: "/images/services/data-science-hero-composite.webp", heroAlt: "Real machine-learning code with an integrated dimensional predictive network",
   problemLabel: "Prediction with a purpose", problemTitle: "A model is useful only when it improves a decision.",
   problemParagraphs: ["Organizations often have years of historical data but still plan through intuition, static averages, and manual rules. Data science can reveal patterns that are difficult to see—but experimentation alone does not create value.", "We begin with the decision, the action it enables, and the cost of being wrong. The resulting solution is designed around measurable outcomes, usable outputs, and a realistic path into operations."],
   capabilities: [

@@ -4,7 +4,7 @@ import ServiceDetailPage, { type ServicePageContent } from "../../components/Ser
 export const metadata: Metadata = { title: "Data & AI Strategy", description: "Assess readiness, prioritize high-value opportunities, and create a practical roadmap for data, analytics, and AI investment.", alternates: { canonical: "/services/data-ai-strategy" } };
 
 const content: ServicePageContent = {
-  eyebrow: "Data & AI Strategy", heroTitle: "Turn ambition into", heroAccent: "an achievable roadmap.", heroDescription: "We connect business priorities, data readiness, technology, and governance into a clear plan for measurable data and AI progress.", heroImage: "/images/services/data-ai-strategy-hero.png", heroAlt: "A strategic compass connecting current data systems to a phased data and AI roadmap",
+  eyebrow: "Data & AI Strategy", heroTitle: "Turn ambition into", heroAccent: "an achievable roadmap.", heroDescription: "We connect business priorities, data readiness, technology, and governance into a clear plan for measurable data and AI progress.", heroImage: "/images/services/data-ai-strategy-hero-composite.webp", heroAlt: "A real strategy workshop with an integrated dimensional data and AI roadmap",
   problemLabel: "Direction before investment", problemTitle: "Start with the decisions—not the technology.",
   problemParagraphs: ["Data and AI initiatives often stall because the organization starts with a platform, model, or trend before agreeing on the business outcome and the capabilities required to reach it.", "We help leadership understand the current landscape, identify valuable opportunities, make informed technology choices, and sequence investment into a roadmap teams can realistically deliver."],
   capabilities: [

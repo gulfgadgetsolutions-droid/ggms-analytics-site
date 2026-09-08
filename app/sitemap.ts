@@ -1,5 +1,7 @@
 import type { MetadataRoute } from "next";
 import { getSiteUrl } from "./lib/site";
+import { industries } from "./lib/industries";
+import { insightArticles } from "./lib/insights";
 
 const routes = [
   ["", "weekly", 1], ["/services", "weekly", 0.9],
@@ -14,5 +16,24 @@ const routes = [
 export default function sitemap(): MetadataRoute.Sitemap {
   const siteUrl = getSiteUrl();
   const lastModified = new Date();
-  return routes.map(([path, changeFrequency, priority]) => ({ url: `${siteUrl}${path}`, lastModified, changeFrequency, priority }));
+  const primaryRoutes = routes.map(([path, changeFrequency, priority]) => ({
+    url: `${siteUrl}${path}`,
+    lastModified,
+    changeFrequency,
+    priority,
+  }));
+  const insightRoutes = insightArticles.map((article) => ({
+    url: `${siteUrl}/insights/${article.slug}`,
+    lastModified: new Date(article.datePublished),
+    changeFrequency: "monthly" as const,
+    priority: 0.65,
+  }));
+  const industryRoutes = industries.map((industry) => ({
+    url: `${siteUrl}/industries/${industry.slug}`,
+    lastModified,
+    changeFrequency: "monthly" as const,
+    priority: 0.72,
+  }));
+
+  return [...primaryRoutes, ...industryRoutes, ...insightRoutes];
 }

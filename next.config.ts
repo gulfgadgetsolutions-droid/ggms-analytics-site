@@ -8,6 +8,11 @@ const nextConfig: NextConfig = {
         hostname: "images.unsplash.com",
         pathname: "/photo-*",
       },
+      {
+        protocol: "https",
+        hostname: "ggmsglobal.com",
+        pathname: "/wp-content/uploads/**",
+      },
     ],
   },
 };

@@ -25,20 +25,20 @@ const values = [
 
 export default function About() {
   return (
-    <main className="min-h-screen bg-[#f4f8fb] text-slate-900">
+    <main className="depth-page depth-about min-h-screen bg-[#f4f8fb] text-slate-900">
       <Navbar />
 
-      <section className="relative overflow-hidden border-b border-cyan-100 bg-gradient-to-br from-white via-[#eff9fc] to-[#dceff5]">
+      <section className="depth-hero relative overflow-hidden border-b border-cyan-100 bg-gradient-to-br from-[#e9eef3] via-[#e3edf2] to-[#d5e7ee]">
         <div className="absolute -left-28 top-16 h-72 w-72 rounded-full bg-cyan-300/20 blur-3xl" />
         <div className="absolute right-[38%] top-0 h-64 w-64 rounded-full bg-sky-200/30 blur-3xl" />
         <div className="relative mx-auto grid min-h-[690px] max-w-7xl items-center gap-12 px-6 py-20 lg:grid-cols-[1.05fr_.95fr] lg:px-10">
-          <div className="relative z-10">
+          <div className="depth-hero-copy relative z-10">
             <div className="mb-7 inline-flex items-center gap-3 rounded-full border border-cyan-200 bg-white/80 px-4 py-2 text-xs font-semibold uppercase tracking-[.2em] text-cyan-700 shadow-sm backdrop-blur"><span className="h-2 w-2 rounded-full bg-cyan-500 shadow-[0_0_14px_rgba(6,182,212,.8)]" /> About GGMS Analytics</div>
             <h1 className="max-w-3xl text-4xl font-semibold leading-[1.08] tracking-[-.04em] text-slate-950 md:text-6xl lg:text-7xl">Gulf presence. Global thinking. <span className="text-cyan-600">Data built for real business.</span></h1>
             <p className="mt-7 max-w-2xl text-lg leading-8 text-slate-600 md:text-xl">GGMS Analytics is a growing Data and AI company headquartered in Oman, with branches in the UAE and Saudi Arabia—and an ambition to help organizations compete through trusted data, intelligent analytics, and practical AI.</p>
             <div className="mt-9 flex flex-wrap gap-4"><Link href="/services" className="rounded-xl bg-slate-900 px-6 py-3.5 font-semibold text-white shadow-lg shadow-slate-900/15 transition hover:-translate-y-1 hover:bg-cyan-600 hover:shadow-cyan-600/25">Explore our services →</Link><Link href="/contact" className="rounded-xl border border-slate-300 bg-white/80 px-6 py-3.5 font-semibold text-slate-800 transition hover:-translate-y-1 hover:border-cyan-500 hover:text-cyan-700">Talk to our team</Link></div>
           </div>
-          <div className="relative min-h-[480px] lg:min-h-[570px]"><div className="absolute inset-4 rotate-3 rounded-[2.5rem] bg-cyan-500/15" /><div className="absolute inset-0 overflow-hidden rounded-[2.5rem] border-8 border-white shadow-[0_35px_80px_-30px_rgba(15,23,42,.4)]"><Image src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1600&q=88" alt="A professional technology team collaborating in a modern workplace" fill priority sizes="(min-width: 1024px) 48vw, 100vw" className="object-cover" /><div className="absolute inset-0 bg-gradient-to-t from-slate-950/55 via-transparent to-transparent" /><p className="absolute bottom-7 left-7 right-7 text-sm font-medium leading-6 text-white">Technology delivery becomes valuable when strategy, people, systems, and data move together.</p></div><div className="absolute -bottom-4 -left-5 rounded-2xl border border-white bg-white/95 p-5 shadow-xl backdrop-blur md:left-[-35px]"><p className="text-xs font-semibold uppercase tracking-[.18em] text-cyan-700">Regional footprint</p><p className="mt-2 font-semibold text-slate-900">Oman · UAE · Saudi Arabia</p></div></div>
+          <div className="depth-stage depth-stage-reverse relative min-h-[480px] lg:min-h-[570px]"><div className="absolute inset-4 rotate-3 rounded-[2.5rem] bg-cyan-500/15" /><div className="absolute inset-0 overflow-hidden rounded-[2.5rem] border-8 border-white shadow-[0_35px_80px_-30px_rgba(15,23,42,.4)]"><Image src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1600&q=88" alt="A professional technology team collaborating in a modern workplace" fill priority sizes="(min-width: 1024px) 48vw, 100vw" className="object-cover" /><div className="absolute inset-0 bg-gradient-to-t from-slate-950/55 via-transparent to-transparent" /><p className="absolute bottom-7 left-7 right-7 text-sm font-medium leading-6 text-white">Technology delivery becomes valuable when strategy, people, systems, and data move together.</p></div><div className="absolute -bottom-4 -left-5 rounded-2xl border border-white bg-white/95 p-5 shadow-xl backdrop-blur md:left-[-35px]"><p className="text-xs font-semibold uppercase tracking-[.18em] text-cyan-700">Regional footprint</p><p className="mt-2 font-semibold text-slate-900">Oman · UAE · Saudi Arabia</p></div></div>
         </div>
       </section>
 

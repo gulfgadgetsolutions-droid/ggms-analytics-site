@@ -3,7 +3,6 @@ import Image from "next/image";
 import Link from "next/link";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
-import ServiceHeroScene from "../../components/ServiceHeroScene";
 import ServiceSchema from "../../components/ServiceSchema";
 
 export const metadata: Metadata = {
@@ -69,18 +68,17 @@ const faqs = [
 
 export default function ManagedDataAi() {
   return (
-    <main className="min-h-screen overflow-hidden bg-white text-slate-950">
+    <main className="depth-page depth-services min-h-screen overflow-hidden bg-white text-slate-950">
       <ServiceSchema name="Managed Data & AI Services" description="Ongoing monitoring, maintenance, support, and improvement for business-critical data platforms, analytics, and AI solutions." path="/services/managed-data-ai" />
       <Navbar />
 
-      <section className="service-hero-soft relative isolate min-h-[720px] overflow-hidden bg-slate-300 text-slate-950">
-        <Image src="/images/services/managed-data-ai-hero.png" alt="A protected operations hub continuously monitoring connected data and AI systems" fill preload sizes="100vw" className="object-cover object-[70%_center] opacity-90" />
-        <ServiceHeroScene variant="managed" />
+      <section className="service-hero-soft depth-hero relative isolate min-h-[720px] overflow-hidden bg-slate-300 text-slate-950">
+        <Image src="/images/services/managed-data-ai-hero-composite.webp" alt="Earth at night with an integrated dimensional monitoring network" fill preload sizes="100vw" className="object-cover object-center opacity-95" />
         <div className="absolute inset-0 bg-gradient-to-r from-slate-200/95 via-slate-300/85 to-slate-900/20" />
         <div className="absolute inset-0 bg-gradient-to-t from-slate-400/60 via-transparent to-slate-200/30" />
         <div className="absolute inset-y-0 left-0 w-3/5 bg-[radial-gradient(circle_at_30%_45%,rgba(255,255,255,0.32),transparent_60%)]" />
         <div className="relative z-10 mx-auto flex min-h-[760px] max-w-7xl items-center px-6 py-24 lg:px-8">
-          <div className="service-hero-panel max-w-2xl">
+          <div className="service-hero-panel depth-panel max-w-2xl">
             <div className="mb-7 inline-flex items-center gap-3 rounded-full border border-slate-400/45 bg-white/55 px-4 py-2 text-xs font-semibold uppercase tracking-[0.22em] text-cyan-700 shadow-lg shadow-slate-900/10 backdrop-blur"><span className="h-1.5 w-1.5 rounded-full bg-emerald-500 shadow-[0_0_10px_#10b981]" /> Managed Data &amp; AI</div>
             <h1 className="text-5xl font-semibold leading-[1.04] tracking-[-0.04em] sm:text-6xl lg:text-7xl">Keep critical systems<span className="block bg-gradient-to-r from-cyan-600 to-sky-700 bg-clip-text text-transparent">healthy and improving.</span></h1>
             <p className="mt-7 max-w-xl text-lg leading-8 text-slate-700 sm:text-xl">Ongoing monitoring, maintenance, and optimization for the data platforms, analytics, and AI solutions your business depends on.</p>

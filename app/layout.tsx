@@ -1,12 +1,8 @@
 import type { Metadata } from "next";
-import { Space_Grotesk, Inter } from "next/font/google";
 import "./globals.css";
 import Chatbot from "./components/Chatbot";
 import { getSiteUrl, siteDescription, siteName } from "./lib/site";
 import { companyContact } from "./lib/company";
-
-const spaceGrotesk = Space_Grotesk({ subsets: ["latin"], variable: "--font-heading", weight: ["500", "600", "700"] });
-const inter = Inter({ subsets: ["latin"], variable: "--font-body" });
 
 export const metadata: Metadata = {
   metadataBase: new URL(getSiteUrl()),
@@ -32,10 +28,10 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   const schema = {
     "@context": "https://schema.org",
     "@graph": [
-      { "@type": "Organization", "@id": `${siteUrl}/#organization`, name: siteName, url: siteUrl, description: siteDescription, logo: `${siteUrl}/favicon.ico`, telephone: companyContact.phone.label, email: companyContact.email[0].label, address: { "@type": "PostalAddress", streetAddress: "Office No. 103, Truckker Building", addressLocality: "Muscat", addressCountry: "OM" }, areaServed: ["Oman", "United Arab Emirates", "Saudi Arabia"], knowsAbout: ["Data Engineering", "Business Intelligence", "Data Science", "Machine Learning", "Generative AI", "AI Automation", "Microsoft Azure"] },
+      { "@type": "Organization", "@id": `${siteUrl}/#organization`, name: siteName, url: siteUrl, description: siteDescription, logo: `${siteUrl}/favicon.ico`, telephone: companyContact.phone.label, email: companyContact.email[0].label, address: { "@type": "PostalAddress", streetAddress: "Office No. 103, Truckker Building", addressLocality: "Muscat", addressCountry: "OM" }, areaServed: ["Oman", "United Arab Emirates", "Saudi Arabia"], parentOrganization: { "@type": "Organization", name: "GGMS Global IT Solutions SPC", url: "https://ggmsglobal.com/" }, knowsAbout: ["Data Engineering", "Business Intelligence", "Data Science", "Machine Learning", "Generative AI", "AI Automation", "Microsoft Azure"] },
       { "@type": "WebSite", "@id": `${siteUrl}/#website`, url: siteUrl, name: siteName, description: siteDescription, publisher: { "@id": `${siteUrl}/#organization` }, inLanguage: "en" },
     ],
   };
 
-  return <html lang="en"><body className={`${spaceGrotesk.variable} ${inter.variable} font-sans antialiased`}><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema).replace(/</g, "\\u003c") }} />{children}<Chatbot /></body></html>;
+  return <html lang="en" data-scroll-behavior="smooth"><body className="font-sans antialiased"><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema).replace(/</g, "\\u003c") }} />{children}<Chatbot /></body></html>;
 }

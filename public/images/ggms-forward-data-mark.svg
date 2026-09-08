@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="320" viewBox="0 0 320 320" role="img" aria-labelledby="title desc">
+  <title id="title">GGMS Analytics Forward Data mark</title>
+  <desc id="desc">An open white G with a cyan forward arrow.</desc>
+  <defs>
+    <linearGradient id="cyan" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0" stop-color="#08B5DD"/>
+      <stop offset="1" stop-color="#5CE5F8"/>
+    </linearGradient>
+  </defs>
+  <path d="M205 43A125 125 0 1 0 205 277" fill="none" stroke="#F8FBFF" stroke-width="38" stroke-linecap="round"/>
+  <path d="M144 160H255" fill="none" stroke="#F8FBFF" stroke-width="38" stroke-linecap="round"/>
+  <path d="M218 111L267 160L218 209" fill="none" stroke="url(#cyan)" stroke-width="32" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

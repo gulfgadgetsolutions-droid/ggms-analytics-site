@@ -9,6 +9,6 @@ export const companyContact = {
     { label: "care@ggmsglobal.com", href: "mailto:care@ggmsglobal.com" },
   ],
   address: "Office No. 103, Truckker Building, Muscat, Oman",
-  mapUrl: "https://www.google.com/maps/search/?api=1&query=Office%20No.%20103%2C%20Truckker%20Building%2C%20Muscat%2C%20Oman",
-  mapEmbedUrl: "https://www.google.com/maps?q=Office%20No.%20103%2C%20Truckker%20Building%2C%20Muscat%2C%20Oman&output=embed",
+  mapUrl: "https://maps.app.goo.gl/Yz7Zrdj536vhSTJo7?g_st=iwb",
+  mapEmbedUrl: "https://maps.google.com/maps?q=23.5844293%2C58.3679152&t=m&z=16&output=embed&iwloc=near",
 } as const;
