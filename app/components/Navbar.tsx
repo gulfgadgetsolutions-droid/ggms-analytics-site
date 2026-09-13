@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useSyncExternalStore } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import BrandIdentity from "./BrandIdentity";
@@ -29,6 +29,10 @@ const locationLinks = [
 
 const regionalPathPattern = /^\/(om|ae|sa)(?=\/|$)/;
 
+const subscribeToHydration = () => () => {};
+const clientSnapshot = () => true;
+const serverSnapshot = () => false;
+
 function GlobeIcon() {
   return (
     <svg viewBox="0 0 24 24" className="h-[18px] w-[18px]" fill="none" stroke="currentColor" strokeWidth="1.7" aria-hidden="true">
@@ -44,7 +48,10 @@ export default function Navbar() {
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
   const [locationOpen, setLocationOpen] = useState(false);
   const closeMobile = () => setMobileOpen(false);
-  const activeRegion = locationLinks.find((location) => pathname === `/${location.slug}` || pathname.startsWith(`/${location.slug}/`));
+  // Rewrites render the global path on the server. Match that first render,
+  // then use the browser's regional path once hydration has completed.
+  const hydrated = useSyncExternalStore(subscribeToHydration, clientSnapshot, serverSnapshot);
+  const activeRegion = hydrated ? locationLinks.find((location) => pathname === `/${location.slug}` || pathname.startsWith(`/${location.slug}/`)) : undefined;
   const globalPath = pathname.replace(regionalPathPattern, "") || "/";
   const regionalHref = (href: string) => activeRegion ? `/${activeRegion.slug}${href === "/" ? "" : href}` : href;
   const switchRegionHref = (slug: string) => `/${slug}${globalPath === "/" ? "" : globalPath}`;
@@ -109,7 +116,6 @@ export default function Navbar() {
           <Link href={regionalHref("/lets-talk")} className="hidden rounded-md bg-cyan-400 px-4 py-2.5 text-[15px] font-semibold text-slate-950 transition hover:bg-cyan-300 sm:inline-flex">Start a Project</Link>
           <div
             className="relative hidden lg:block"
-            onMouseEnter={() => setLocationOpen(true)}
             onMouseLeave={() => setLocationOpen(false)}
             onBlur={(event) => {
               if (!event.currentTarget.contains(event.relatedTarget as Node | null)) setLocationOpen(false);

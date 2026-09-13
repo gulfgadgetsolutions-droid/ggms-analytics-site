@@ -1,3 +1,5 @@
+import { insightNotes, type EditorialSource } from "./editorial";
+
 export type InsightCategory = "Data Engineering" | "Analytics & BI" | "AI & Automation" | "Industry Intelligence";
 
 export type InsightSection = {
@@ -10,7 +12,7 @@ export type InsightSection = {
 export type InsightArticle = {
   slug: string;
   category: InsightCategory;
-  format: "Field note" | "Practical guide" | "Architecture perspective";
+  format: "Practical guide" | "Architecture perspective";
   title: string;
   excerpt: string;
   image: string;
@@ -19,6 +21,8 @@ export type InsightArticle = {
   published: string;
   datePublished: string;
   author: string;
+  dateModified: string;
+  sources: EditorialSource[];
   featured?: boolean;
   keyTakeaway: string;
   flow: string[];
@@ -34,18 +38,17 @@ export const insightCategories: Array<"All" | InsightCategory> = [
   "Industry Intelligence",
 ];
 
-export const insightArticles: InsightArticle[] = [
+const articleDrafts: Omit<InsightArticle, "dateModified" | "sources" | "readTime">[] = [
   {
     slug: "trusted-finance-analytics-from-source-to-decision",
     category: "Analytics & BI",
     format: "Architecture perspective",
-    title: "From SAP extract to executive decision: the architecture of trusted finance analytics",
+    title: "Finance reporting from SAP to Power BI: a reconciliation checklist",
     excerpt:
       "Finance reporting becomes dependable when definitions, controls, data grain, and ownership are designed before the executive dashboard.",
     image:
       "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1800&q=86",
     alt: "Finance leaders reviewing business performance around a meeting table",
-    readTime: "8 min read",
     published: "September 2026",
     datePublished: "2026-09-02",
     author: "GGMS Analytics",
@@ -103,14 +106,13 @@ export const insightArticles: InsightArticle[] = [
   {
     slug: "supply-chain-visibility-needs-an-operating-model",
     category: "Industry Intelligence",
-    format: "Field note",
-    title: "Supply chain visibility needs one operating model—not another dashboard",
+    format: "Practical guide",
+    title: "Supply chain visibility: track the promise, shipment, and receipt",
     excerpt:
       "Connect assets, materials, manufacturing, inventory, and logistics around shared events, decisions, and exceptions.",
     image:
       "https://images.unsplash.com/photo-1565793298595-6a879b1d9492?auto=format&fit=crop&w=1800&q=86",
     alt: "Industrial manufacturing environment with modern production equipment",
-    readTime: "7 min read",
     published: "September 2026",
     datePublished: "2026-09-02",
     author: "GGMS Analytics",
@@ -162,13 +164,12 @@ export const insightArticles: InsightArticle[] = [
     slug: "distributor-analytics-decisions",
     category: "Industry Intelligence",
     format: "Practical guide",
-    title: "Distributor analytics: five decisions a channel performance model should support",
+    title: "Distributor analytics: reconcile stock and secondary sales",
     excerpt:
       "Move beyond sales totals to understand territory execution, product movement, inventory exposure, and channel action.",
     image:
       "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1800&q=86",
     alt: "Organized distribution warehouse representing channel and inventory analytics",
-    readTime: "6 min read",
     published: "September 2026",
     datePublished: "2026-09-02",
     author: "GGMS Analytics",
@@ -217,14 +218,13 @@ export const insightArticles: InsightArticle[] = [
   {
     slug: "airline-sales-analytics-beyond-route-performance",
     category: "Industry Intelligence",
-    format: "Field note",
-    title: "Airline sales analytics beyond route performance",
+    format: "Practical guide",
+    title: "Airline sales analytics: compare bookings at the same horizon",
     excerpt:
       "A commercial model should connect route, market, channel, booking behavior, and sales activity without losing time context.",
     image:
       "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1800&q=86",
     alt: "Commercial aircraft in flight representing airline sales analytics",
-    readTime: "7 min read",
     published: "September 2026",
     datePublished: "2026-09-02",
     author: "GGMS Analytics",
@@ -275,13 +275,12 @@ export const insightArticles: InsightArticle[] = [
     slug: "build-the-pipeline-before-the-prediction",
     category: "Data Engineering",
     format: "Architecture perspective",
-    title: "Build the pipeline before the prediction",
+    title: "Data pipelines for AI: replay, reconcile, and validate",
     excerpt:
       "Why AI-ready data depends on observable pipelines, stable definitions, quality controls, and ownership—not model choice alone.",
     image:
       "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1800&q=86",
     alt: "Enterprise data center infrastructure supporting reliable data pipelines",
-    readTime: "8 min read",
     published: "September 2026",
     datePublished: "2026-09-02",
     author: "GGMS Analytics",
@@ -333,13 +332,12 @@ export const insightArticles: InsightArticle[] = [
     slug: "where-ai-automation-belongs-in-reporting",
     category: "AI & Automation",
     format: "Practical guide",
-    title: "Where AI automation belongs in the reporting cycle",
+    title: "AI in reporting: automate the draft, keep the evidence",
     excerpt:
       "Use AI to reduce repetitive work, surface context, and coordinate action—while preserving review where judgment matters.",
     image:
       "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1800&q=86",
     alt: "Corporate team collaborating on an AI-enabled reporting workflow",
-    readTime: "7 min read",
     published: "September 2026",
     datePublished: "2026-09-02",
     author: "GGMS Analytics",
@@ -389,13 +387,12 @@ export const insightArticles: InsightArticle[] = [
     slug: "workforce-analytics-questions",
     category: "Industry Intelligence",
     format: "Practical guide",
-    title: "The workforce questions an HR analytics product should answer",
+    title: "Workforce analytics: define headcount before comparing teams",
     excerpt:
       "Organize headcount, movement, recruitment, attendance, and structure around workforce decisions—not isolated HR extracts.",
     image:
       "https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=1800&q=86",
     alt: "Professionals collaborating in a modern workplace",
-    readTime: "6 min read",
     published: "September 2026",
     datePublished: "2026-09-02",
     author: "GGMS Analytics",
@@ -443,14 +440,13 @@ export const insightArticles: InsightArticle[] = [
   {
     slug: "healthcare-operations-analytics-capacity",
     category: "Industry Intelligence",
-    format: "Field note",
-    title: "Healthcare operations analytics: design for capacity, not chart volume",
+    format: "Practical guide",
+    title: "Healthcare operations: measure staffed capacity and service flow",
     excerpt:
       "Connect demand, service flow, workforce, and capacity using governed measures that support operational coordination.",
     image:
       "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1800&q=86",
     alt: "Healthcare professional using a digital device in a clinical setting",
-    readTime: "7 min read",
     published: "September 2026",
     datePublished: "2026-09-02",
     author: "GGMS Analytics",
@@ -499,14 +495,13 @@ export const insightArticles: InsightArticle[] = [
   {
     slug: "social-media-analytics-beyond-vanity-metrics",
     category: "Analytics & BI",
-    format: "Field note",
-    title: "Social media analytics should explain audience movement—not count activity",
+    format: "Practical guide",
+    title: "Social media analytics: reach, response, and measurement gaps",
     excerpt:
       "Connect content, audience, campaign, engagement, and conversion signals so teams can understand what changed and decide what to do next.",
     image:
       "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1800&q=86",
     alt: "Marketing team reviewing campaign ideas and audience activity in a workshop",
-    readTime: "7 min read",
     published: "September 2026",
     datePublished: "2026-09-04",
     author: "GGMS Analytics",
@@ -557,13 +552,12 @@ export const insightArticles: InsightArticle[] = [
     slug: "ecommerce-analytics-connect-demand-margin-fulfilment",
     category: "Analytics & BI",
     format: "Architecture perspective",
-    title: "E-commerce analytics: connect acquisition, orders, margin, and fulfilment",
+    title: "E-commerce analytics: reconcile orders, refunds, and margin",
     excerpt:
       "A dependable commerce model follows the customer and order journey from demand creation through payment, delivery, returns, and contribution.",
     image:
       "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=1800&q=86",
     alt: "Customer completing a digital payment in a real retail environment",
-    readTime: "8 min read",
     published: "September 2026",
     datePublished: "2026-09-04",
     author: "GGMS Analytics",
@@ -613,13 +607,12 @@ export const insightArticles: InsightArticle[] = [
     slug: "marketing-measurement-before-attribution",
     category: "Analytics & BI",
     format: "Practical guide",
-    title: "Marketing measurement: build a decision system before an attribution model",
+    title: "Marketing measurement: what evidence should change the budget?",
     excerpt:
       "Align objectives, spend, audiences, campaigns, journeys, and commercial outcomes before selecting a more sophisticated measurement method.",
     image:
       "https://images.unsplash.com/photo-1533750516457-a7f992034fec?auto=format&fit=crop&w=1800&q=86",
     alt: "Marketing professional working with campaign and digital performance information",
-    readTime: "7 min read",
     published: "September 2026",
     datePublished: "2026-09-04",
     author: "GGMS Analytics",
@@ -665,6 +658,15 @@ export const insightArticles: InsightArticle[] = [
     ],
   },
 ];
+
+export const insightArticles: InsightArticle[] = articleDrafts.map((article) => {
+  const note = insightNotes[article.slug];
+  if (!note) throw new Error(`Missing editorial review for ${article.slug}`);
+  const sections = [{ id: "checks-before-release", heading: note.heading, paragraphs: [note.detail], bullets: note.checks }, ...article.sections];
+  const words = [article.title, article.excerpt, article.keyTakeaway, ...article.flow, ...article.technologyContext,
+    ...sections.flatMap((section) => [section.heading, ...section.paragraphs, ...(section.bullets ?? [])])].join(" ").trim().split(/\s+/).length;
+  return { ...article, sections, sources: note.sources, dateModified: "2026-09-09", readTime: `${Math.max(1, Math.ceil(words / 200))} min read` };
+});
 
 export function getInsightBySlug(slug: string) {
   return insightArticles.find((article) => article.slug === slug);

@@ -4,6 +4,7 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import InsightsLibrary from "./InsightsLibrary";
 import { insightArticles } from "../lib/insights";
+import PublicStories from "../components/PublicStories";
 import { getSiteUrl } from "../lib/site";
 
 export default function InsightsPage() {
@@ -18,7 +19,6 @@ export default function InsightsPage() {
     .map((slug) => insightArticles.find((article) => article.slug === slug))
     .filter((article): article is (typeof insightArticles)[number] => Boolean(article));
   const libraryArticles = insightArticles
-    .filter((article) => article.slug !== featured.slug)
     .sort((a, b) => b.datePublished.localeCompare(a.datePublished))
     .map(({ slug, category, format, title, excerpt, image, alt, readTime, published }) => ({
       slug,
@@ -74,8 +74,7 @@ export default function InsightsPage() {
               <span className="block text-cyan-700">not display.</span>
             </h1>
             <p className="mt-7 text-lg leading-8 text-slate-700">
-              Original, experience-informed perspectives on the architecture, controls, and operating practices that
-              turn data and AI into dependable business capability.
+              Practical guides to data modelling, reporting, and automation. Explore implementation checks, technical references, and clearly attributed stories from other organizations.
             </p>
             <a
               href="#latest-insights"
@@ -159,7 +158,7 @@ export default function InsightsPage() {
                 <h3 className="mt-4 max-w-2xl text-3xl font-semibold leading-tight tracking-tight sm:text-4xl">{briefingArticles[0].title}</h3>
                 <p className="mt-4 max-w-2xl leading-7 text-slate-300">{briefingArticles[0].excerpt}</p>
                 <span className="mt-6 inline-flex items-center gap-2 text-sm font-semibold">
-                  Read the field perspective <span aria-hidden="true" className="transition-transform group-hover:translate-x-1">→</span>
+                  Read the guide <span aria-hidden="true" className="transition-transform group-hover:translate-x-1">→</span>
                 </span>
               </div>
             </Link>
@@ -194,12 +193,14 @@ export default function InsightsPage() {
           </div>
 
           <div className="mt-10 flex flex-wrap gap-x-8 gap-y-3 border-t border-slate-800 pt-8 text-sm text-slate-400">
-            <span><strong className="font-semibold text-white">Field notes</strong> from recurring delivery challenges</span>
+            <span><strong className="font-semibold text-white">Source references</strong> for technical context</span>
             <span><strong className="font-semibold text-white">Practical guides</strong> for active initiatives</span>
             <span><strong className="font-semibold text-white">Architecture perspectives</strong> connecting technology and decisions</span>
           </div>
         </div>
       </section>
+
+      <PublicStories />
 
       <section id="latest-insights" className="mx-auto max-w-7xl scroll-mt-24 px-6 py-24 sm:py-32 lg:px-8">
         <InsightsLibrary articles={libraryArticles} />
@@ -224,15 +225,14 @@ export default function InsightsPage() {
             <p className="text-sm font-semibold uppercase tracking-[0.2em] text-cyan-700">Our editorial standard</p>
             <h2 className="mt-4 text-3xl font-semibold tracking-tight sm:text-5xl">Useful before impressive.</h2>
             <p className="mt-6 text-lg leading-8 text-slate-700">
-              GGMS Insights is written from recurring delivery patterns: the questions organizations face when data
-              moves from source systems into reporting, planning, prediction, and automated workflows.
+              Each guide explains a specific decision, the data needed to support it, and checks to run before release. External case studies name their publisher. GGMS client stories require approved project facts and permission to publish.
             </p>
             <div className="mt-9 space-y-6">
               {[
-                ["Practitioner-led", "Built around problems that appear in real data, reporting, planning, and automation programs."],
+                ["Traceable sources", "Technical references are linked so readers can check the underlying concepts."],
                 ["Decision-centered", "Organized around the choices, controls, and operating response—not a software feature list."],
                 ["Technology-aware", "Platforms are discussed only where they materially change architecture, delivery, or governance."],
-                ["Responsible", "Client confidentiality is protected and no article presents fictional results as evidence."],
+                ["Clear attribution", "Public customer stories are labelled as external examples. Proposed approaches are not presented as delivered results."],
               ].map(([title, description]) => (
                 <div key={title} className="grid grid-cols-[auto_1fr] gap-4">
                   <span className="mt-2 h-2.5 w-2.5 rounded-full bg-cyan-600" />

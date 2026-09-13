@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import PublicStories from "../../components/PublicStories";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import { getInsightBySlug, insightArticles } from "../../lib/insights";
@@ -35,6 +36,7 @@ export async function generateMetadata({ params }: InsightPageProps): Promise<Me
       url: `/insights/${article.slug}`,
       type: "article",
       publishedTime: article.datePublished,
+      modifiedTime: article.dateModified,
       authors: [article.author],
       images: [{ url: article.image, alt: article.alt }],
     },
@@ -69,7 +71,8 @@ export default async function InsightArticlePage({ params }: InsightPageProps) {
     description: article.excerpt,
     image: article.image,
     datePublished: article.datePublished,
-    dateModified: article.datePublished,
+    dateModified: article.dateModified,
+    citation: article.sources.map((source) => source.url),
     author: { "@type": "Organization", name: "GGMS Analytics", url: siteUrl },
     publisher: { "@id": `${siteUrl}/#organization` },
     mainEntityOfPage: `${siteUrl}/insights/${article.slug}`,
@@ -95,7 +98,7 @@ export default async function InsightArticlePage({ params }: InsightPageProps) {
                 Insights
               </Link>
               <span aria-hidden="true">/</span>
-              <span>{article.category}</span>
+              <span aria-current="page">{article.title}</span>
             </nav>
 
             <div className="mt-10 flex flex-wrap items-center gap-3 text-xs font-semibold uppercase tracking-[0.18em] text-cyan-800">
@@ -110,14 +113,15 @@ export default async function InsightArticlePage({ params }: InsightPageProps) {
 
             <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-3 border-t border-slate-400/50 pt-6 text-sm text-slate-600">
               <span className="font-semibold text-slate-900">{article.author}</span>
-              <span>{article.published}</span>
+              <time dateTime={article.datePublished}>Published {article.published}</time>
+              <time dateTime={article.dateModified}>Updated {new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" }).format(new Date(article.dateModified))}</time>
               <span>{article.readTime}</span>
             </div>
           </div>
         </header>
 
         <div className="mx-auto max-w-7xl px-6 pt-10 lg:px-8">
-          <div className="insight-article-cover depth-stage relative min-h-[440px] overflow-hidden rounded-3xl border border-slate-300 bg-slate-300 shadow-2xl sm:min-h-[620px]">
+          <div className="insight-article-cover depth-stage relative min-h-[240px] overflow-hidden rounded-3xl border border-slate-300 bg-slate-300 shadow-2xl sm:min-h-[400px]">
             <span className="insight-cover-orbit" aria-hidden="true" />
             <Image
               src={article.image}
@@ -145,6 +149,7 @@ export default async function InsightArticlePage({ params }: InsightPageProps) {
                     {section.heading}
                   </a>
                 ))}
+                <a href="#sources" className="block border-l-2 border-slate-200 pl-3 text-sm text-cyan-800">Sources and further reading</a>
               </nav>
               <Link
                 href="/insights"
@@ -163,14 +168,14 @@ export default async function InsightArticlePage({ params }: InsightPageProps) {
 
             <div className="insight-decision-flow depth-panel mt-12 overflow-hidden rounded-2xl bg-slate-900 p-7 text-white shadow-xl sm:p-9">
               <p className="text-xs font-semibold uppercase tracking-[0.18em] text-cyan-400">Decision flow</p>
-              <div className="mt-7 grid gap-3 sm:grid-cols-5">
+              <div className="mt-7 grid gap-3 xl:grid-cols-5">
                 {article.flow.map((step, index) => (
-                  <div key={step} className="insight-flow-step flex items-center gap-3 sm:block">
-                    <div className="insight-flow-node flex min-h-20 flex-1 items-center rounded-xl border border-slate-700 bg-slate-800 px-4 py-3 text-sm font-semibold leading-5 text-slate-200 sm:min-h-28">
+                  <div key={step} className="insight-flow-step flex items-center gap-3 xl:block">
+                    <div className="insight-flow-node flex min-h-20 flex-1 items-center rounded-xl border border-slate-700 bg-slate-800 px-4 py-3 text-sm font-semibold leading-5 text-slate-200 xl:min-h-28">
                       {step}
                     </div>
                     {index < article.flow.length - 1 && (
-                      <span aria-hidden="true" className="shrink-0 text-cyan-400 sm:mt-2 sm:block sm:text-center sm:rotate-90 lg:rotate-0">
+                      <span aria-hidden="true" className="shrink-0 text-cyan-400 rotate-90 xl:mt-2 xl:block xl:text-center xl:rotate-0">
                         →
                       </span>
                     )}
@@ -216,15 +221,27 @@ export default async function InsightArticlePage({ params }: InsightPageProps) {
               ))}
             </div>
 
+            <section id="sources" className="mt-12 scroll-mt-28 rounded-2xl border border-slate-200 bg-white p-7">
+              <h2 className="text-2xl font-semibold">Sources and further reading</h2>
+              <ul className="mt-5 space-y-5">
+                {article.sources.map((source) => <li key={source.url}>
+                  <a href={source.url} className="font-semibold text-cyan-800 underline underline-offset-4">{source.title}</a>
+                  <p className="mt-2 text-sm leading-7 text-slate-600">{source.context}</p>
+                </li>)}
+              </ul>
+              <p className="mt-5 text-xs text-slate-500">Sources checked 9 September 2026.</p>
+            </section>
             <div className="mt-16 border-t border-slate-300 pt-8">
               <p className="text-sm leading-7 text-slate-500">
-                This GGMS Analytics perspective is experience-informed editorial guidance. It protects client
-                confidentiality and does not present outcomes from an unnamed organization as a case study.
+                This article offers implementation guidance, not a report of a GGMS client engagement.
+                The sources below support the referenced technical concepts; the proposed checks should be adapted to your systems and reviewed by the relevant business owner.
               </p>
             </div>
           </div>
         </div>
       </article>
+
+      <PublicStories insight={article.slug} />
 
       <section className="border-y border-slate-300 bg-white py-20 sm:py-24">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
@@ -233,7 +250,7 @@ export default async function InsightArticlePage({ params }: InsightPageProps) {
               <p className="text-sm font-semibold uppercase tracking-[0.2em] text-cyan-700">Continue reading</p>
               <h2 className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">Related perspectives</h2>
             </div>
-            <Link href="/insights" className="hidden text-sm font-semibold text-slate-900 hover:text-cyan-800 sm:block">
+            <Link href="/insights" className="hidden text-sm font-semibold text-slate-900 hover:text-cyan-800 xl:block">
               View all insights →
             </Link>
           </div>

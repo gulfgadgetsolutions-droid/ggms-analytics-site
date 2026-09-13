@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Chatbot from "./components/Chatbot";
-import { getSiteUrl, siteDescription, siteName } from "./lib/site";
+import { getSiteUrl, isPublicSite, siteDescription, siteName } from "./lib/site";
 import { companyContact } from "./lib/company";
 
 export const metadata: Metadata = {
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     images: [{ url: "/images/home-data-journey.png", width: 1200, height: 800, alt: "GGMS Analytics enterprise data and AI journey" }],
   },
   twitter: { card: "summary_large_image", title: "GGMS Analytics | Enterprise Data, Analytics & AI", description: siteDescription, images: ["/images/home-data-journey.png"] },
-  robots: { index: true, follow: true, googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1, "max-video-preview": -1 } },
+  robots: { index: isPublicSite(), follow: true, googleBot: { index: isPublicSite(), follow: true, "max-image-preview": "large", "max-snippet": -1, "max-video-preview": -1 } },
   category: "technology",
 };
 

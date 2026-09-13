@@ -46,9 +46,6 @@ function DataSignalLayer() {
             <path d="M1035 72V344M1165 72V344M1295 72V344M1425 72V344" />
           </g>
 
-          <path className="brand-signal-flow brand-signal-flow-a" d="M720 206C900 92 1052 244 1220 154s250-38 344-82" />
-          <path className="brand-signal-flow brand-signal-flow-b" d="M850 382c174-112 278-16 382 68s206 112 344 28" />
-          <path className="brand-signal-flow brand-signal-flow-c" d="M790 724c174-130 316-58 418-12s232 22 370-108" />
           <path className="brand-signal-line" d="M910 606c114-72 212-68 306-6s202 74 330-10" />
 
           <g filter="url(#brandSignalGlow)">

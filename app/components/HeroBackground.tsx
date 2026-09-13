@@ -5,6 +5,12 @@ import { Line, Points, PointMaterial } from "@react-three/drei";
 import { useMemo, useRef } from "react";
 import * as THREE from "three";
 
+// Decorative point positions must stay stable across React renders.
+function pointNoise(index: number) {
+  const value = Math.sin((index + 1) * 12.9898) * 43758.5453;
+  return value - Math.floor(value);
+}
+
 type HeroBackgroundProps = {
   activeSlide: number;
 };
@@ -224,14 +230,14 @@ function DataScience() {
     const result: [number, number, number][] = [];
 
     for (let i = 0; i < 100; i++) {
-      const x = (Math.random() - 0.5) * 6;
+      const x = (pointNoise(i * 3) - 0.5) * 6;
 
       const y =
         Math.sin(x * 1.4) +
-        (Math.random() - 0.5) * 1.3;
+        (pointNoise(i * 3 + 1) - 0.5) * 1.3;
 
       const z =
-        (Math.random() - 0.5) * 2.5;
+        (pointNoise(i * 3 + 2) - 0.5) * 2.5;
 
       result.push([x, y, z]);
     }
@@ -618,13 +624,13 @@ function BackgroundParticles() {
       i += 3
     ) {
       positions[i] =
-        (Math.random() - 0.5) * 16;
+        (pointNoise(i) - 0.5) * 16;
 
       positions[i + 1] =
-        (Math.random() - 0.5) * 10;
+        (pointNoise(i + 1) - 0.5) * 10;
 
       positions[i + 2] =
-        (Math.random() - 0.5) * 9;
+        (pointNoise(i + 2) - 0.5) * 9;
     }
 
     return positions;

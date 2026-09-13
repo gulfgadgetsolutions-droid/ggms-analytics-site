@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import PublicStories from "../../components/PublicStories";
+import { industryBriefs } from "../../lib/editorial";
+import { getSiteUrl } from "../../lib/site";
 import Footer from "../../components/Footer";
 import Navbar from "../../components/Navbar";
 import { getIndustry, industries } from "../../lib/industries";
@@ -31,13 +34,16 @@ export async function generateMetadata({ params }: IndustryPageProps): Promise<M
 
   return {
     title: `${industry.title} Data, Analytics & AI`,
-    description: `${industry.description} Explore industry-focused data engineering, analytics, AI, automation, and governance from GGMS Analytics.`,
+    description: industry.description,
     alternates: { canonical: `/industries/${industry.slug}` },
     openGraph: {
       title: `${industry.title} | GGMS Analytics`,
+      type: "website",
+      url: `/industries/${industry.slug}`,
       description: industry.description,
       images: [{ url: industry.image, alt: `${industry.title} data and analytics` }],
     },
+    twitter: { card: "summary_large_image", title: `${industry.title} | GGMS Analytics`, description: industry.description, images: [industry.image] },
   };
 }
 
@@ -47,9 +53,13 @@ export default async function IndustryDetailPage({ params }: IndustryPageProps) 
 
   if (!industry) notFound();
 
+  const brief = industryBriefs[industry.slug];
+  const pageUrl = `${getSiteUrl()}/industries/${industry.slug}`;
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "WebPage",
+    "@id": pageUrl,
+    url: pageUrl,
     name: `${industry.title} Data, Analytics & AI`,
     description: industry.description,
     isPartOf: { "@type": "WebSite", name: "GGMS Analytics" },
@@ -59,7 +69,7 @@ export default async function IndustryDetailPage({ params }: IndustryPageProps) 
   return (
     <main className="depth-page depth-industries min-h-screen text-slate-950">
       <Navbar />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData).replace(/</g, "\\u003c") }} />
 
       <section className="industry-detail-hero depth-hero relative overflow-hidden border-b border-slate-300/70">
         <div className="industry-detail-grid" aria-hidden="true" />
@@ -70,7 +80,7 @@ export default async function IndustryDetailPage({ params }: IndustryPageProps) 
             <nav aria-label="Breadcrumb" className="flex flex-wrap items-center gap-2 text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">
               <Link href="/industries" className="transition hover:text-cyan-700">Industries</Link>
               <span aria-hidden="true">/</span>
-              <span className="text-cyan-700">{industry.shortTitle}</span>
+              <span aria-current="page" className="text-cyan-700">{industry.shortTitle}</span>
             </nav>
             <p className="mt-7 text-xs font-semibold uppercase tracking-[0.24em] text-cyan-700">Industry intelligence</p>
             <h1 className="mt-4 text-4xl font-semibold leading-[1.04] tracking-[-0.045em] sm:text-6xl">{industry.title}</h1>
@@ -84,7 +94,7 @@ export default async function IndustryDetailPage({ params }: IndustryPageProps) 
           <div className="industry-detail-visual depth-stage">
             <div className="industry-visual-backplate" aria-hidden="true" />
             <div className="industry-visual-frame relative h-[480px] overflow-hidden rounded-3xl border border-white/70 bg-slate-900">
-              <Image src={industry.image} alt={`Real-world ${industry.title} operations`} fill priority sizes="(min-width: 1024px) 54vw, 100vw" className="object-cover" style={{ objectPosition: industry.imagePosition }} />
+              <Image src={industry.image} alt={`Illustrative photograph for ${industry.title}`} fill priority sizes="(min-width: 1024px) 54vw, 100vw" className="object-cover" style={{ objectPosition: industry.imagePosition }} />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/10 to-white/5" />
               <div className="absolute inset-x-0 bottom-0 p-7 text-white sm:p-9">
                 <p className="text-xs font-semibold uppercase tracking-[0.2em] text-cyan-300">Connected industry view</p>
@@ -97,11 +107,27 @@ export default async function IndustryDetailPage({ params }: IndustryPageProps) 
         </div>
       </section>
 
+      <section className="mx-auto max-w-7xl px-6 py-16 lg:px-8" aria-labelledby="starting-point-title">
+        <div className="rounded-3xl border border-cyan-200 bg-cyan-50/50 p-6 sm:p-10">
+          <p className="text-xs font-semibold uppercase tracking-widest text-cyan-800">A practical starting scope</p>
+          <h2 id="starting-point-title" className="mt-4 max-w-3xl text-3xl font-semibold leading-tight tracking-tight">{brief.question}</h2>
+          <p className="mt-4 text-sm leading-7 text-slate-600">A proposed approach to discuss with your team. It is not a claim about a completed client project.</p>
+          <dl className="mt-8 grid gap-7 md:grid-cols-2">
+            {[["Data to bring", brief.data], ["First deliverable", brief.firstDelivery], ["Acceptance checks", brief.acceptance], ["Measures to track", brief.measure]].map(([label, text]) => <div key={label}>
+              <dt className="font-semibold text-slate-950">{label}</dt>
+              <dd className="mt-2 text-sm leading-7 text-slate-700">{text}</dd>
+            </div>)}
+          </dl>
+          <Link href={`/insights/${brief.related}`} className="mt-8 inline-block font-semibold text-cyan-800 underline underline-offset-4">Read the related implementation guide</Link>
+        </div>
+      </section>
+      <PublicStories industry={industry.slug} />
+
       <section className="mx-auto max-w-7xl px-6 py-24 lg:px-8">
         <div className="grid gap-12 lg:grid-cols-[0.72fr_1.28fr] lg:items-start">
           <div className="max-w-xl lg:sticky lg:top-28">
             <p className="text-xs font-semibold uppercase tracking-[0.24em] text-cyan-700">Business pressure points</p>
-            <h2 className="mt-4 text-3xl font-semibold tracking-tight sm:text-5xl">See the whole operation, not another isolated report.</h2>
+            <h2 className="mt-4 text-3xl font-semibold tracking-tight sm:text-5xl">Questions to resolve before delivery.</h2>
             <p className="mt-6 text-base leading-8 text-slate-600">We begin with the business decisions that matter, then connect the data, controls, analytics, and workflows required to support them.</p>
           </div>
           <div className="depth-grid grid gap-5 sm:grid-cols-2">
@@ -109,7 +135,7 @@ export default async function IndustryDetailPage({ params }: IndustryPageProps) 
               <article key={priority} className="industry-pressure-card depth-card rounded-2xl border border-slate-200 bg-white/90 p-7">
                 <span className="industry-pressure-mark" aria-hidden="true" />
                 <h3 className="relative mt-10 text-lg font-semibold leading-7">{priority}</h3>
-                <p className="relative mt-3 text-sm leading-7 text-slate-600">Build visibility, shared definitions, and a practical path from signal to action.</p>
+
               </article>
             ))}
           </div>
@@ -155,7 +181,7 @@ export default async function IndustryDetailPage({ params }: IndustryPageProps) 
 
       <section id="use-cases" className="mx-auto max-w-7xl px-6 py-24 lg:px-8">
         <div className="max-w-3xl">
-          <p className="text-xs font-semibold uppercase tracking-[0.24em] text-cyan-700">High-value use cases</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.24em] text-cyan-700">Potential project areas</p>
           <h2 className="mt-4 text-3xl font-semibold tracking-tight sm:text-5xl">Where data can change the decision.</h2>
           <p className="mt-5 text-lg leading-8 text-slate-600">Priorities are selected around business value, data readiness, adoption, risk, and the ability to integrate insight into real work.</p>
         </div>
@@ -164,7 +190,7 @@ export default async function IndustryDetailPage({ params }: IndustryPageProps) 
             <article key={useCase} className="industry-use-case depth-card rounded-2xl border border-slate-200 bg-white p-6">
               <span className="industry-use-case-icon" aria-hidden="true"><span /></span>
               <h3 className="mt-6 text-lg font-semibold leading-7">{useCase}</h3>
-              <p className="mt-3 text-sm leading-7 text-slate-600">Connected data, clear measures, and decision-ready delivery.</p>
+
             </article>
           ))}
         </div>
@@ -207,8 +233,9 @@ export default async function IndustryDetailPage({ params }: IndustryPageProps) 
         <div className="industry-outcomes depth-panel overflow-hidden rounded-3xl border border-slate-200 bg-white px-7 py-12 sm:px-12 lg:px-14">
           <div className="relative grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-center">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.24em] text-cyan-700">Business outcomes</p>
-              <h2 className="mt-4 text-3xl font-semibold tracking-tight sm:text-4xl">Built to improve how the organization sees and acts.</h2>
+              <p className="text-xs font-semibold uppercase tracking-[0.24em] text-cyan-700">Outcomes to work toward</p>
+              <h2 className="mt-4 text-3xl font-semibold tracking-tight sm:text-4xl">Agree a baseline before setting targets.</h2>
+              <p className="mt-5 text-sm leading-7 text-slate-600">These are project objectives, not measured client results. Agree the baseline, reporting window, and attribution method before evaluating improvement.</p>
             </div>
             <div className="grid gap-4 sm:grid-cols-2">
               {industry.outcomes.map((outcome) => (

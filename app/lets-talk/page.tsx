@@ -28,10 +28,12 @@ export default function LetsTalk() {
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    if (status === "sending") return;
     setStatus("sending");
     try {
-      const response = await fetch("/api/contact", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ ...form, message: form.details, purpose: "Project Consultation" }) });
-      if (!response.ok) throw new Error("Submission failed");
+      const response = await fetch("/api/contact", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ ...form, organization: form.company, service: form.interest, message: form.details, purpose: "Project Consultation" }) });
+      const result = await response.json();
+      if (!response.ok || result.success !== true) throw new Error("Submission failed");
       setStatus("sent");
     } catch (error) {
       console.error("Let's Talk form error:", error);
@@ -74,11 +76,11 @@ export default function LetsTalk() {
           <p className="text-sm font-semibold uppercase tracking-[.2em] text-cyan-700">Project conversation</p>
           <h2 className="mt-4 text-3xl font-semibold tracking-tight">Help us prepare before we speak.</h2>
           <p className="mt-5 leading-7 text-slate-600">This page is for project discovery. Share the business challenge, current environment, stage, and timing so the right people can review it.</p>
-          <div className="depth-panel mt-9 space-y-4 rounded-2xl border border-slate-300 bg-slate-200 p-6"><p className="text-sm font-semibold">Prefer a direct channel?</p><a href={companyContact.phone.href} className="block text-sm text-slate-700 hover:text-cyan-700">Call {companyContact.phone.label}</a><a href={companyContact.whatsapp[0].href} target="_blank" rel="noreferrer" className="block text-sm text-slate-700 hover:text-cyan-700">WhatsApp {companyContact.whatsapp[0].label}</a><a href={companyContact.email[0].href} className="block break-all text-sm text-slate-700 hover:text-cyan-700">{companyContact.email[0].label}</a></div>
+          <div className="depth-panel mt-9 space-y-4 rounded-2xl border border-slate-300 bg-slate-200 p-6"><p className="text-sm font-semibold">Prefer a direct channel?</p><a href={companyContact.phone.href} className="block text-sm text-slate-700 hover:text-cyan-700">Call {companyContact.phone.label}</a><a href={companyContact.whatsapp[0].href} target="_blank" rel="noreferrer" className="block text-sm text-slate-700 hover:text-cyan-700">WhatsApp {companyContact.whatsapp[0].label}</a><a href={companyContact.enquiryEmail.href} className="block break-all text-sm text-slate-700 hover:text-cyan-700">{companyContact.enquiryEmail.label}</a></div>
           <div className="mt-7 border-l-2 border-cyan-500 pl-5"><p className="text-sm font-semibold">What happens next</p><ol className="mt-4 space-y-3 text-sm leading-6 text-slate-600"><li>We review your context.</li><li>We identify the right capability.</li><li>We prepare focused questions.</li><li>We agree on a practical next step.</li></ol></div>
         </aside>
         <div className="depth-panel rounded-3xl border border-slate-300 bg-slate-50 p-7 shadow-xl shadow-slate-900/8 sm:p-10">
-        {status === "sent" ? <div className="py-20 text-center"><p className="text-sm font-semibold uppercase tracking-[.2em] text-cyan-700">Request received</p><h2 className="mt-4 text-3xl font-semibold">Thank you. We&apos;ll review your project context.</h2><p className="mx-auto mt-5 max-w-xl leading-7 text-slate-600">You can also contact us directly at {companyContact.phone.label}.</p></div> : <form onSubmit={handleSubmit} className="space-y-14">
+        {status === "sent" ? <div className="py-20 text-center"><p className="text-sm font-semibold uppercase tracking-[.2em] text-cyan-700">Request submitted</p><h2 className="mt-4 text-3xl font-semibold">Thank you. We&apos;ll review your project context.</h2><p className="mx-auto mt-5 max-w-xl leading-7 text-slate-600">You can also contact us directly at {companyContact.phone.label}.</p></div> : <form onSubmit={handleSubmit} className="space-y-14">
 
           {/* What do you want to discuss? */}
           <div>
@@ -300,7 +302,7 @@ export default function LetsTalk() {
               {status === "sending" ? "Sending..." : "Start the conversation →"}
             </button>
           </div>
-          {status === "error" && <p className="text-sm text-red-600">We could not submit the form. Please try again or use one of the direct contact channels.</p>}
+          {status === "error" && <p role="alert" className="text-sm text-red-600">Your enquiry could not be sent. Your details are still here so you can retry, or email <a href={companyContact.enquiryEmail.href} className="underline">{companyContact.enquiryEmail.label}</a>.</p>}
         </form>
         }
         </div>

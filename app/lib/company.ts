@@ -1,4 +1,5 @@
 export const companyContact = {
+  enquiryEmail: { label: "Digital@ggmsglobal.com", href: "mailto:Digital@ggmsglobal.com" },
   phone: { label: "+968 9321 8505", href: "tel:+96893218505" },
   whatsapp: [
     { label: "+968 9208 7886", href: "https://wa.me/96892087886" },

@@ -7,8 +7,10 @@ import { industries } from "../lib/industries";
 
 export const metadata: Metadata = {
   title: "Industries | Data, Analytics & AI",
-  description: "Explore GGMS Analytics experience across financial services, government, energy, supply chain, healthcare, retail, and aviation.",
+  description: "Explore data and analytics project approaches for financial services, government, energy, supply chain, healthcare, retail, and aviation.",
   alternates: { canonical: "/industries" },
+  openGraph: { type: "website", url: "/industries", title: "Industry Data & Analytics | GGMS Analytics", description: "Explore industry-specific starting scopes, data requirements, and delivery checks.", images: [industries[0].image] },
+  twitter: { card: "summary_large_image", title: "Industry Data & Analytics | GGMS Analytics", description: "Practical project approaches for your sector.", images: [industries[0].image] },
 };
 
 const heroImages = [
@@ -28,7 +30,7 @@ export default function IndustriesPage() {
         <div className="relative mx-auto grid min-h-[650px] max-w-7xl items-center gap-12 px-6 py-20 lg:grid-cols-[0.82fr_1.18fr] lg:px-8 lg:py-24">
           <div className="depth-hero-copy max-w-2xl">
             <span className="inline-flex items-center gap-2 rounded-full border border-cyan-200 bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.22em] text-cyan-700 shadow-sm"><span className="h-1.5 w-1.5 rounded-full bg-cyan-500" /> Industries</span>
-            <h1 className="mt-6 text-4xl font-semibold leading-[1.04] tracking-[-0.04em] sm:text-6xl">Industry knowledge.<span className="block text-cyan-600">Data that fits the reality.</span></h1>
+            <h1 className="mt-6 text-4xl font-semibold leading-[1.04] tracking-[-0.04em] sm:text-6xl">Start with the operation.<span className="block text-cyan-600">Build the right reporting.</span></h1>
             <p className="mt-6 max-w-xl text-lg leading-8 text-slate-600">We apply data, analytics, and AI in the context of your operations, decisions, controls, and customers—not as disconnected technology.</p>
             <div className="mt-9 flex flex-wrap gap-3">
               <a href="#industry-expertise" className="rounded-lg bg-cyan-500 px-6 py-3.5 font-semibold text-slate-950 transition hover:-translate-y-0.5 hover:bg-cyan-400">Explore industries</a>
@@ -52,7 +54,7 @@ export default function IndustriesPage() {
 
       <section id="industry-expertise" className="mx-auto max-w-7xl px-6 py-24 lg:px-8">
         <div className="mb-14 max-w-3xl">
-          <p className="text-xs font-semibold uppercase tracking-[0.24em] text-cyan-600">Where we work</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.24em] text-cyan-600">Explore your sector</p>
           <h2 className="mt-4 text-3xl font-semibold tracking-tight sm:text-5xl">Technology shaped around business reality.</h2>
           <p className="mt-5 text-lg leading-8 text-slate-600">Each sector brings different systems, risks, decisions, and opportunities. Our approach begins with that operating context.</p>
         </div>
@@ -63,7 +65,7 @@ export default function IndustriesPage() {
               <div className="industry-card-image relative h-56 overflow-hidden rounded-t-[0.95rem] bg-slate-900">
                 <Image src={industry.image} alt={`${industry.title} industry`} fill sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw" className="object-cover transition duration-700 group-hover:scale-105" style={{ objectPosition: industry.imagePosition }} />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950/75 via-slate-950/5 to-transparent" />
-                <span className="absolute bottom-4 left-5 rounded-full border border-white/30 bg-slate-950/45 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-white backdrop-blur-sm">Industry expertise</span>
+                <span className="absolute bottom-4 left-5 rounded-full border border-white/30 bg-slate-950/45 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-white backdrop-blur-sm">Industry focus</span>
               </div>
               <div className="industry-card-content p-7">
                 <div className="flex items-start justify-between gap-5"><h3 className="text-xl font-semibold leading-snug tracking-tight group-hover:text-cyan-700">{industry.title}</h3><span className="industry-card-arrow mt-1 text-cyan-600 transition group-hover:translate-x-1" aria-hidden="true">→</span></div>

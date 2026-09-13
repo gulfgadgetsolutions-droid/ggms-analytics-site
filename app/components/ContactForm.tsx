@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
+import { companyContact } from "../lib/company";
 
 type FormStatus = "idle" | "sending" | "sent" | "error";
 
@@ -30,6 +31,7 @@ export default function ContactForm() {
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    if (status === "sending") return;
 
     setStatus("sending");
 
@@ -42,7 +44,8 @@ export default function ContactForm() {
         body: JSON.stringify(form),
       });
 
-      if (!res.ok) {
+      const result = await res.json();
+      if (!res.ok || result.success !== true) {
         throw new Error("Contact form submission failed");
       }
 
@@ -66,9 +69,9 @@ export default function ContactForm() {
 
   if (status === "sent") {
     return (
-      <div className="border border-cyan-200 bg-cyan-50 p-8">
+      <div role="status" className="border border-cyan-200 bg-cyan-50 p-8">
         <p className="text-xl font-semibold text-slate-950">
-          Thanks — we&apos;ve received your message.
+          Thanks — your enquiry has been submitted.
         </p>
 
         <p className="mt-3 text-sm leading-6 text-slate-600">
@@ -90,7 +93,7 @@ export default function ContactForm() {
     "w-full border-0 border-b border-slate-300 bg-transparent px-0 py-4 text-[15px] text-slate-950 outline-none transition placeholder:text-slate-400 focus:border-cyan-500";
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-8">
+    <form onSubmit={handleSubmit} aria-busy={status === "sending"} className="space-y-8">
       {/* Purpose */}
       <div>
         <label className="mb-4 block text-sm font-semibold text-slate-950">
@@ -107,6 +110,7 @@ export default function ContactForm() {
             <button
               key={purpose}
               type="button"
+              aria-pressed={form.purpose === purpose}
               onClick={() => updateField("purpose", purpose)}
               className={`rounded-full border px-4 py-2 text-sm transition ${
                 form.purpose === purpose
@@ -276,8 +280,9 @@ export default function ContactForm() {
 
       {/* Error */}
       {status === "error" && (
-        <p className="text-sm text-red-500">
-          Something went wrong. Please try again.
+        <p role="alert" className="text-sm text-red-500">
+          Your enquiry could not be sent. Your details are still here so you can retry, or email us at{" "}
+          <a href={companyContact.enquiryEmail.href} className="underline">{companyContact.enquiryEmail.label}</a>.
         </p>
       )}
 
@@ -295,7 +300,7 @@ export default function ContactForm() {
         >
           {status === "sending"
             ? "Sending..."
-            : "Let&apos;s Talk →"}
+            : "Let's Talk →"}
         </button>
       </div>
     </form>

@@ -2,7 +2,6 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
 const regionCookie = "ggms-region";
-const supportedRegions = new Set(["om", "ae", "sa"]);
 const regionalPathPattern = /^\/(om|ae|sa)(?=\/|$)/;
 
 export function proxy(request: NextRequest) {
@@ -36,13 +35,8 @@ export function proxy(request: NextRequest) {
     return response;
   }
 
-  const savedRegion = request.cookies.get(regionCookie)?.value;
-  if (request.method === "GET" && savedRegion && supportedRegions.has(savedRegion)) {
-    const destination = request.nextUrl.clone();
-    destination.pathname = `/${savedRegion}${pathname === "/" ? "" : pathname}`;
-    return NextResponse.redirect(destination);
-  }
-
+  // The URL controls the region. Redirecting the rewritten global destination
+  // using the saved cookie can send the request back into the same rewrite.
   return NextResponse.next();
 }
 

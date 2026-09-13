@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { getSiteUrl } from "./lib/site";
+import { getSiteUrl, isPublicSite } from "./lib/site";
 import { industries } from "./lib/industries";
 import { insightArticles } from "./lib/insights";
 
@@ -15,22 +15,21 @@ const routes = [
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const siteUrl = getSiteUrl();
-  const lastModified = new Date();
+  if (!isPublicSite()) return [];
   const primaryRoutes = routes.map(([path, changeFrequency, priority]) => ({
     url: `${siteUrl}${path}`,
-    lastModified,
     changeFrequency,
     priority,
   }));
   const insightRoutes = insightArticles.map((article) => ({
     url: `${siteUrl}/insights/${article.slug}`,
-    lastModified: new Date(article.datePublished),
+    lastModified: new Date(article.dateModified),
     changeFrequency: "monthly" as const,
     priority: 0.65,
   }));
   const industryRoutes = industries.map((industry) => ({
     url: `${siteUrl}/industries/${industry.slug}`,
-    lastModified,
+    lastModified: new Date("2026-09-09"),
     changeFrequency: "monthly" as const,
     priority: 0.72,
   }));

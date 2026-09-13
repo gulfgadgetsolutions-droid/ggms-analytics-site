@@ -33,7 +33,7 @@ export default function InsightsLibrary({ articles }: { articles: InsightCard[] 
           <p className="text-sm font-semibold uppercase tracking-[0.2em] text-cyan-700">Browse the library</p>
           <h2 className="mt-3 text-3xl font-semibold tracking-tight sm:text-5xl">Latest perspectives</h2>
         </div>
-        <div aria-label="Filter insights by topic" className="flex flex-wrap gap-2">
+        <div role="group" aria-label="Filter insights by topic" className="flex flex-wrap gap-2">
           {filters.map((filter) => {
             const selected = filter === activeFilter;
             return (
@@ -55,6 +55,7 @@ export default function InsightsLibrary({ articles }: { articles: InsightCard[] 
         </div>
       </div>
 
+      <p role="status" aria-live="polite" className="mt-5 text-sm text-slate-600">{filteredArticles.length} {filteredArticles.length === 1 ? "article" : "articles"}{activeFilter === "All" ? " across all topics" : ` in ${activeFilter}`}</p>
       {filteredArticles.length > 0 ? (
         <div className="depth-grid mt-10 grid gap-x-7 gap-y-12 md:grid-cols-2 lg:grid-cols-3">
           {filteredArticles.map((article) => (
