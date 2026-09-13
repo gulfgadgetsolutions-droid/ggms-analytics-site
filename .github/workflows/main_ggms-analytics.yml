@@ -23,17 +23,28 @@ jobs:
         with:
           node-version: '24.x'
 
-      - name: npm install, build, and test
+      - name: Install, check, and build
+        env:
+          NEXT_PUBLIC_SITE_URL: https://ggms-analytics-hwbnc8bpdncyfmeh.southindia-01.azurewebsites.net
         run: |
-          npm install
-          npm run build --if-present
-          npm run test --if-present
+          npm ci
+          npm run lint
+          npm run test:content
+          node scripts/contact-mail-audit.mjs
+          npm run build
+
+      - name: Package the Next.js application
+        run: |
+          test -f .next/BUILD_ID
+          zip -q -r release.zip .next public node_modules package.json package-lock.json next.config.ts -x '.next/cache/*'
+          unzip -l release.zip | grep '.next/BUILD_ID'
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
           name: node-app
-          path: .
+          path: release.zip
+          if-no-files-found: error
 
   deploy:
     runs-on: ubuntu-latest
@@ -47,7 +58,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: node-app
-      
+
       - name: Login to Azure
         uses: azure/login@v2
         with:
@@ -61,5 +72,6 @@ jobs:
         with:
           app-name: 'ggms-analytics'
           slot-name: 'Production'
-          package: .
-          
+          package: release.zip
+          startup-command: 'node node_modules/next/dist/bin/next start --hostname 0.0.0.0 --port ${PORT:-8080}'
+
