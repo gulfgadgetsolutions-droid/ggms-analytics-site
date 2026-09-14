@@ -86,7 +86,7 @@ export default function Contact() {
         <div className="contact-hero-grid mx-auto grid max-w-7xl items-center gap-14 px-6 py-16 sm:py-20 lg:grid-cols-[0.88fr_1.12fr] lg:px-8 lg:py-24">
           <div className="contact-hero-copy">
             <p className="contact-eyebrow">Contact GGMS Analytics</p>
-            <h1>Let&apos;s talk about what comes next.</h1>
+            <h1>Let&apos;s connect.</h1>
             <p className="contact-hero-intro">
               For company information, office directions, partnerships, or a direct conversation with our team, choose the channel that works best for you.
             </p>
