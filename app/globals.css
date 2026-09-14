@@ -1122,6 +1122,54 @@ body {
   perspective: 1800px;
 }
 
+.contact-data-cube {
+  position: absolute;
+  z-index: 5;
+  top: -0.75rem;
+  right: -1rem;
+  width: 7.5rem;
+  height: 7.5rem;
+  perspective: 900px;
+  filter: drop-shadow(0 24px 22px rgba(3, 20, 34, 0.38));
+  pointer-events: none;
+}
+
+.contact-data-cube-body {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  animation: contact-cube-float 9s ease-in-out infinite;
+}
+
+.contact-cube-face {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(175, 246, 255, 0.8);
+  border-radius: 0.75rem;
+  background: linear-gradient(145deg, rgba(7, 58, 79, 0.88), rgba(8, 155, 186, 0.62));
+  box-shadow: inset 0 0 30px rgba(112, 235, 255, 0.2);
+  color: #e7fcff;
+  font-size: 2.1rem;
+  font-weight: 800;
+  letter-spacing: -0.08em;
+  backface-visibility: hidden;
+}
+
+.contact-cube-front { transform: translateZ(3.75rem); }
+.contact-cube-back { transform: rotateY(180deg) translateZ(3.75rem); }
+.contact-cube-right { transform: rotateY(90deg) translateZ(3.75rem); }
+.contact-cube-left { transform: rotateY(-90deg) translateZ(3.75rem); }
+.contact-cube-top { transform: rotateX(90deg) translateZ(3.75rem); }
+.contact-cube-bottom { transform: rotateX(-90deg) translateZ(3.75rem); }
+
+@keyframes contact-cube-float {
+  0%, 100% { transform: translateY(0) rotateX(-18deg) rotateY(-28deg); }
+  50% { transform: translateY(1.25rem) rotateX(-10deg) rotateY(35deg); }
+}
+
 .contact-visual-backplate {
   position: absolute;
   inset: 3rem -1.25rem -1.25rem 4.5rem;
@@ -1734,6 +1782,14 @@ body {
 }
 
 @media (max-width: 639px) {
+  .contact-data-cube { top: 0.25rem; right: 0.5rem; width: 4rem; height: 4rem; }
+  .contact-cube-face { font-size: 1.25rem; border-radius: 0.4rem; }
+  .contact-cube-front { transform: translateZ(2rem); }
+  .contact-cube-back { transform: rotateY(180deg) translateZ(2rem); }
+  .contact-cube-right { transform: rotateY(90deg) translateZ(2rem); }
+  .contact-cube-left { transform: rotateY(-90deg) translateZ(2rem); }
+  .contact-cube-top { transform: rotateX(90deg) translateZ(2rem); }
+  .contact-cube-bottom { transform: rotateX(-90deg) translateZ(2rem); }
   .contact-hero-copy { transform: none; }
   .contact-hero-copy h1 { font-size: clamp(2.8rem, 15vw, 4.1rem); }
   .contact-visual { min-height: 430px; }
@@ -1764,6 +1820,7 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .contact-data-cube-body { animation: none; transform: rotateX(-18deg) rotateY(-28deg); }
   .contact-visual-frame,
   .contact-channel-card,
   .contact-primary-button,

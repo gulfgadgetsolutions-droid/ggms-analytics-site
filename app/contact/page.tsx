@@ -126,6 +126,16 @@ export default function Contact() {
               <span className="contact-quick-icon"><PhoneIcon /></span>
               <span><small>Direct business line</small><strong>{companyContact.phone.label}</strong></span>
             </div>
+            <div className="contact-data-cube" aria-hidden="true">
+              <div className="contact-data-cube-body">
+                <span className="contact-cube-face contact-cube-front">GG</span>
+                <span className="contact-cube-face contact-cube-back">GG</span>
+                <span className="contact-cube-face contact-cube-right" />
+                <span className="contact-cube-face contact-cube-left" />
+                <span className="contact-cube-face contact-cube-top" />
+                <span className="contact-cube-face contact-cube-bottom" />
+              </div>
+            </div>
             <div className="contact-visual-orbit" aria-hidden="true"><span /></div>
           </div>
         </div>
