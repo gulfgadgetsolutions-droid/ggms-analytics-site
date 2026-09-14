@@ -14,6 +14,11 @@ const brandClips = [
     mobile: "/videos/ggms-premium-analytics-review-mobile.mp4",
     label: "A corporate team discussing analytics shown on a laptop",
   },
+  {
+    desktop: "/videos/ggms-premium-digital-analytics.mp4",
+    mobile: "/videos/ggms-premium-digital-analytics-mobile.mp4",
+    label: "People reviewing data charts on a laptop and tablet",
+  },
 ];
 
 function DataSignalLayer() {
