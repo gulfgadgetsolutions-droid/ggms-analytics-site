@@ -987,6 +987,7 @@ body {
   --contact-cyan: #0ea5c6;
   --contact-surface: #e7edf2;
   --contact-line: rgba(71, 85, 105, 0.2);
+  font-family: Arial, Helvetica, sans-serif;
   background:
     radial-gradient(circle at 88% 8%, rgba(14, 165, 198, 0.11), transparent 26rem),
     linear-gradient(180deg, #dde5eb, #e8edf2 45%, #dce4ea);
@@ -1022,12 +1023,13 @@ body {
 }
 
 .contact-hero-copy h1 {
-  max-width: 42rem;
+  max-width: 37rem;
   margin-top: 1.25rem;
-  font-size: clamp(3rem, 5.7vw, 5.4rem);
-  font-weight: 650;
-  line-height: 0.98;
-  letter-spacing: -0.052em;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(3.1rem, 5.2vw, 5rem);
+  font-weight: 600;
+  line-height: 1.06;
+  letter-spacing: -0.045em;
   color: var(--contact-ink);
   text-wrap: balance;
 }
@@ -1336,9 +1338,10 @@ body {
   max-width: 42rem;
   margin-top: 0.8rem;
   font-size: clamp(2.25rem, 4vw, 4rem);
-  font-weight: 650;
-  line-height: 1.06;
-  letter-spacing: -0.042em;
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 600;
+  line-height: 1.12;
+  letter-spacing: -0.035em;
   color: var(--contact-ink);
   text-wrap: balance;
 }
@@ -1676,6 +1679,13 @@ body {
   color: #85e7f6;
 }
 
+.contact-location-panel h2 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 600;
+  line-height: 1.12;
+  letter-spacing: -0.035em;
+}
+
 .contact-location-button {
   position: absolute;
   left: 2.2rem;
@@ -1781,9 +1791,10 @@ body {
   max-width: 48rem;
   margin-top: 0.65rem;
   font-size: clamp(2rem, 3.6vw, 3.6rem);
-  font-weight: 650;
-  line-height: 1.08;
-  letter-spacing: -0.04em;
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 600;
+  line-height: 1.12;
+  letter-spacing: -0.035em;
   text-wrap: balance;
 }
 
