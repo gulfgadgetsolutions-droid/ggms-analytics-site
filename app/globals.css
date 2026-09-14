@@ -11,6 +11,19 @@
    GLOBAL
 ================================ */
 
+.brand-film-copy {
+  animation: brand-film-copy-in 650ms ease-out both;
+}
+
+@keyframes brand-film-copy-in {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .brand-film-copy { animation: none; }
+}
+
 * {
   box-sizing: border-box;
 }

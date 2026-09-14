@@ -8,16 +8,28 @@ const brandClips = [
     desktop: "/videos/ggms-premium-finance-team.mp4",
     mobile: "/videos/ggms-premium-finance-team-mobile.mp4",
     label: "Business leaders reviewing financial data together",
+    eyebrow: "Finance, in motion",
+    headline: "Make every number",
+    emphasis: "move the business.",
+    description: "Connect financial data, forecasts, and approvals to give every decision a clearer direction.",
   },
   {
     desktop: "/videos/ggms-premium-analytics-review.mp4",
     mobile: "/videos/ggms-premium-analytics-review-mobile.mp4",
     label: "A corporate team discussing analytics shown on a laptop",
+    eyebrow: "Insight in every conversation",
+    headline: "Turn every discussion",
+    emphasis: "into direction.",
+    description: "Bring dashboards and performance signals into the conversations that shape what happens next.",
   },
   {
     desktop: "/videos/ggms-premium-digital-analytics.mp4",
     mobile: "/videos/ggms-premium-digital-analytics-mobile.mp4",
     label: "People reviewing data charts on a laptop and tablet",
+    eyebrow: "The signal behind the decision",
+    headline: "See what is changing.",
+    emphasis: "Act on what matters.",
+    description: "Bring trends into focus across your data, then move forward with confidence.",
   },
 ];
 
@@ -256,23 +268,22 @@ export default function BrandFilmHero() {
       <div className="pointer-events-none absolute inset-4 border border-white/10 shadow-[inset_0_0_90px_rgba(255,255,255,.035)] sm:inset-6" />
 
       <div className="relative z-[2] mx-auto flex min-h-[calc(100svh-81px)] max-w-[1600px] items-end px-6 pb-32 pt-24 sm:px-10 lg:px-16 lg:pb-28">
-        <div className="max-w-4xl">
+        <div key={activeClip} className="brand-film-copy max-w-4xl">
           <div className="mb-6 flex items-center gap-4 text-xs font-semibold uppercase tracking-[0.32em] text-white/80">
             <span className="h-px w-12 bg-cyan-300" aria-hidden="true" />
-            Intelligence, made actionable
+            {brandClips[activeClip].eyebrow}
           </div>
 
           <h1
             id="brand-film-title"
             className="max-w-3xl font-[family-name:var(--font-heading)] text-[clamp(3rem,6vw,6.6rem)] font-medium leading-[0.9] tracking-[-0.055em] text-white [text-shadow:0_3px_28px_rgba(0,0,0,.58)]"
           >
-            Move forward
-            <span className="block font-light italic text-white/95">with clarity.</span>
+            {brandClips[activeClip].headline}
+            <span className="block font-light italic text-white/95">{brandClips[activeClip].emphasis}</span>
           </h1>
 
           <p className="mt-7 max-w-xl border-l border-cyan-200/70 pl-5 text-base leading-7 text-white/95 [text-shadow:0_2px_16px_rgba(0,0,0,.7)] sm:text-lg sm:leading-8">
-            We turn complex data into the confidence to act—faster, smarter,
-            and with purpose.
+            {brandClips[activeClip].description}
           </p>
         </div>
       </div>
