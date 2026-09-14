@@ -7,6 +7,16 @@ type Message = {
   content: string;
 };
 
+function AssistantMessage({ content }: { content: string }) {
+  // Render only approved site links; all other model text stays escaped by React.
+  return content.split(/(\[[^\]\n]+\]\(https:\/\/analytics\.ggmsglobal\.com\/(?:lets-talk|contact)\)|\*\*[^*\n]+\*\*)/g).map((part, index) => {
+    const link = part.match(/^\[([^\]\n]+)\]\((https:\/\/analytics\.ggmsglobal\.com\/(?:lets-talk|contact))\)$/);
+    if (link) return <a key={index} href={link[2]} className="font-semibold text-cyan-300 underline underline-offset-2 hover:text-cyan-100">{link[1]}</a>;
+    if (part.startsWith("**") && part.endsWith("**")) return <strong key={index}>{part.slice(2, -2)}</strong>;
+    return part;
+  });
+}
+
 type AssistantStarProps = {
   size?: "small" | "medium" | "large";
 };
@@ -174,7 +184,7 @@ export default function Chatbot() {
                       : "rounded-bl-md border border-white/10 bg-slate-800/90 text-slate-100 shadow-[0_16px_30px_-24px_rgba(2,6,23,.9)]"
                   }`}
                 >
-                  {item.content}
+                  {item.role === "assistant" ? <AssistantMessage content={item.content} /> : item.content}
                 </div>
               </div>
             ))}

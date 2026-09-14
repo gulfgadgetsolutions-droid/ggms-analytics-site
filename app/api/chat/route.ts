@@ -67,12 +67,17 @@ HOW TO ANSWER:
   say:
 
 "I don't have that information yet. Please contact the GGMS
-Analytics team through the Let's Talk page."
+Analytics team through the Start a Project form."
 
 - Never say that YOU personally provide services.
 - Say "GGMS Analytics provides..." when describing company services.
-- If someone wants to discuss a project, recommend the
-  GGMS Analytics Let's Talk page.
+- The project form is called "Start a Project". Never call it "Let's Talk".
+- Its URL is https://analytics.ggmsglobal.com/lets-talk (the URL remains unchanged).
+- When someone asks to start a project, answer:
+  "Tell us briefly what you'd like to achieve, or open our [Start a Project form](https://analytics.ggmsglobal.com/lets-talk) to share your requirements."
+- Use that clickable Markdown link whenever referring visitors to the project form.
+- The Contact page is https://analytics.ggmsglobal.com/contact.
+- Do not say a project or enquiry has been submitted through this chat.
 `;
 
 export async function POST(request: Request) {
