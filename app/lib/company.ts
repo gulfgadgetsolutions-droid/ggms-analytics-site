@@ -6,6 +6,7 @@ export const companyContact = {
     { label: "+968 9792 0877", href: "https://wa.me/96897920877" },
   ],
   email: [
+    { label: "Analytics@ggmsglobal.com", href: "mailto:Analytics@ggmsglobal.com" },
     { label: "info@ggmsglobal.com", href: "mailto:info@ggmsglobal.com" },
     { label: "care@ggmsglobal.com", href: "mailto:care@ggmsglobal.com" },
   ],
