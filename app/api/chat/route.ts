@@ -76,57 +76,63 @@ Analytics team through the Let's Talk page."
 `;
 
 export async function POST(request: Request) {
+  let body: unknown;
   try {
-    const { message } = await request.json();
-
-    if (!message || typeof message !== "string") {
-      return NextResponse.json(
-        { error: "Message is required" },
-        { status: 400 }
-      );
+    body = await request.json();
+  } catch {
+    return NextResponse.json({ error: "Please enter a valid message." }, { status: 400 });
+  }
+  const message = body && typeof body === "object" && "message" in body ? body.message : undefined;
+  if (typeof message !== "string" || !message.trim() || message.length > 2000) {
+    return NextResponse.json({ error: "Enter a message between 1 and 2000 characters." }, { status: 400 });
+  }
+  const endpoint = process.env.AZURE_OPENAI_ENDPOINT?.trim();
+  const key = process.env.AZURE_OPENAI_API_KEY;
+  const deployment = process.env.AZURE_OPENAI_DEPLOYMENT?.trim();
+  if (!endpoint || !key || !deployment) {
+    return NextResponse.json({ error: "The assistant is temporarily unavailable." }, { status: 503 });
+  }
+  try {
+    const base = new URL(endpoint);
+    if (base.protocol !== "https:" || base.username || base.password || base.search || base.hash ||
+        !/^\/openai\/v1\/?$/.test(base.pathname) ||
+        !(base.hostname.endsWith(".services.ai.azure.com") || base.hostname.endsWith(".openai.azure.com"))) {
+      throw new Error("Invalid Azure endpoint configuration");
     }
-
-    const response = await fetch("http://localhost:11434/api/chat", {
+    const response = await fetch(`${endpoint.replace(/\/$/, "")}/responses`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        "api-key": key,
       },
       body: JSON.stringify({
-        model: "llama3.2:3b",
-        messages: [
-          {
-            role: "system",
-            content: GGMS_SYSTEM_PROMPT,
-          },
-          {
-            role: "user",
-            content: message,
-          },
-        ],
-        stream: false,
-        options: {
-          temperature: 0.2,
-        },
+        model: deployment,
+        instructions: GGMS_SYSTEM_PROMPT,
+        input: message.trim(),
+        max_output_tokens: 1500,
+        store: false,
       }),
+      signal: AbortSignal.timeout(25000),
+      redirect: "error",
     });
 
     if (!response.ok) {
-      throw new Error("Ollama request failed");
+      throw new Error("Azure model request failed");
     }
 
     const data = await response.json();
-
-    return NextResponse.json({
-      response:
-        data.message?.content ||
-        "Sorry, I could not generate a response.",
-    });
-  } catch (error) {
-    console.error("Chat API error:", error);
-
+    const output = Array.isArray(data.output) ? data.output : [];
+    const answer = output.flatMap((item: { type?: string; content?: { type?: string; text?: string }[] }) =>
+      item.type === "message" && Array.isArray(item.content)
+        ? item.content.filter(part => part.type === "output_text" && typeof part.text === "string").map(part => part.text)
+        : [],
+    ).join("\n").trim();
+    if (data.error || data.status !== "completed" || !answer) throw new Error("No completed answer");
+    return NextResponse.json({ response: answer });
+  } catch {
     return NextResponse.json(
-      { error: "Unable to connect to the local AI model." },
-      { status: 500 }
+      { error: "The assistant is temporarily unavailable." },
+      { status: 503 }
     );
   }
 }

@@ -37,6 +37,7 @@ export default function Chatbot() {
     },
   ]);
   const [isLoading, setIsLoading] = useState(false);
+  const sendingRef = useRef(false);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -56,7 +57,8 @@ export default function Chatbot() {
 
     const trimmedMessage = message.trim();
 
-    if (!trimmedMessage || isLoading) return;
+    if (!trimmedMessage || sendingRef.current) return;
+    sendingRef.current = true;
 
     setMessages((previous) => [
       ...previous,
@@ -75,11 +77,12 @@ export default function Chatbot() {
         body: JSON.stringify({
           message: trimmedMessage,
         }),
+        signal: AbortSignal.timeout(30000),
       });
 
       const data = await response.json();
 
-      if (!response.ok) {
+      if (!response.ok || typeof data.response !== "string" || !data.response.trim()) {
         throw new Error(data.error || "Something went wrong");
       }
 
@@ -90,18 +93,18 @@ export default function Chatbot() {
           content: data.response,
         },
       ]);
-    } catch (error) {
-      console.error("Chat error:", error);
-
+    } catch {
+      setMessage((current) => current || trimmedMessage);
       setMessages((previous) => [
         ...previous,
         {
           role: "assistant",
           content:
-            "Sorry, I'm having trouble connecting right now. Please try again.",
+            "Sorry, the assistant is unavailable right now. Your message is kept below so you can retry. You can also use the Contact or Start a Project page to reach our team.",
         },
       ]);
     } finally {
+      sendingRef.current = false;
       setIsLoading(false);
     }
   }
@@ -209,6 +212,7 @@ export default function Chatbot() {
             <div className="flex gap-2">
               <input
                 type="text"
+                maxLength={2000}
                 value={message}
                 onChange={(event) => setMessage(event.target.value)}
                 placeholder="How can we help?"

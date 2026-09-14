@@ -31,6 +31,7 @@ jobs:
           npm run lint
           npm run test:content
           node scripts/contact-mail-audit.mjs
+          node scripts/chat-audit.mjs
           npm run build
 
       - name: Package the Next.js application
