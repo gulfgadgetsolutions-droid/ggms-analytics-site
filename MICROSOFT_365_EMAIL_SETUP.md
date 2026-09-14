@@ -1,5 +1,7 @@
 # Website enquiries through Microsoft 365
 
+> Current hosting uses cPanel SMTP. Follow [SMTP_EMAIL_SETUP.md](SMTP_EMAIL_SETUP.md). This document is retained only for a future Microsoft 365 migration.
+
 Recipient: **Digital@ggmsglobal.com**. Change `CONTACT_TO_EMAIL` later to change the recipient without a code edit. The public general-contact addresses are unchanged.
 
 ## Administrator setup
