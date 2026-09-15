@@ -15,24 +15,13 @@
   animation: brand-film-copy-in 650ms ease-out both;
 }
 
-.brand-film-progress-fill {
-  animation: brand-film-progress linear both;
-  transform-origin: left center;
-}
-
 @keyframes brand-film-copy-in {
   from { opacity: 0; transform: translateY(14px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
-@keyframes brand-film-progress {
-  from { transform: scaleX(0); }
-  to { transform: scaleX(1); }
-}
-
 @media (prefers-reduced-motion: reduce) {
-  .brand-film-copy,
-  .brand-film-progress-fill { animation: none; }
+  .brand-film-copy { animation: none; }
 }
 
 * {
