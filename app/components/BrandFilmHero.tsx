@@ -8,30 +8,35 @@ const brandClips = [
     desktop: "/videos/ggms-premium-finance-team.mp4",
     mobile: "/videos/ggms-premium-finance-team-mobile.mp4",
     label: "Business leaders reviewing financial data together",
-    eyebrow: "Finance, in motion",
-    headline: "Make every number",
-    emphasis: "move the business.",
-    description: "Connect financial data, forecasts, and approvals to give every decision a clearer direction.",
+    chapter: "01",
+    eyebrow: "Trusted data",
+    headline: "Before data becomes insight,",
+    emphasis: "it needs trust.",
+    description: "We connect finance, operations, and enterprise systems so leaders can act on one version of the truth.",
   },
   {
     desktop: "/videos/ggms-premium-analytics-review.mp4",
     mobile: "/videos/ggms-premium-analytics-review-mobile.mp4",
     label: "A corporate team discussing analytics shown on a laptop",
-    eyebrow: "Insight in every conversation",
-    headline: "Turn every discussion",
-    emphasis: "into direction.",
-    description: "Bring dashboards and performance signals into the conversations that shape what happens next.",
+    chapter: "02",
+    eyebrow: "Automation at work",
+    headline: "When systems speak,",
+    emphasis: "work moves faster.",
+    description: "We turn manual reporting, scattered files, and slow approvals into governed workflows built for daily use.",
   },
   {
     desktop: "/videos/ggms-premium-digital-analytics.mp4",
     mobile: "/videos/ggms-premium-digital-analytics-mobile.mp4",
     label: "People reviewing data charts on a laptop and tablet",
-    eyebrow: "The signal behind the decision",
-    headline: "See what is changing.",
-    emphasis: "Act on what matters.",
-    description: "Bring trends into focus across your data, then move forward with confidence.",
+    chapter: "03",
+    eyebrow: "AI with direction",
+    headline: "From signal to decision,",
+    emphasis: "GGMS Analytics moves it forward.",
+    description: "Data engineering, analytics, automation, and AI come together around measurable business outcomes.",
   },
 ];
+
+const CHAPTER_DURATION_MS = 7800;
 
 function DataSignalLayer() {
   return (
@@ -195,6 +200,28 @@ export default function BrandFilmHero() {
     };
   }, []);
 
+  useEffect(() => {
+    if (!isPlaying) return;
+
+    const chapterTimer = window.setInterval(() => {
+      setActiveClip((currentIndex) => {
+        const nextIndex = (currentIndex + 1) % brandClips.length;
+        const currentVideo = videoRefs.current[currentIndex];
+        const nextVideo = videoRefs.current[nextIndex];
+
+        currentVideo?.pause();
+        if (nextVideo) {
+          nextVideo.currentTime = 0;
+          void nextVideo.play();
+        }
+
+        return nextIndex;
+      });
+    }, CHAPTER_DURATION_MS);
+
+    return () => window.clearInterval(chapterTimer);
+  }, [isPlaying]);
+
   const togglePlayback = () => {
     const video = videoRefs.current[activeClip];
     if (!video) return;
@@ -261,30 +288,43 @@ export default function BrandFilmHero() {
         </video>
       ))}
 
-      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,rgba(2,6,12,.68)_0%,rgba(2,6,12,.36)_38%,rgba(2,6,12,.07)_70%,rgba(2,6,12,.02)_100%)]" />
-      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(2,6,12,.08)_0%,transparent_48%,rgba(2,6,12,.48)_100%)]" />
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_82%_18%,rgba(255,255,255,.2),transparent_30%),radial-gradient(circle_at_72%_76%,rgba(34,211,238,.1),transparent_34%)] mix-blend-screen" />
+      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,rgba(2,6,12,.78)_0%,rgba(2,6,12,.5)_36%,rgba(2,6,12,.16)_68%,rgba(2,6,12,.04)_100%)]" />
+      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(2,6,12,.18)_0%,transparent_42%,rgba(2,6,12,.64)_100%)]" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_82%_18%,rgba(255,255,255,.14),transparent_28%),radial-gradient(circle_at_72%_76%,rgba(34,211,238,.12),transparent_34%)] mix-blend-screen" />
       <DataSignalLayer />
       <div className="pointer-events-none absolute inset-4 border border-white/10 shadow-[inset_0_0_90px_rgba(255,255,255,.035)] sm:inset-6" />
 
-      <div className="relative z-[2] mx-auto flex min-h-[calc(100svh-81px)] max-w-[1600px] items-end px-6 pb-32 pt-24 sm:px-10 lg:px-16 lg:pb-28">
-        <div key={activeClip} className="brand-film-copy max-w-4xl">
-          <div className="mb-6 flex items-center gap-4 text-xs font-semibold uppercase tracking-[0.32em] text-white/80">
+      <div className="relative z-[2] mx-auto flex min-h-[calc(100svh-81px)] max-w-[1600px] items-end px-6 pb-36 pt-24 sm:px-10 lg:px-16 lg:pb-32">
+        <div key={activeClip} className="brand-film-copy max-w-5xl">
+          <div className="mb-7 flex flex-wrap items-center gap-4 text-xs font-semibold uppercase text-white/82">
+            <span className="inline-flex h-9 min-w-9 items-center justify-center border border-cyan-200/70 bg-slate-950/25 text-cyan-100 backdrop-blur-sm">
+              {brandClips[activeClip].chapter}
+            </span>
             <span className="h-px w-12 bg-cyan-300" aria-hidden="true" />
-            {brandClips[activeClip].eyebrow}
+            <span>{brandClips[activeClip].eyebrow}</span>
           </div>
 
           <h1
             id="brand-film-title"
-            className="max-w-3xl font-[family-name:var(--font-heading)] text-[clamp(3rem,6vw,6.6rem)] font-medium leading-[0.9] tracking-[-0.055em] text-white [text-shadow:0_3px_28px_rgba(0,0,0,.58)]"
+            className="max-w-4xl font-[family-name:var(--font-heading)] text-[clamp(2.7rem,5.5vw,6.2rem)] font-semibold leading-[0.94] tracking-normal text-white [text-shadow:0_3px_30px_rgba(0,0,0,.62)]"
           >
             {brandClips[activeClip].headline}
-            <span className="block font-light italic text-white/95">{brandClips[activeClip].emphasis}</span>
+            <span className="block font-normal text-cyan-100">{brandClips[activeClip].emphasis}</span>
           </h1>
 
-          <p className="mt-7 max-w-xl border-l border-cyan-200/70 pl-5 text-base leading-7 text-white/95 [text-shadow:0_2px_16px_rgba(0,0,0,.7)] sm:text-lg sm:leading-8">
+          <p className="mt-7 max-w-2xl border-l border-cyan-200/70 pl-5 text-base leading-7 text-white/94 [text-shadow:0_2px_16px_rgba(0,0,0,.7)] sm:text-xl sm:leading-8">
             {brandClips[activeClip].description}
           </p>
+
+          <div className="mt-8 flex flex-wrap items-center gap-3 text-xs font-semibold uppercase text-white/76">
+            <span>Data engineering</span>
+            <span className="h-1 w-1 rounded-full bg-cyan-200/80" aria-hidden="true" />
+            <span>Analytics</span>
+            <span className="h-1 w-1 rounded-full bg-cyan-200/80" aria-hidden="true" />
+            <span>Automation</span>
+            <span className="h-1 w-1 rounded-full bg-cyan-200/80" aria-hidden="true" />
+            <span>AI</span>
+          </div>
         </div>
       </div>
 
@@ -298,28 +338,42 @@ export default function BrandFilmHero() {
         <span className="text-xs" aria-hidden="true">{isPlaying ? "Ⅱ" : "▶"}</span>
       </button>
 
-      <div className="absolute bottom-6 left-6 right-6 z-10 flex items-end justify-between sm:bottom-8 sm:left-10 sm:right-10 lg:left-16 lg:right-16">
-        <div className="hidden items-center gap-2 sm:flex" aria-label="Brand film scenes">
+      <div className="absolute bottom-6 left-6 right-6 z-10 flex items-end justify-between gap-5 sm:bottom-8 sm:left-10 sm:right-10 lg:left-16 lg:right-16">
+        <div className="flex flex-1 items-end gap-3" aria-label="Brand film chapters">
           {brandClips.map((clip, index) => (
             <button
               key={clip.desktop}
               type="button"
               onClick={() => selectClip(index)}
-              aria-label={`Play scene: ${clip.label}`}
+              aria-label={`Play chapter ${clip.chapter}: ${clip.eyebrow}`}
               aria-pressed={activeClip === index}
-              className={`h-1 rounded-full transition-[width,background-color] duration-500 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cyan-300 ${activeClip === index ? "w-12 bg-cyan-300" : "w-6 bg-white/45 hover:bg-white/75"}`}
-            />
+              className={`group min-w-0 flex-1 border-t pt-3 text-left transition-colors focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cyan-300 ${
+                activeClip === index ? "border-cyan-200 text-white" : "border-white/25 text-white/62 hover:border-white/60 hover:text-white"
+              }`}
+            >
+              <span className="block overflow-hidden text-ellipsis whitespace-nowrap text-[0.7rem] font-semibold uppercase">
+                {clip.chapter} {clip.eyebrow}
+              </span>
+              <span className="mt-2 block h-px bg-white/20">
+                {activeClip === index ? (
+                  <span
+                    key={activeClip}
+                    className="brand-film-progress-fill block h-px bg-cyan-200"
+                    style={{
+                      animationDuration: `${CHAPTER_DURATION_MS}ms`,
+                      animationPlayState: isPlaying ? "running" : "paused",
+                    }}
+                  />
+                ) : null}
+              </span>
+            </button>
           ))}
         </div>
-        <div className="pointer-events-none absolute bottom-1 left-1/2 hidden -translate-x-1/2 items-center gap-3 text-sm font-medium text-white/85 md:flex">
-          <span className="text-lg text-cyan-300" aria-hidden="true">↓</span>
-          Discover what trusted data makes possible
-        </div>
         <Link
-          href="/about"
-          className="group inline-flex items-center gap-5 border border-white/75 bg-slate-950/30 px-5 py-3.5 text-sm font-semibold text-white shadow-[0_16px_42px_-22px_rgba(0,0,0,.85)] backdrop-blur-sm transition hover:border-cyan-200 hover:bg-slate-950/50 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cyan-300 sm:px-6"
+          href="/lets-talk"
+          className="group hidden shrink-0 items-center gap-5 border border-white/75 bg-slate-950/34 px-5 py-3.5 text-sm font-semibold text-white shadow-[0_16px_42px_-22px_rgba(0,0,0,.85)] backdrop-blur-sm transition hover:border-cyan-200 hover:bg-slate-950/56 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cyan-300 sm:inline-flex sm:px-6"
         >
-          Explore GGMS
+          Start a Project
           <span className="transition-transform group-hover:translate-x-1" aria-hidden="true">→</span>
         </Link>
       </div>
