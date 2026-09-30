@@ -123,6 +123,10 @@ export default function InsightsPage() {
         </div>
       </section>
 
+      <section id="latest-insights" className="mx-auto max-w-7xl scroll-mt-24 px-6 py-20 sm:py-28 lg:px-8">
+        <InsightsLibrary articles={libraryArticles} />
+      </section>
+
       <section className="relative overflow-hidden border-b border-slate-800 bg-slate-950 py-24 text-white sm:py-32">
         <div className="absolute right-[-12rem] top-[-10rem] h-[32rem] w-[32rem] rounded-full bg-cyan-400/10 blur-3xl" />
         <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
@@ -202,9 +206,6 @@ export default function InsightsPage() {
 
       <PublicStories />
 
-      <section id="latest-insights" className="mx-auto max-w-7xl scroll-mt-24 px-6 py-24 sm:py-32 lg:px-8">
-        <InsightsLibrary articles={libraryArticles} />
-      </section>
 
       <section className="border-y border-slate-300 bg-white py-24 sm:py-32">
         <div className="mx-auto grid max-w-7xl items-center gap-14 px-6 lg:grid-cols-[1.05fr_0.95fr] lg:gap-20 lg:px-8">
