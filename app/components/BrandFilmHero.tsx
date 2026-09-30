@@ -5,9 +5,9 @@ import Link from "next/link";
 
 const brandClips = [
   {
-    desktop: "/videos/ggms-premium-finance-team.mp4",
-    mobile: "/videos/ggms-premium-finance-team-mobile.mp4",
-    label: "Business leaders reviewing financial data together",
+    desktop: "/videos/ggms-brand-film-02.mp4",
+    mobile: "/videos/ggms-brand-film-02-mobile.mp4",
+    label: "Modern AI and data brand film",
     eyebrow: "Finance, in motion",
     headline: "Make every number",
     emphasis: "move the business.",
@@ -326,3 +326,5 @@ export default function BrandFilmHero() {
     </section>
   );
 }
+
+

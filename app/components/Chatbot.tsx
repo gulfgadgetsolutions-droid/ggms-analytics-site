@@ -7,14 +7,50 @@ type Message = {
   content: string;
 };
 
-function AssistantMessage({ content }: { content: string }) {
+function InlineAssistantText({ text }: { text: string }) {
   // Render only approved site links; all other model text stays escaped by React.
-  return content.split(/(\[[^\]\n]+\]\(https:\/\/analytics\.ggmsglobal\.com\/(?:lets-talk|contact)\)|\*\*[^*\n]+\*\*)/g).map((part, index) => {
+  return text.split(/(\[[^\]\n]+\]\(https:\/\/analytics\.ggmsglobal\.com\/(?:lets-talk|contact)\)|\*\*[^*\n]+\*\*)/g).map((part, index) => {
     const link = part.match(/^\[([^\]\n]+)\]\((https:\/\/analytics\.ggmsglobal\.com\/(?:lets-talk|contact))\)$/);
     if (link) return <a key={index} href={link[2]} className="font-semibold text-cyan-300 underline underline-offset-2 hover:text-cyan-100">{link[1]}</a>;
-    if (part.startsWith("**") && part.endsWith("**")) return <strong key={index}>{part.slice(2, -2)}</strong>;
+    if (part.startsWith("**") && part.endsWith("**")) return <strong key={index} className="font-semibold text-white">{part.slice(2, -2)}</strong>;
     return part;
   });
+}
+
+function AssistantMessage({ content }: { content: string }) {
+  const blocks = content
+    .replace(/\r\n/g, "\n")
+    .split(/\n{2,}/)
+    .map((block) => block.trim())
+    .filter(Boolean);
+
+  return (
+    <div className="space-y-3 text-[14px] leading-7 tracking-[0.005em]">
+      {blocks.map((block, index) => {
+        const lines = block.split("\n").map((line) => line.trim()).filter(Boolean);
+        const isList = lines.length > 0 && lines.every((line) => /^[-•*]\s+/.test(line) || /^\d+[.)]\s+/.test(line));
+
+        if (isList) {
+          return (
+            <ul key={index} className="space-y-2 pl-1">
+              {lines.map((line, lineIndex) => (
+                <li key={lineIndex} className="flex gap-2.5">
+                  <span className="mt-[0.72em] h-1.5 w-1.5 shrink-0 rounded-full bg-cyan-300" aria-hidden="true" />
+                  <span><InlineAssistantText text={line.replace(/^[-•*]\s+/, "").replace(/^\d+[.)]\s+/, "")} /></span>
+                </li>
+              ))}
+            </ul>
+          );
+        }
+
+        return (
+          <p key={index} className="whitespace-pre-wrap">
+            <InlineAssistantText text={block} />
+          </p>
+        );
+      })}
+    </div>
+  );
 }
 
 type AssistantStarProps = {
@@ -178,7 +214,7 @@ export default function Chatbot() {
                   </span>
                 )}
                 <div
-                  className={`chatbot-message max-w-[82%] rounded-2xl px-4 py-3 text-sm leading-relaxed ${
+                  className={`chatbot-message max-w-[86%] rounded-2xl px-4 py-3.5 text-sm leading-relaxed ${
                     item.role === "user"
                       ? "rounded-br-md border border-cyan-200/20 bg-gradient-to-br from-cyan-500 to-sky-600 text-slate-950 shadow-[0_16px_30px_-22px_rgba(34,211,238,.8)]"
                       : "rounded-bl-md border border-white/10 bg-slate-800/90 text-slate-100 shadow-[0_16px_30px_-24px_rgba(2,6,23,.9)]"

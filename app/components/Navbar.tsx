@@ -63,7 +63,7 @@ export default function Navbar() {
         <div className="absolute top-1/2 -translate-y-1/2" style={{ left: "calc((100vw - 100%) / -2 + clamp(1.5rem, 4vw, 4rem))" }}>
           <BrandIdentity compact href={regionalHref("/")} onNavigate={closeMobile} />
         </div>
-        <div className="h-10 w-3 shrink-0" aria-hidden="true" />
+        <div className="h-10 w-44 shrink-0 md:w-56 lg:w-64" aria-hidden="true" />
 
         <nav className="hidden items-center gap-7 text-[15px] font-medium md:flex" aria-label="Primary navigation">
           <div className="services-nav-group relative focus-within:z-50">
@@ -250,3 +250,4 @@ export default function Navbar() {
     </header>
   );
 }
+
