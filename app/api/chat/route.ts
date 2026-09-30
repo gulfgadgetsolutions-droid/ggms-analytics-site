@@ -134,6 +134,9 @@ RULES:
 function fallbackAnswer(message: string) {
   const lower = message.toLowerCase();
 
+  if (lower.includes("power bi") || lower.includes("dashboard") || lower.includes("report") || lower.includes("kpi") || lower.includes("bi report")) {
+    return "Yes. GGMS Analytics can help you build Power BI reports, dashboards, KPI views, and executive analytics.\n\nThe team can support Power BI work such as:\n\n- Finance, cash flow, AFE, budget, and performance reports.\n- Executive dashboards for CFO, operations, sales, customer, and management teams.\n- Data modelling, DAX measures, semantic models, and KPI definitions.\n- Connecting Power BI with SAP, SQL Server, Excel, Azure, cloud databases, APIs, and other business systems.\n- Replacing manual Excel reporting with automated, refreshable dashboards.\n\nA good first step is to share your current data source, report objective, users, and sample Excel or manual report. You can open the [Start a Project form](https://analytics.ggmsglobal.com/lets-talk) to send the requirement.";
+  }
   if (lower.includes("start") || lower.includes("project") || lower.includes("contact") || lower.includes("talk")) {
     return "Tell us briefly what you'd like to achieve, or open our [Start a Project form](https://analytics.ggmsglobal.com/lets-talk) to share your requirements.\n\nThe GGMS Analytics team can review your business problem, current systems, data sources, and expected outcome.";
   }
@@ -150,7 +153,7 @@ function fallbackAnswer(message: string) {
     return "GGMS Analytics helps organizations apply AI in practical business workflows.\n\nAI solution areas include:\n\n- AI agents for guided business tasks and internal processes.\n- RAG systems for secure knowledge search and document-based answers.\n- Enterprise assistants and copilots for employees and customers.\n- Intelligent automation for approvals, reporting, operations, and repetitive work.\n- Machine learning for forecasting, risk, anomaly detection, and prediction.\n\nThe focus is to connect AI with real systems, data, and business outcomes.";
   }
 
-  if (lower.includes("azure") || lower.includes("cloud") || lower.includes("data") || lower.includes("power bi") || lower.includes("dashboard") || lower.includes("sap") || lower.includes("sql")) {
+  if (lower.includes("azure") || lower.includes("cloud") || lower.includes("data") || lower.includes("sap") || lower.includes("sql")) {
     return "GGMS Analytics works across modern data and cloud platforms.\n\nTechnology areas include:\n\n- Microsoft Azure, Azure Data Factory, Azure Data Lake Storage, Azure Blob Storage, Azure SQL Database, Azure Synapse Analytics, and Azure Databricks.\n- SQL Server, SAP data, MongoDB, APIs, and enterprise data integration.\n- Power BI, semantic models, KPI reporting, dashboards, and executive analytics.\n- Cloud hosting, data modernization, data quality, and platform optimization.\n\nThe goal is to create trusted data foundations that support analytics, AI, automation, and enterprise applications.";
   }
 
@@ -214,4 +217,3 @@ export async function POST(request: Request) {
     return NextResponse.json({ response: fallbackAnswer(message.trim()) });
   }
 }
-
