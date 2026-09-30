@@ -20,6 +20,14 @@ const originalFetch = globalThis.fetch;
 const request = value => new Request('https://analytics.ggmsglobal.com/api/chat', {
   method: 'POST', body: JSON.stringify(value), headers: {'Content-Type': 'application/json'},
 });
+
+async function expectFallback(response) {
+  assert.equal(response.status, 200);
+  const text = await response.text();
+  assert.ok(text.includes('GGMS Analytics'));
+  assert.ok(!text.includes('private provider detail'));
+}
+
 try {
   globalThis.fetch = async () => { throw new Error('Unexpected network request'); };
   for (const name of names) delete process.env[name];
@@ -27,7 +35,8 @@ try {
     assert.equal((await POST(request(value))).status, 400);
   }
   assert.equal((await POST(new Request('https://example.com', {method:'POST',body:'{'}))).status, 400);
-  assert.equal((await POST(request({message:'Hello'}))).status, 503);
+  await expectFallback(await POST(request({message:'Hello'})));
+
   Object.assign(process.env, {
     AZURE_OPENAI_ENDPOINT:'https://digital-6182-resource.services.ai.azure.com/openai/v1/',
     AZURE_OPENAI_DEPLOYMENT:'gpt-5.6-luna', AZURE_OPENAI_API_KEY:'fake-test-key',
@@ -45,19 +54,19 @@ try {
   const result = await POST(request({message:' Hello '}));
   assert.equal(result.status, 200);
   assert.equal((await result.json()).response, 'Welcome to GGMS Analytics.');
+
   for (const status of [401, 403, 429, 500]) {
     globalThis.fetch = async () => new Response('private provider detail', {status});
-    const failed = await POST(request({message:'Hello'}));
-    assert.equal(failed.status, 503);
-    assert.ok(!(await failed.text()).includes('private'));
+    await expectFallback(await POST(request({message:'Hello'})));
   }
   for (const value of [{status:'completed',output:[]}, {status:'incomplete',output:[]}]) {
     globalThis.fetch = async () => Response.json(value);
-    assert.equal((await POST(request({message:'Hello'}))).status, 503);
+    await expectFallback(await POST(request({message:'Hello'})));
   }
   globalThis.fetch = async () => {throw new DOMException('Timed out', 'TimeoutError');};
-  assert.equal((await POST(request({message:'Hello'}))).status, 503);
-  console.log('PASS: chat validation, configuration, Azure request, output parsing, provider failures, and timeout. No live AI calls.');
+  await expectFallback(await POST(request({message:'Hello'})));
+
+  console.log('PASS: chat validation, fallback handling, Azure request, output parsing, provider failures, and timeout. No live AI calls.');
 } finally {
   globalThis.fetch = originalFetch;
   names.forEach((name, i) => {if (saved[i] === undefined) delete process.env[name]; else process.env[name] = saved[i];});
