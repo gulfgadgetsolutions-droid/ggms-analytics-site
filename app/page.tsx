@@ -9,18 +9,18 @@ import TechnologyEcosystem from "./components/TechnologyEcosystem";
 import { insightArticles } from "./lib/insights";
 
 export const metadata: Metadata = {
-  title: "Enterprise Data Engineering, Analytics & AI",
-  description: "GGMS Analytics builds trusted data platforms, Power BI analytics, data science solutions, generative AI automation, and managed data services across the Gulf.",
+  title: "AI, Data, Cloud Automation & Enterprise Digital Solutions",
+  description: "GGMS Analytics turns business requirements into AI, data, cloud, automation, analytics, and enterprise application solutions across the Gulf.",
   alternates: { canonical: "/" },
 };
 
 const services = [
-  { href: "/services/data-ai-strategy", title: "Data and AI Strategy", description: "Readiness assessment, opportunity prioritization, architecture, and roadmap." },
-  { href: "/services/data-engineering", title: "Data Engineering", description: "ETL/ELT pipelines, SAP and SQL Server integration, Azure Data Factory." },
-  { href: "/services/data-analytics", title: "Data Analytics and BI", description: "Power BI dashboards and semantic models leadership trusts." },
-  { href: "/services/data-science", title: "Data Science", description: "Forecasting, anomaly detection, and predictive models." },
-  { href: "/services/ai-automation", title: "Generative and Agentic AI", description: "Enterprise assistants, AI agents, and intelligent workflow automation." },
-  { href: "/services/managed-data-ai", title: "Managed Data and AI", description: "Monitoring, support, maintenance, and continuous optimization." },
+  { href: "/services/data-ai-strategy", title: "Data and AI Strategy", description: "Business use cases, adoption roadmap, governance, architecture, and execution plan." },
+  { href: "/services/data-engineering", title: "Cloud Data Engineering", description: "Modern data platforms, pipelines, integration, migration, lakehouse, warehouse, and APIs." },
+  { href: "/services/data-analytics", title: "Analytics and Decision Intelligence", description: "Power BI, KPI systems, semantic models, operational intelligence, and executive insight." },
+  { href: "/services/data-science", title: "Data Science and ML", description: "Forecasting, prediction, anomaly detection, risk scoring, and optimization models." },
+  { href: "/services/ai-automation", title: "Generative and Agentic AI", description: "RAG systems, copilots, AI agents, enterprise assistants, and intelligent workflow automation." },
+  { href: "/services/managed-data-ai", title: "Managed Data and AI", description: "Production support, monitoring, improvement, security checks, and long-term optimization." },
 ];
 
 const differentiators = [
@@ -35,6 +35,25 @@ const deliverySteps = [
   ["Design", "Shape the architecture, delivery plan, controls, responsibilities, and measurable outcomes."],
   ["Deliver", "Build, integrate, test, and launch a production-ready solution with the people who will use it."],
   ["Support", "Transfer knowledge, monitor performance, resolve issues, and continuously improve where needed."],
+];
+
+const aiDeliveryLayers = [
+  {
+    title: "AI agents and copilots",
+    text: "Assist teams with guided tasks, knowledge search, document reasoning, customer support, and internal operations.",
+  },
+  {
+    title: "RAG and enterprise knowledge",
+    text: "Connect policies, documents, systems, and business context so answers are grounded in trusted information.",
+  },
+  {
+    title: "Predictive intelligence",
+    text: "Use forecasting, anomaly detection, risk scoring, and machine learning to identify what needs attention.",
+  },
+  {
+    title: "Automation and digital apps",
+    text: "Turn decisions into action through approval flows, business apps, notifications, integrations, and governed workflows.",
+  },
 ];
 
 const exploreLinks = [
@@ -145,11 +164,11 @@ export default function Home() {
             <div className="max-w-3xl">
               <span className="text-xs font-semibold uppercase tracking-[0.24em] text-cyan-400">Explore GGMS Analytics</span>
               <h2 className="mt-4 text-3xl font-semibold tracking-tight sm:text-5xl">
-                Find the expertise, perspective, or conversation you need.
+                Explore the capability behind intelligent business change.
               </h2>
             </div>
             <p className="max-w-md text-sm leading-7 text-slate-400">
-              Start with a capability, explore your industry, read our thinking, or tell us what you are trying to change.
+              Start with your requirement, current systems, and ambition. We shape the data, AI, cloud, automation, and application path around it.
             </p>
           </div>
 
@@ -192,15 +211,15 @@ export default function Home() {
           </span>
 
           <h2 className="text-3xl font-bold mt-3 mb-5">
-            We solve the data problems that stall decisions
+            We turn business requirements into intelligent AI solutions
           </h2>
 
           <p className="text-slate-600 leading-relaxed">
-            Every enterprise sits on data it can&apos;t fully use &mdash;
-            locked in SAP, scattered across SQL Server, or buried in
-            spreadsheets. We build the pipelines, models, and dashboards
-            that turn that data into something leadership actually trusts
-            and acts on.
+            Organizations do not only need reports. They need connected
+            systems, reliable data, practical AI, secure cloud foundations,
+            and automated workflows that improve how work gets done. GGMS
+            Analytics designs and delivers the full path from requirement to
+            working solution.
           </p>
         </div>
 
@@ -229,6 +248,41 @@ export default function Home() {
                 parent-company satisfied customers
               </p>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ================= AI DELIVERY LAYER ================= */}
+      <section className="border-y border-slate-800 bg-[radial-gradient(circle_at_top_left,rgba(34,211,238,.2),transparent_34%),linear-gradient(135deg,#020617,#08111f_48%,#020617)] py-20 text-white sm:py-24">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-end">
+            <div>
+              <span className="text-xs font-semibold uppercase tracking-[0.24em] text-cyan-300">AI delivery layer</span>
+              <h2 className="mt-4 text-3xl font-semibold tracking-tight sm:text-5xl">
+                From data to agents, from insight to action.
+              </h2>
+            </div>
+            <p className="text-lg leading-8 text-slate-300">
+              The strongest AI solutions are not isolated demos. They connect data, documents, systems, models, workflows, and people into one secure operating layer.
+            </p>
+          </div>
+
+          <div className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+            {aiDeliveryLayers.map((layer, index) => (
+              <article
+                key={layer.title}
+                className="group rounded-3xl border border-white/10 bg-white/[0.06] p-6 shadow-2xl shadow-cyan-950/20 backdrop-blur transition hover:-translate-y-1 hover:border-cyan-300/50 hover:bg-white/[0.09]"
+              >
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-semibold uppercase tracking-[0.22em] text-cyan-300">
+                    0{index + 1}
+                  </span>
+                  <span className="h-2.5 w-2.5 rounded-full bg-cyan-300 shadow-[0_0_26px_rgba(103,232,249,.9)]" />
+                </div>
+                <h3 className="mt-8 text-xl font-semibold tracking-tight">{layer.title}</h3>
+                <p className="mt-4 text-sm leading-6 text-slate-300">{layer.text}</p>
+              </article>
+            ))}
           </div>
         </div>
       </section>
@@ -303,7 +357,7 @@ export default function Home() {
             </span>
 
             <h2 className="text-3xl font-bold mt-3">
-              Six practice areas, one team
+              One connected team across AI, data, cloud, and automation
             </h2>
           </div>
 
@@ -357,7 +411,7 @@ export default function Home() {
         <div className="mx-auto max-w-6xl px-6">
           <div className="max-w-2xl">
             <span className="text-xs font-semibold uppercase tracking-widest text-cyan-400">How We Work</span>
-            <h2 className="mt-3 text-3xl font-bold tracking-tight">A clear path from challenge to working solution</h2>
+            <h2 className="mt-3 text-3xl font-bold tracking-tight">A clear path from business challenge to intelligent delivery</h2>
           </div>
           <div className="mt-14 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
             {deliverySteps.map(([title, text]) => (
@@ -382,34 +436,35 @@ export default function Home() {
           </span>
 
           <h2 className="text-3xl font-bold mt-3">
-            Real Work, Real Results
+            Real capabilities, built around business outcomes
           </h2>
         </div>
 
         <div className="depth-panel grid overflow-hidden rounded-2xl bg-slate-900 text-white lg:grid-cols-[1.2fr_0.8fr]">
           <div className="p-8 sm:p-10">
           <span className="text-xs font-semibold uppercase tracking-wide text-cyan-400">
-            Case Study
+            Delivery example
           </span>
 
           <h3 className="text-xl font-semibold mt-3 mb-3">
-            SAP and SQL Server to Power BI: Enterprise AFE Dashboard
+            From scattered requirements to a connected AI and data solution
           </h3>
 
           <p className="text-slate-300 leading-relaxed max-w-3xl">
-            Built a full data pipeline and Power BI reporting layer on
-            top of SAP and SQL Server data, giving leadership a live
-            view of Authorization for Expenditure tracking instead of
-            static spreadsheet reporting.
+            A business problem may start as manual reporting, a slow approval
+            process, disconnected SAP data, customer operations, or a need for
+            AI assistance. We design the architecture, build the data
+            foundation, apply analytics or AI where it adds value, and connect
+            the result into the way teams actually work.
           </p>
           </div>
 
           <div className="border-t border-slate-700 bg-slate-800/70 p-8 sm:p-10 lg:border-l lg:border-t-0">
             <p className="text-xs font-semibold uppercase tracking-widest text-cyan-400">Outcomes delivered</p>
             <ul className="mt-6 space-y-4 text-sm leading-6 text-slate-300">
-              <li className="flex gap-3"><span className="text-cyan-400">✓</span>Unified SAP and SQL Server data into one reporting foundation</li>
-              <li className="flex gap-3"><span className="text-cyan-400">✓</span>Replaced fragmented spreadsheet reporting with a live executive view</li>
-              <li className="flex gap-3"><span className="text-cyan-400">✓</span>Created consistent expenditure definitions and reusable business logic</li>
+              <li className="flex gap-3"><span className="text-cyan-400">✓</span>Integrated enterprise data, cloud services, APIs, and business applications</li>
+              <li className="flex gap-3"><span className="text-cyan-400">✓</span>Applied analytics, machine learning, RAG, agents, or automation where useful</li>
+              <li className="flex gap-3"><span className="text-cyan-400">✓</span>Delivered usable solutions for leaders, employees, customers, and operations</li>
             </ul>
           </div>
         </div>

@@ -8,30 +8,32 @@ const brandClips = [
     desktop: "/videos/ggms-brand-film-02.mp4",
     mobile: "/videos/ggms-brand-film-02-mobile.mp4",
     label: "Modern AI and data brand film",
-    eyebrow: "Finance, in motion",
-    headline: "Make every number",
-    emphasis: "move the business.",
-    description: "Connect financial data, forecasts, and approvals to give every decision a clearer direction.",
+    eyebrow: "AI, data, cloud, automation",
+    headline: "Build intelligence",
+    emphasis: "into the business.",
+    description: "GGMS Analytics turns requirements into AI agents, trusted data platforms, automated workflows, and enterprise digital solutions.",
   },
   {
     desktop: "/videos/ggms-premium-analytics-review.mp4",
     mobile: "/videos/ggms-premium-analytics-review-mobile.mp4",
     label: "A corporate team discussing analytics shown on a laptop",
-    eyebrow: "Insight in every conversation",
-    headline: "Turn every discussion",
-    emphasis: "into direction.",
-    description: "Bring dashboards and performance signals into the conversations that shape what happens next.",
+    eyebrow: "AI with business direction",
+    headline: "Build the systems",
+    emphasis: "that move decisions.",
+    description: "From RAG and copilots to predictive models and workflow automation, we design AI around real operations and accountable outcomes.",
   },
   {
     desktop: "/videos/ggms-premium-digital-analytics.mp4",
     mobile: "/videos/ggms-premium-digital-analytics-mobile.mp4",
     label: "People reviewing data charts on a laptop and tablet",
-    eyebrow: "The signal behind the decision",
-    headline: "See what is changing.",
-    emphasis: "Act on what matters.",
-    description: "Bring trends into focus across your data, then move forward with confidence.",
+    eyebrow: "Cloud, data, and automation",
+    headline: "Modernize the way",
+    emphasis: "your business runs.",
+    description: "Unify platforms, pipelines, intelligence, and applications so teams can move faster with trusted information and automated work.",
   },
 ];
+
+const aiSignals = ["AI Agents", "RAG Systems", "Predictive Intelligence", "Cloud Data Platforms", "Workflow Automation"];
 
 function DataSignalLayer() {
   return (
@@ -285,6 +287,17 @@ export default function BrandFilmHero() {
           <p className="mt-7 max-w-xl border-l border-cyan-200/70 pl-5 text-base leading-7 text-white/95 [text-shadow:0_2px_16px_rgba(0,0,0,.7)] sm:text-lg sm:leading-8">
             {brandClips[activeClip].description}
           </p>
+
+          <div className="mt-7 flex max-w-2xl flex-wrap gap-2.5" aria-label="AI and data capabilities">
+            {aiSignals.map((signal) => (
+              <span
+                key={signal}
+                className="rounded-full border border-cyan-200/35 bg-slate-950/35 px-3.5 py-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-cyan-100 shadow-[0_12px_32px_-18px_rgba(34,211,238,.9)] backdrop-blur-md"
+              >
+                {signal}
+              </span>
+            ))}
+          </div>
         </div>
       </div>
 
@@ -313,7 +326,7 @@ export default function BrandFilmHero() {
         </div>
         <div className="pointer-events-none absolute bottom-1 left-1/2 hidden -translate-x-1/2 items-center gap-3 text-sm font-medium text-white/85 md:flex">
           <span className="text-lg text-cyan-300" aria-hidden="true">↓</span>
-          Discover what trusted data makes possible
+          Discover what intelligent delivery makes possible
         </div>
         <Link
           href="/about"
