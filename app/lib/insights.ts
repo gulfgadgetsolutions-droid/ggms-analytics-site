@@ -40,6 +40,172 @@ export const insightCategories: Array<"All" | InsightCategory> = [
 
 const articleDrafts: Omit<InsightArticle, "dateModified" | "sources" | "readTime">[] = [
   {
+    slug: "enterprise-ai-agent-workflows-human-in-the-loop",
+    category: "AI & Automation",
+    format: "Architecture perspective",
+    title: "AI agent workflows: turn requirements into governed action",
+    excerpt:
+      "Modern AI agents create value when they connect intake, knowledge, tools, approvals, and audit trails inside a controlled business workflow.",
+    image:
+      "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=1800&q=86",
+    alt: "Abstract AI system with connected digital intelligence nodes",
+    published: "October 2026",
+    datePublished: "2026-10-01",
+    author: "GGMS Analytics",
+    keyTakeaway:
+      "An AI agent should not be launched as a general chatbot. It should sit inside a clear workflow with trusted context, bounded tools, human approval where needed, and measurable outcomes.",
+    flow: ["Request intake", "Context retrieval", "Agent reasoning", "Tool action", "Human approval", "Logged outcome"],
+    technologyContext: ["Azure AI Foundry", "Azure OpenAI", "RAG", "APIs", "Power Automate", "Power Apps", "Databricks", "Power BI"],
+    sections: [
+      {
+        id: "agent-is-a-workflow-participant",
+        heading: "An AI agent is a workflow participant",
+        paragraphs: [
+          "Many teams start with a chatbot and then expect it to transform operations. A stronger approach starts with the business workflow: what arrives, who owns it, what evidence is required, which systems must be checked, and what action closes the loop.",
+          "The agent then becomes one participant in that workflow. It can classify requests, retrieve knowledge, draft responses, call approved tools, prepare summaries, and route exceptions. The operating model around it decides whether the result is safe, useful, and repeatable.",
+        ],
+      },
+      {
+        id: "reference-agent-workflow",
+        heading: "A practical enterprise agent workflow",
+        paragraphs: ["A first agent should be narrow enough to explain and important enough to remove real friction."],
+        bullets: [
+          "Capture the request from a form, email, portal, Teams message, or business application.",
+          "Classify the task and retrieve only the approved documents, data, and prior cases required for that task.",
+          "Ask the model to prepare a plan, draft, recommendation, or next-best action with evidence links.",
+          "Use deterministic rules for amounts, dates, thresholds, permissions, and mandatory fields.",
+          "Send high-risk or uncertain items to a named reviewer before any system update is made.",
+          "Log the final action, evidence, reviewer decision, and outcome for future improvement.",
+        ],
+      },
+      {
+        id: "human-approval",
+        heading: "Place human approval where the risk changes",
+        paragraphs: [
+          "Human review is not a weakness in the design. It is how teams keep judgment, accountability, and customer or financial impact under control. The agent can prepare the work; the business decides when a person must approve it.",
+          "Approval is especially important when the workflow touches finance, HR, customer commitments, regulated documents, system changes, or external communication. The interface should show the evidence, the recommended action, and the reason the item was routed for review.",
+        ],
+      },
+      {
+        id: "measure-agent-value",
+        heading: "Measure whether the workflow improves",
+        paragraphs: [
+          "The right success measures are operational: time to first response, manual steps removed, exception ageing, rework, reviewer correction rate, user adoption, and successful system updates. If those do not improve, the agent is only a demo.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "rag-systems-for-enterprise-knowledge-workflows",
+    category: "AI & Automation",
+    format: "Practical guide",
+    title: "RAG systems: connect enterprise knowledge to daily work",
+    excerpt:
+      "A useful RAG system needs content ownership, retrieval quality, access control, citations, feedback, and workflow integration.",
+    image:
+      "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1800&q=86",
+    alt: "Digital workspace representing connected enterprise knowledge and search",
+    published: "October 2026",
+    datePublished: "2026-10-01",
+    author: "GGMS Analytics",
+    keyTakeaway:
+      "RAG becomes valuable when it is designed around one business process and maintained like a knowledge product, not when every document is uploaded into a search index without ownership.",
+    flow: ["Content sources", "Preparation", "Indexing", "Retrieval", "Grounded answer", "Feedback loop"],
+    technologyContext: ["Azure AI Search", "Azure OpenAI", "Vector search", "SharePoint", "Blob Storage", "APIs", "Data governance"],
+    sections: [
+      {
+        id: "rag-is-more-than-upload",
+        heading: "RAG is more than uploading documents",
+        paragraphs: [
+          "Retrieval-augmented generation helps an AI system answer with company-specific context, but the quality depends on what it retrieves. A weak knowledge base produces weak answers even when the model is strong.",
+          "The first decision is scope. Choose a process such as sales support, policy guidance, project delivery, finance close support, service desk triage, or compliance evidence. Then define which documents are approved, who owns them, and how users will verify answers.",
+        ],
+      },
+      {
+        id: "knowledge-operating-model",
+        heading: "Build a knowledge operating model",
+        paragraphs: ["The system needs clear responsibilities before it needs more documents."],
+        bullets: [
+          "Name the owner for each knowledge source and define how often it is reviewed.",
+          "Keep drafts, expired policies, duplicate files, and uncontrolled exports out of the approved answer path.",
+          "Preserve permissions so users cannot retrieve material they should not see.",
+          "Show citations and source dates in the answer so a user can check the evidence.",
+          "Collect feedback when the answer is weak, missing, outdated, or unsupported.",
+        ],
+      },
+      {
+        id: "workflow-not-search-box",
+        heading: "Put RAG inside the workflow",
+        paragraphs: [
+          "The strongest RAG experience is rarely a blank search box. It appears inside a task: preparing a proposal, reviewing a contract, answering a customer question, checking a policy, or summarizing a project handover.",
+          "When the interface knows the task, it can retrieve better context, ask better follow-up questions, and present the answer in a format that is easier to act on.",
+        ],
+      },
+      {
+        id: "measure-rag-quality",
+        heading: "Measure retrieval before generation",
+        paragraphs: [
+          "Teams often judge only the final answer. A better test separates retrieval quality from writing quality: did the system find the right source, respect permissions, use current material, and cite the evidence clearly?",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "ai-automation-workflows-from-email-to-action",
+    category: "AI & Automation",
+    format: "Practical guide",
+    title: "AI automation workflows: from email and documents to action",
+    excerpt:
+      "Combine AI extraction, business rules, approvals, and system updates so manual intake becomes a controlled operating workflow.",
+    image:
+      "https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=1800&q=86",
+    alt: "Team working with business applications and automation workflows",
+    published: "October 2026",
+    datePublished: "2026-10-01",
+    author: "GGMS Analytics",
+    keyTakeaway:
+      "The value of AI automation is not that it reads a message. The value is that it extracts the right information, validates it, routes it, secures approval, updates the business system, and shows what happened.",
+    flow: ["Trigger", "Extract", "Validate", "Route", "Approve", "Update systems", "Monitor"],
+    technologyContext: ["Power Automate", "Azure AI", "Document Intelligence", "Power Apps", "SAP", "Dynamics", "ServiceNow", "APIs"],
+    sections: [
+      {
+        id: "workflow-before-model",
+        heading: "Start with the workflow, then choose the model",
+        paragraphs: [
+          "A business email, form, PDF, or spreadsheet often starts a process that touches several people and systems. AI can help read and summarize the input, but the automation must still decide what happens next.",
+          "Map the existing path first: who receives the request, what fields are checked, which approvals are needed, what system is updated, and which exceptions cause delays. That map becomes the blueprint for AI automation.",
+        ],
+      },
+      {
+        id: "what-ai-should-do",
+        heading: "Use AI where interpretation is needed",
+        paragraphs: ["AI is useful for messy inputs; rules are better for exact control."],
+        bullets: [
+          "Classify the request type and urgency from unstructured text.",
+          "Extract fields from emails, attachments, scanned documents, and customer messages.",
+          "Summarize the request and identify missing information for follow-up.",
+          "Find related policies, historical cases, contracts, or knowledge articles.",
+          "Draft a response or action plan for a reviewer to approve.",
+        ],
+      },
+      {
+        id: "controls-for-action",
+        heading: "Keep controls around the system update",
+        paragraphs: [
+          "The final update to SAP, CRM, finance, HR, service desk, or another system should be protected by validation rules and approval thresholds. AI can propose the action, but the workflow decides whether it is allowed.",
+          "This design gives teams speed without losing auditability. It also helps leaders see how much work is automated, where exceptions remain, and which inputs cause rework.",
+        ],
+      },
+      {
+        id: "where-to-begin",
+        heading: "Good places to begin",
+        paragraphs: [
+          "Strong candidates include invoice intake, vendor onboarding, customer support triage, project request intake, employee expense checks, sales proposal preparation, contract review support, and operational exception routing.",
+        ],
+      },
+    ],
+  },
+  {
     slug: "trusted-finance-analytics-from-source-to-decision",
     category: "Analytics & BI",
     format: "Architecture perspective",
@@ -52,7 +218,6 @@ const articleDrafts: Omit<InsightArticle, "dateModified" | "sources" | "readTime
     published: "September 2026",
     datePublished: "2026-09-02",
     author: "GGMS Analytics",
-    featured: true,
     keyTakeaway:
       "A finance dashboard is the final interface of a control system. Trust is created upstream through reconciled sources, governed definitions, and a model that preserves financial meaning.",
     flow: ["SAP, OneStream & files", "Controlled ingestion", "Finance data model", "Reconciliation", "Executive view"],
@@ -665,7 +830,7 @@ export const insightArticles: InsightArticle[] = articleDrafts.map((article) => 
   const sections = [{ id: "checks-before-release", heading: note.heading, paragraphs: [note.detail], bullets: note.checks }, ...article.sections];
   const words = [article.title, article.excerpt, article.keyTakeaway, ...article.flow, ...article.technologyContext,
     ...sections.flatMap((section) => [section.heading, ...section.paragraphs, ...(section.bullets ?? [])])].join(" ").trim().split(/\s+/).length;
-  return { ...article, sections, sources: note.sources, dateModified: "2026-09-09", readTime: `${Math.max(1, Math.ceil(words / 200))} min read` };
+  return { ...article, sections, sources: note.sources, dateModified: article.datePublished, readTime: `${Math.max(1, Math.ceil(words / 200))} min read` };
 });
 
 export function getInsightBySlug(slug: string) {

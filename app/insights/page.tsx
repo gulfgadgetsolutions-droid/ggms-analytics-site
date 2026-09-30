@@ -11,14 +11,14 @@ export default function InsightsPage() {
   const siteUrl = getSiteUrl();
   const featured = insightArticles.find((article) => article.featured) ?? insightArticles[0];
   const briefingSlugs = [
-    "marketing-measurement-before-attribution",
-    "ecommerce-analytics-connect-demand-margin-fulfilment",
-    "where-ai-automation-belongs-in-reporting",
+    "enterprise-ai-agent-workflows-human-in-the-loop",
+    "rag-systems-for-enterprise-knowledge-workflows",
+    "ai-automation-workflows-from-email-to-action",
   ];
   const briefingArticles = briefingSlugs
     .map((slug) => insightArticles.find((article) => article.slug === slug))
     .filter((article): article is (typeof insightArticles)[number] => Boolean(article));
-  const libraryArticles = insightArticles
+  const libraryArticles = [...insightArticles]
     .sort((a, b) => b.datePublished.localeCompare(a.datePublished))
     .map(({ slug, category, format, title, excerpt, image, alt, readTime, published }) => ({
       slug,
@@ -38,7 +38,7 @@ export default function InsightsPage() {
     "@id": `${siteUrl}/insights/#collection`,
     name: "GGMS Analytics Insights",
     description:
-      "Original perspectives and practical guides on data engineering, analytics, data strategy, data science, and AI automation.",
+      "Original perspectives and practical guides on AI automation, agent workflows, RAG systems, data engineering, analytics, and cloud platforms.",
     url: `${siteUrl}/insights`,
     isPartOf: { "@id": `${siteUrl}/#website` },
     mainEntity: {
@@ -74,7 +74,7 @@ export default function InsightsPage() {
               <span className="block text-cyan-700">not display.</span>
             </h1>
             <p className="mt-7 text-lg leading-8 text-slate-700">
-              Practical guides to data modelling, reporting, and automation. Explore implementation checks, technical references, and clearly attributed stories from other organizations.
+              Practical guides to AI automation, agent workflows, RAG systems, data platforms, and decision intelligence. Explore implementation checks, technical references, and clearly attributed stories from other organizations.
             </p>
             <a
               href="#latest-insights"
@@ -132,7 +132,7 @@ export default function InsightsPage() {
               <h2 className="mt-4 text-3xl font-semibold tracking-tight sm:text-5xl">Questions behind the next decision.</h2>
             </div>
             <p className="max-w-2xl text-lg leading-8 text-slate-300">
-              A focused reading list for leaders shaping performance, operations, customer experience, and data foundations—not a catalogue of technology trends.
+              A focused reading list for leaders shaping AI automation, enterprise knowledge, workflow modernization, and trusted data foundations—not a catalogue of technology trends.
             </p>
           </div>
 

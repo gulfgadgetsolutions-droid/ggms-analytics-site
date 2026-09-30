@@ -150,6 +150,10 @@ const homeIndustries = [
 ];
 
 export default function Home() {
+  const latestHomeInsights = [...insightArticles]
+    .sort((a, b) => b.datePublished.localeCompare(a.datePublished))
+    .slice(0, 3);
+
   return (
     <main className="depth-page depth-home min-h-screen bg-white text-slate-900">
       <Navbar />
@@ -519,12 +523,12 @@ export default function Home() {
               <h2 className="mt-4 text-3xl font-semibold tracking-tight sm:text-5xl">Thinking built around real decisions.</h2>
             </div>
             <p className="max-w-2xl text-lg leading-8 text-slate-600">
-              Explore practical perspectives on finance, supply chains, data platforms, analytics, and responsible AI—written to help teams decide what to do next.
+              Explore practical perspectives on AI automation, agent workflows, RAG systems, data platforms, and responsible analytics—written to help teams decide what to do next.
             </p>
           </div>
 
           <div className="depth-grid mt-12 grid gap-5 lg:grid-cols-3">
-            {insightArticles.slice(0, 3).map((article) => (
+            {latestHomeInsights.map((article) => (
               <article key={article.slug} className="depth-card group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-xl">
                 <Link href={`/insights/${article.slug}`} className="block">
                   <div className="relative aspect-[16/10] overflow-hidden bg-slate-900">

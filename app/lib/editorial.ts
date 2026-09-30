@@ -21,7 +21,41 @@ const commerce: EditorialSource = {
   context: "Implementation reference for purchase and refund events and transaction identifiers. Analytics events still need reconciliation to order and payment records.",
 };
 
+const azureAgents: EditorialSource = {
+  title: "Microsoft Learn: Microsoft Foundry Agent Service overview",
+  url: "https://learn.microsoft.com/en-us/azure/ai-services/agents/overview",
+  context: "Reference for managed AI agents, tools, deployment patterns, identity, and observability. The workflow patterns below are GGMS editorial recommendations.",
+};
+const azureRag: EditorialSource = {
+  title: "Microsoft Learn: Retrieval-augmented generation in Azure AI Search",
+  url: "https://learn.microsoft.com/en-us/azure/search/retrieval-augmented-generation-overview",
+  context: "Technical reference for retrieval-augmented generation patterns using enterprise search and generative AI.",
+};
+const owaspLlm: EditorialSource = {
+  title: "OWASP: Top 10 for Large Language Model Applications 2025",
+  url: "https://genai.owasp.org/llm-top-10/",
+  context: "Security reference for common LLM and generative AI application risks. It supports the checks around prompt injection, permissions, and unsafe actions.",
+};
+
 export const insightNotes: Record<string, { heading: string; detail: string; checks: string[]; sources: EditorialSource[] }> = {
+  "enterprise-ai-agent-workflows-human-in-the-loop": {
+    heading: "Keep the agent inside an auditable workflow",
+    detail: "Before giving an AI agent access to tools, define the task boundary, the data it may use, the action it may take, and the point where a human must approve the outcome. A useful first release should complete one repeatable workflow, cite its evidence, and record every decision instead of behaving like an open-ended chatbot.",
+    checks: ["Test a request with missing evidence, conflicting documents, and instructions embedded inside a retrieved file.", "Verify that the agent cannot read or act outside the user permissions already granted in the business system.", "Log the input, retrieved evidence, tool calls, human approval, final action, and rollback path."],
+    sources: [azureAgents, owaspLlm, aiRisk],
+  },
+  "rag-systems-for-enterprise-knowledge-workflows": {
+    heading: "Treat RAG as an operating model, not a document upload",
+    detail: "A RAG system is useful only when the knowledge base has owners, freshness rules, permission boundaries, retrieval tests, and a feedback loop. Begin with one business process, approved source documents, and answer-quality checks before expanding to every folder and policy in the company.",
+    checks: ["Measure whether the correct document is retrieved before judging the generated answer.", "Preserve source permissions and show citations so users can verify the answer.", "Track unanswered questions, weak citations, stale documents, and repeated user corrections."],
+    sources: [azureRag, azureAgents, owaspLlm, aiRisk],
+  },
+  "ai-automation-workflows-from-email-to-action": {
+    heading: "Automate the hand-off, not only the message",
+    detail: "Email, forms, PDFs, and spreadsheets can start a useful AI workflow, but the value comes from extraction, validation, routing, approval, and system update. Keep deterministic checks for numbers and policy thresholds, and let AI support classification, summarization, evidence discovery, and drafting.",
+    checks: ["Test low-quality documents, duplicate submissions, missing fields, and values that cross approval thresholds.", "Separate AI-generated suggestions from the final approved system update.", "Record who approved the action, when it was completed, and which source evidence supported it."],
+    sources: [azureAgents, azureRag, owaspLlm, aiRisk],
+  },
   "trusted-finance-analytics-from-source-to-decision": {
     heading: "Reconcile one closed period before adding more charts",
     detail: "Start with one legal entity and one closed period. Keep ledger actuals and budget versions in separate facts at their own level of detail. Joining a monthly budget directly to journal lines can multiply the budget. Compare both through shared account, entity, and calendar dimensions, and retain the reconciliation signed off by the finance owner.",
